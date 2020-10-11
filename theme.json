@@ -1,0 +1,20 @@
+{
+    "name": "contentpress-default-theme",
+    "extends": "",
+    "asset-path": "contentpress-default-theme/assets",
+    "views-path": "contentpress-default-theme/views",
+
+    "display_name": "Default",
+    "version": "0.1",
+    "authors": [
+        {
+            "name": "wp-kitten",
+            "url": "https://wp-kitten.github.io"
+        }
+    ],
+    "contributors": [],
+    "page_url": "https://github.com/wp-kitten/contentpress-default-theme",
+    "update_url": "",
+    "description": "The default theme for ContentPress",
+    "thumbnail": "thumb.png"
+}
