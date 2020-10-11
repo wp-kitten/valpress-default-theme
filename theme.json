@@ -14,7 +14,7 @@
     ],
     "contributors": [],
     "page_url": "https://github.com/wp-kitten/contentpress-default-theme",
-    "update_url": "",
+    "update_url": "http://api.contentpress.news/api/theme/info/contentpress-default-theme",
     "description": "The default theme for ContentPress",
     "thumbnail": "thumb.png"
 }
