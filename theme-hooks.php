@@ -9,7 +9,7 @@ use App\Helpers\Theme;
 add_filter( 'contentpress/register_view_paths', function ( $paths = [] ) {
     $paths[] = path_combine( DEFAULT_THEME_DIR_PATH, 'views' );
     return $paths;
-}, 20 );
+}, 100 );
 
 /**
  * Register the path to the translation file that will be used depending on the current locale
@@ -83,6 +83,6 @@ add_action( 'contentpress/post/footer', function ( $post ) {
  * Filter classes applied to the <body> tag
  */
 add_filter( 'contentpress/body-class', function ( $classes = [] ) {
-    $classes[] = 'theme-default';
+    $classes[] = 'contentpress-default-theme';
     return $classes;
 } );

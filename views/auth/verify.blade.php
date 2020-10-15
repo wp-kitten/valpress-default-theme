@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.frontend')
 
 @section('title')
     <title>{{__('Verify Your Email Address')}}</title>
