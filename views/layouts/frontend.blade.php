@@ -20,7 +20,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com"/>
 
-    @cp_head()
+    {!! contentpressHead() !!}
 </head>
 <body class="{{cp_body_classes()}}">
     {{do_action('contentpress/after_body_open')}}
@@ -31,6 +31,6 @@
 
     @include('inc.site-footer')
 
-    @cp_footer()
+    {!! contentpressFooter() !!}
 </body>
 </html>
