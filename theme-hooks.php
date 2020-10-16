@@ -2,6 +2,7 @@
 
 use App\Helpers\ScriptsManager;
 use App\Helpers\Theme;
+use App\Models\Menu;
 
 /**
  * Include theme's views into the global scope
@@ -31,7 +32,7 @@ add_action( 'contentpress/site/head', function () {
     ScriptsManager::enqueueStylesheet( 'gfont-open-sans', '//fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&display=swap' );
 
     ScriptsManager::enqueueStylesheet( 'bootstrap.css', $theme->url( 'assets/vendor/bootstrap/css/bootstrap.min.css' ) );
-    ScriptsManager::enqueueStylesheet( 'theme-style.css', $theme->url( 'assets/dist/css/theme-styles.css' ) );
+    ScriptsManager::enqueueStylesheet( 'theme-style.css', $theme->url( 'assets/dist/css/theme-styles.css?t='.now() ) );
 
     ScriptsManager::enqueueHeadScript( 'jquery.js', $theme->url( 'assets/vendor/jquery.min.js' ) );
     ScriptsManager::enqueueHeadScript( 'popper.js', $theme->url( 'assets/vendor/popper.min.js' ) );
@@ -86,3 +87,20 @@ add_filter( 'contentpress/body-class', function ( $classes = [] ) {
     $classes[] = 'contentpress-default-theme';
     return $classes;
 } );
+
+
+//<editor-fold desc=":: MAIN MENU ::">
+/**
+ * Add custom menu items to the main menu
+ */
+add_action( 'contentpress/menu::main-menu/before', function ( Menu $menu ) {
+    $activeClass = ( Route::is( 'app.home' ) ? 'active' : '' );
+    echo '<a href="' . route( 'app.home' ) . '" class="menu-item ' . $activeClass . '">' . esc_attr( __( 'cpdt::m.Home' ) ) . '</a>';
+} );
+add_action( 'contentpress/menu::main-menu/after', function ( Menu $menu ) {
+    echo '<a href="#" class="icon btn-toggle-nav js-toggle-menu" title="' . esc_attr( __( 'np::m.Toggle menu' ) ) . '">&#9776;</a>';
+} );
+add_action( 'contentpress/menu::main-menu', function ( Menu $menu ) {
+
+} );
+//</editor-fold desc=":: MAIN MENU ::">

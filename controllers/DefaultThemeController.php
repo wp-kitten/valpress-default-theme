@@ -20,30 +20,8 @@ class DefaultThemeController extends SiteController
      */
     public function index()
     {
-        $postsQuery = Post::where( 'post_type_id', PostType::where( 'name', 'post' )->first()->id )
-            ->where( 'post_status_id', PostStatus::where( 'name', 'publish' )->first()->id );
-
-        $s1_posts = $postsQuery->latest()->limit( 4 )->get();
-        $excludeIds = $s1_posts->pluck( 'id' )->toArray();
-
-        $s2_posts = $postsQuery->latest()->whereNotIn( 'id', $excludeIds )->limit( 5 )->get();
-        $excludeIds = array_merge( $excludeIds, $s2_posts->pluck( 'id' )->toArray() );
-
-        $s3_posts = $postsQuery->latest()->whereNotIn( 'id', $excludeIds )->limit( 5 )->get();
-        $excludeIds = array_merge( $excludeIds, $s3_posts->pluck( 'id' )->toArray() );
-
-        $s4_posts = $postsQuery->latest()->whereNotIn( 'id', $excludeIds )->limit( 3 )->get();
-        $excludeIds = array_merge( $excludeIds, $s4_posts->pluck( 'id' )->toArray() );
-
-        $s5_posts = $postsQuery->latest()->whereNotIn( 'id', $excludeIds )->limit( 6 )->get();
-//        $excludeIds = array_merge($excludeIds,  $s5_posts->pluck( 'id' )->toArray());
-
         return view( 'index' )->with( [
-            's1_posts' => $s1_posts,
-            's2_posts' => $s2_posts,
-            's3_posts' => $s3_posts,
-            's4_posts' => $s4_posts,
-            's5_posts' => $s5_posts,
+
         ] );
     }
 

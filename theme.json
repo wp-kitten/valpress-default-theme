@@ -4,8 +4,8 @@
     "asset-path": "contentpress-default-theme/assets",
     "views-path": "contentpress-default-theme/views",
 
-    "display_name": "Default",
-    "version": "0.1",
+    "display_name": "ContentPress Default",
+    "version": "0.2",
     "authors": [
         {
             "name": "wp-kitten",

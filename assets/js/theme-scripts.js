@@ -9,4 +9,10 @@ jQuery( function ($) {
         }
     } );
 
+    //#! [Responsive] Toggle nav menu
+    $( '.js-toggle-menu' ).on( 'click', function (ev) {
+        ev.preventDefault();
+        $( '.topnav' ).toggleClass( 'responsive' );
+    } );
+
 } );

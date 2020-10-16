@@ -1,7 +1,8 @@
 <?php
 return [
     // localized strings
-    'Hello' => 'Hello',
+    'Home' => 'Home',
+    //============================
     'Section :n' => 'Section :n',
     'Categories' => 'Categories',
     'Category:' => 'Category:',

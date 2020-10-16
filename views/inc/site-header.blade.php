@@ -8,17 +8,17 @@
                     </a>
                 </h1>
             </div>
-            <div class="col-sm-12 col-md-8">
-                {{--// Maybe show ad space here --}}
+            <div class="col-sm-12 col-md-8 text-right">
+                @if(cp_has_menu('main-menu'))
+                    <nav class="cpdt-navbar">
+                        <div class="cpdt-navbar-nav topnav">
+                            {!! cp_menu('main-menu') !!}
+                        </div>
+                    </nav>
+                @endif
             </div>
         </div>
 
-        @if(cp_has_menu('main-menu'))
-            <nav class="cpdt-navbar">
-                <div class="cpdt-navbar-nav">
-                    {!! cp_menu('main-menu') !!}
-                </div>
-            </nav>
-        @endif
+
     </div>
 </header>

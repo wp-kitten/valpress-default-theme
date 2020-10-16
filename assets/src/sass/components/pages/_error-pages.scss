@@ -1,0 +1,22 @@
+.page-404 .page-content-wrap,
+.page-500 .page-content-wrap,
+.page-under-maintenance .page-content-wrap {
+    padding: 50px 0 200px 0;
+}
+
+.page-404 .page-content-wrap .title,
+.page-500 .page-content-wrap .title,
+.page-under-maintenance .page-content-wrap .title {
+    font-size: 12rem;
+}
+
+.page-404 .page-content-wrap .subtitle,
+.page-500 .page-content-wrap .subtitle,
+.page-under-maintenance .page-content-wrap .subtitle {
+    margin-top: 3rem;
+    font-size: 2rem;
+}
+
+.page-under-maintenance .title {
+    font-size: 6rem !important;
+}

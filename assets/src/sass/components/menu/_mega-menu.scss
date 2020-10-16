@@ -1,0 +1,57 @@
+.cp-mega-menu {
+    overflow: hidden;
+    background-color: #0f6674
+}
+
+.cp-mega-menu, .cp-mega-menu .has-dropdown > .sub-menu {
+    list-style-position: outside;
+    list-style-type: none;
+    margin: 0;
+    padding: 0
+}
+
+.cp-mega-menu .has-dropdown > .sub-menu {
+    display: none;
+    position: absolute;
+    left: 15px;
+    width: calc(100% - 30px);
+    background-color: #fff;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .2);
+    z-index: 12
+}
+
+.cp-mega-menu .has-dropdown > .sub-menu > .submenu-wrap {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    align-content: flex-start;
+    justify-content: flex-start
+}
+
+.cp-mega-menu .has-dropdown > .sub-menu .megamenu-section {
+    min-width: 25%;
+    max-width: 25%
+}
+
+.cp-mega-menu .has-dropdown > .sub-menu .megamenu-child {
+    list-style-position: outside;
+    list-style-type: none;
+    margin: 0;
+    padding: 0
+}
+
+.cp-mega-menu .has-dropdown {
+    float: left;
+    overflow: hidden;
+    display: block
+}
+
+.cp-mega-menu .has-dropdown > a {
+    color: #fff;
+    display: block;
+    padding: 14px 16px
+}
+
+.cp-mega-menu .has-dropdown:hover .sub-menu {
+    display: block
+}
