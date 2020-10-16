@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DefaultTheme;
+namespace App\Themes\ContentPressDefaultTheme;
 
 use App\Helpers\ImageHelper;
 use App\Helpers\Theme;
@@ -9,19 +9,9 @@ use App\Models\Post;
 
 class ThemeHelper
 {
-    /**
-     * @var Theme
-     */
-    private $themeClass;
-
-    public function __construct()
-    {
-        $this->themeClass = app( 'cp.theme' );
-    }
-
     public function getPostImageOrPlaceholder( Post $post, $sizeName = '', $imageClass = 'image-responsive', $imageAttributes = [] )
     {
-        $placeholder = '<img src="' . $this->themeClass->url( 'assets/img/placeholder.png' ) . '" alt="" class="' . $imageClass . '"/>';
+        $placeholder = '<img src="' . $this->asset( 'assets/img/placeholder.png' ) . '" alt="" class="' . $imageClass . '"/>';
         if ( cp_post_has_featured_image( $post ) ) {
             $img = ImageHelper::getResponsiveImage( $post, $sizeName, $imageClass, $imageAttributes );
             if ( empty( $img ) ) {
@@ -48,4 +38,8 @@ class ThemeHelper
         return $this->themeClass;
     }
 
+    public function asset( string $path )
+    {
+        return cp_theme_url(DEFAULT_THEME_DIR_NAME, $path);
+    }
 }

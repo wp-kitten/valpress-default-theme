@@ -18,7 +18,5 @@
                 @endif
             </div>
         </div>
-
-
     </div>
 </header>

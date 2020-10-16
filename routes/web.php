@@ -4,6 +4,7 @@
  * Add custom routes or override existent ones
  */
 
+use App\Http\Controllers\DefaultThemeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,8 +23,7 @@ Route::get( "categories/{slug}", "DefaultThemeController@category" )->name( "blo
 Route::get( "tags", "DefaultThemeController@tags" )->name( "blog.tags" );
 Route::get( "tags/{slug}", "DefaultThemeController@tag" )->name( "blog.tag" );
 
-Route::get( "authors", "DefaultThemeController@authors" )->name( "blog.authors" );
-Route::get( "author/{id}", "DefaultThemeController@author" )->name( "blog.author" );
+Route::get( "author/{id}", [ DefaultThemeController::class, 'author' ] )->name( "blog.author" );
 
 Route::any( "search", "DefaultThemeController@search" )->name( "blog.search" );
 

@@ -9,19 +9,22 @@ use App\Models\PostStatus;
 use App\Models\PostType;
 use App\Models\Tag;
 use Illuminate\Support\Arr;
-use Illuminate\View\View;
 
 class DefaultThemeController extends SiteController
 {
     /**
      * Render the website's homepage.
-     *
-     * @return View
      */
     public function index()
     {
+        $posts = Post::where( 'language_id', $this->language->getID( CPML::getFrontendLanguageCode() ) )
+            ->where( 'post_status_id', PostStatus::where( 'name', 'publish' )->first()->id )
+            ->where( 'post_type_id', PostType::where( 'name', 'post' )->first()->id )
+            ->where( 'translated_post_id', null )
+            ->limit( 10 )
+            ->get();
         return view( 'index' )->with( [
-
+            'posts' => $posts,
         ] );
     }
 
@@ -237,4 +240,8 @@ class DefaultThemeController extends SiteController
         ] );
     }
 
+    public function author( $id )
+    {
+        return response()->json( [ 'not yet implemented' ] );
+    }
 }

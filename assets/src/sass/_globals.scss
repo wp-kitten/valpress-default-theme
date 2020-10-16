@@ -1,18 +1,24 @@
+
+//
+body { background-color: #f5f4f4; font-size: 1rem; line-height: 1.3; }
+img, a {border: none 0; outline: none;}
+
 //#! Helper classes
 .hidden { display:none !important;}
 .image-responsive { max-width: 100%;}
-
-//
-body { background-color: #f5f4f4; font-size: 1rem; line-height: 1; }
-img, a {border: none 0; outline: none;}
-
-
+.bg-white { background-color: $color-white !important;}
 .font-default {
     @include body-font;
 }
+.font-smaller { font-size: 0.9rem !important;}
+.text-grey { color: #808080; }
 
 .alert p { margin-bottom: 0 !important; }
 .search-form {
     .search-field { padding: 0.25rem; }
     .search-button { padding: 7px;}
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: Montserrat, sans-serif;
 }
