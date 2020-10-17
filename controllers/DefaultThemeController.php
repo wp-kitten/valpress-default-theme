@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Helpers\CPML;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\PostComments;
 use App\Models\PostStatus;
 use App\Models\PostType;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\URL;
 
 class DefaultThemeController extends SiteController
 {
@@ -21,7 +24,7 @@ class DefaultThemeController extends SiteController
             ->where( 'post_status_id', PostStatus::where( 'name', 'publish' )->first()->id )
             ->where( 'post_type_id', PostType::where( 'name', 'post' )->first()->id )
             ->where( 'translated_post_id', null )
-            ->limit( 10 )
+            ->limit( $this->settings->getSetting( 'posts_per_page', 12 ) )
             ->get();
         return view( 'index' )->with( [
             'posts' => $posts,
@@ -40,7 +43,7 @@ class DefaultThemeController extends SiteController
         //#! Redirect to the translated category if exists
         if ( !$category ) {
             $categories = Category::where( 'slug', $slug )->get();
-            if ( $categories ) {
+            if ( $categories && $categories->count() ) {
                 foreach ( $categories as $_category ) {
                     $translatedCatID = $_category->translated_category_id;
 
@@ -113,7 +116,7 @@ class DefaultThemeController extends SiteController
         //#! Redirect to the translated tag if exists
         if ( !$tag ) {
             $tags = Tag::where( 'slug', $slug )->get();
-            if ( $tags ) {
+            if ( $tags && $tags->count() ) {
                 foreach ( $tags as $_tag ) {
                     $translatedTagID = $_tag->translated_tag_id;
 
@@ -226,7 +229,7 @@ class DefaultThemeController extends SiteController
                         ->orWhere( 'excerpt', 'LIKE', '%' . $s . '%' );
             } )
             //#! Only include results from within the last month
-            ->whereDate( 'created_at', '>', now()->subMonth()->toDateString() )
+//            ->whereDate( 'created_at', '>', now()->subMonth()->toDateString() )
             ->orderBy( 'id', $order );
 
         $numResults = $posts->count();
@@ -242,6 +245,55 @@ class DefaultThemeController extends SiteController
 
     public function author( $id )
     {
-        return response()->json( [ 'not yet implemented' ] );
+        $user = User::find( $id );
+        if ( !$user ) {
+            return $this->_not_found();
+        }
+
+        $posts = $user->posts()
+            ->where( 'post_type_id', PostType::where( 'name', 'post' )->first()->id )
+            ->where( function ( $query ) use ( $user ) {
+                if ( !cp_user_can( $user, 'read_private_posts' ) ) {
+                    $query->where( 'post_status_id', PostStatus::where( 'name', 'published' )->first()->id );
+                }
+            } )
+            ->where( 'translated_post_id', null )
+            ->paginate( $this->settings->getSetting( 'posts_per_page', 12 ) );
+
+        return view( 'author' )->with( [
+            'posts' => $posts,
+            'user' => $user,
+        ] );
     }
+
+    public function __submitComment( $post_id )
+    {
+        do_action( 'contentpress/submit_comment', $this, $post_id );
+        return redirect()->back();
+    }
+
+    public function __deleteComment( $id )
+    {
+        if ( ! cp_current_user_can( 'moderate_comments' ) ) {
+            return redirect()->to( URL::previous() . "#_comments" )->with( 'message', [
+                'class' => 'danger', // success or danger on error
+                'text' => __( 'cpdt::m.You are not allowed to perform this action.' ),
+            ] );
+        }
+
+        $result = PostComments::destroy( $id );
+        if ( ! $result ) {
+            return redirect()->to( URL::previous() . "#_comments" )->with( 'message', [
+                'class' => 'danger',
+                'text' => __( 'cpdt::m.The specified comment could not be deleted.' ),
+            ] );
+        }
+
+        do_action( 'contentpress/comment/deleted', $id );
+        return redirect()->to( URL::previous() . "#_comments" )->with( 'message', [
+            'class' => 'success',
+            'text' => __( 'cpdt::m.Comment deleted.' ),
+        ] );
+    }
+
 }

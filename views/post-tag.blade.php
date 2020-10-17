@@ -4,7 +4,7 @@
 --}}
 @extends('layouts.frontend')
 
-@inject('themeHelper', App\DefaultTheme\ThemeHelper)
+@inject('themeHelper', App\Themes\ContentPressDefaultTheme\ThemeHelper)
 
 @section('title')
     <title>{!! $tag->name !!}</title>
@@ -14,19 +14,21 @@
 @section('content')
     <main class="site-page page-tag">
 
+        <header class="page-subheader bg-white-smoke text-right pt-5 pb-2 mb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2 class="page-title mb-4 mt-4">{{__('cpdt::m.Tag: :name', ['name' => $tag->name])}}</h2>
+                    </div>
+                </div>
+            </div>
+        </header>
+
         <div class="container">
             <div class="row">
 
                 {{-- MAIN CONTENT --}}
                 <div class="col-sm-12 col-md-9">
-
-                    {{-- PAGE TITLE --}}
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h2 class="page-title mb-4">{{esc_html(__('cpdt::m.Tag:'))}} {!! $tag->name !!}</h2>
-                        </div>
-                    </div>
-
                     {{-- POSTS --}}
                     <div class="row">
                         <div class="col-sm-12">
@@ -40,18 +42,18 @@
                                                 <header class="article-header">
                                                     {!! $themeHelper->getPostImageOrPlaceholder($post, '', 'image-responsive') !!}
                                                 </header>
-                                                <section class="article-meta">
-                                                    <a href="{{cp_get_category_link($post->firstCategory())}}" class="text-danger">
+                                                <section class="article-meta mt-2">
+                                                    <a href="{{cp_get_category_link($post->firstCategory())}}" class="text-dark">
                                                         {!! $post->firstCategory()->name !!}
                                                     </a>
                                                     <span class="text-grey">{{cp_the_date($post)}}</span>
                                                 </section>
-                                                <section class="article-content">
-                                                    <h2 class="entry-title">
+                                                <section class="article-content mt-1">
+                                                    <h5 class="entry-title">
                                                         <a href="{{cp_get_permalink($post)}}">
                                                             {!! wp_kses_post($post->title) !!}
                                                         </a>
-                                                    </h2>
+                                                    </h5>
                                                 </section>
                                             </article>
                                         </div>

@@ -1,52 +1,21 @@
 {{--
-        The template to display the search results
+    The template to display an author's posts
 --}}
 @extends('layouts.frontend')
+
 @inject('themeHelper', App\Themes\ContentPressDefaultTheme\ThemeHelper)
-
-
-@section('title')
-    <title>{{__('cpdt::m.Search for: :query_string', [ 'query_string' => cp_get_search_query()]) }}</title>
-@endsection
-
+@php
+    /**@var \App\Themes\ContentPressDefaultTheme\ThemeHelper $themeHelper*/
+@endphp
 
 @section('content')
-    <main class="site-page page-search">
+    <main class="site-page page-page page-singular">
 
-        <header class="page-subheader bg-white-smoke pt-5 pb-2 mb-5">
+        <header class="page-subheader bg-white-smoke text-right pt-5 pb-2 mb-5">
             <div class="container">
-                {{-- FILTERS --}}
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12">
-                        <div class="search-filters-wrap pt-3 pb-3 mb-4">
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-12">
-                                    <div class="search-results">
-                                        <small class="text-dark">{{__('cpdt::m.Found :num_results results for:', [ 'num_results' => number_format( $numResults, 0, ',', '.') ])}}</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12 col-md-8">
-                                    <div class="search-form-wrap">
-                                        {!! cp_search_form(__('cpdt::m.Search...')) !!}
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-md-4 text-right">
-                                    <div class="orderby-wrap">
-                                        <form id="form-filter-search" method="get" action="<?php esc_attr_e( route( 'blog.search' ) ); ?>">
-                                            <input name="s" value="{{cp_get_search_query()}}" class="hidden"/>
-                                            <select name="order" id="js-sort-results" data-form-id="form-filter-search">
-                                                @php $selected = ('desc' == $order ? 'selected' : ''); @endphp
-                                                <option value="desc" {!! $selected !!}>{{__('cpdt::m.Sort by Newest')}}</option>
-                                                @php $selected = ('asc' == $order ? 'selected' : ''); @endphp
-                                                <option value="asc" {!! $selected !!}>{{__('cpdt::m.Sort by Oldest')}}</option>
-                                            </select>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-sm-12">
+                        <h2 class="page-title mb-4 mt-4">{{__("cpdt::m.Author: :name", ['name' => $user->display_name])}}</h2>
                     </div>
                 </div>
             </div>

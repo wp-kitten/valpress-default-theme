@@ -1,0 +1,24 @@
+.page-singular {
+
+    .article-single {
+        .entry-title {}
+        .entry-meta {}
+        .entry-content {
+            line-height: 1.4;
+            word-break: break-word;
+
+            blockquote {
+                margin: 2rem 2rem;
+                font-style: italic;
+                border-left: solid 5px #c00;
+                padding-left: 2rem;
+            }
+        }
+
+        .entry-footer {
+            .post-meta {
+
+            }
+        }
+    }
+}

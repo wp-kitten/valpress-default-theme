@@ -4,13 +4,23 @@
 --}}
 @extends('layouts.frontend')
 
-@inject('themeHelper', App\DefaultTheme\ThemeHelper)
+@inject('themeHelper', App\Themes\ContentPressDefaultTheme\ThemeHelper)
 @php
-    /**@var \App\DefaultTheme\ThemeHelper $themeHelper*/
+    /**@var \App\Themes\ContentPressDefaultTheme\ThemeHelper $themeHelper*/
 @endphp
 
 @section('content')
     <main class="site-page page-page page-singular">
+
+        <header class="page-subheader bg-white-smoke text-right pt-5 pb-2 mb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2 class="page-title mb-4 mt-4">{!!  $page->title !!}</h2>
+                    </div>
+                </div>
+            </div>
+        </header>
 
         <section class="page-content-wrap">
             <div class="container">

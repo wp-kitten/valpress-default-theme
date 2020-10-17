@@ -4,13 +4,40 @@
 --}}
 @extends('layouts.frontend')
 
-@inject('themeHelper', App\DefaultTheme\ThemeHelper)
+@inject('themeHelper', App\Themes\ContentPressDefaultTheme\ThemeHelper)
+@inject('settings', App\Models\Settings)
 @php
-    /**@var \App\DefaultTheme\ThemeHelper $themeHelper*/
+    /**@var \App\Themes\ContentPressDefaultTheme\ThemeHelper $themeHelper*/
 @endphp
 
 @section('content')
     <main class="site-page page-singular">
+
+        <header class="page-subheader bg-white-smoke pt-5 pb-5 mb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2 class="page-title mb-4 mt-4">{!! wp_kses_post($post->title) !!}</h2>
+
+                        <!-- POST META -->
+                        <section class="entry-meta mt-2 mb-2">
+                            <span class="mr-2"><i class="fa fa-clock-o"></i> {{cp_the_date($post, true)}}</span>
+                            <span class="mr-2"><i class="fa fa-user"></i> {{$post->user->display_name}}</span>
+                            @if($post->categories()->count())
+                                <span>
+                                    <i class="fa fa-folder-open"></i>
+                                    @foreach($post->categories()->get() as $category)
+                                        <a href="{{cp_get_category_link($category)}}" class="category-link mr-2">{!! $category->name !!}</a>
+                                    @endforeach
+                                </span>
+                            @endif
+                        </section>
+
+                    </div>
+                </div>
+            </div>
+        </header>
+
         <div class="container">
             <div class="row">
 
@@ -24,26 +51,7 @@
                             {!! $themeHelper->getPostImageOrPlaceholder($post, '', 'image-responsive', [ 'alt' => $post->title ]) !!}
                         </header>
 
-                        <!-- POST TITLE -->
-                        <h2 class="entry-title mt-2 mb-2">
-                            {!! wp_kses_post($post->title) !!}
-                        </h2>
-
-                        <!-- POST META -->
-                        <section class="entry-meta mt-2 mb-2">
-                            <span><i class="fa fa-clock-o"></i> {{cp_the_date($post)}}</span>
-                            <span><i class="fa fa-user"></i> {{$post->user->display_name}}</span>
-                            @if($post->categories()->count())
-                                <span>
-                                <i class="fa fa-folder-open"></i>
-                                @foreach($post->categories()->get() as $category)
-                                    <a href="{{cp_get_category_link($category)}}" class="category-link">{!! $category->name !!}</a>
-                                @endforeach
-                            </span>
-                            @endif
-                        </section>
-
-                        <!-- TEXT POST -->
+                        <!-- POST CONTENT -->
                         <main class="entry-content mt-4 mb-4">
                             {!! $post->content !!}
                         </main>
@@ -67,11 +75,18 @@
                             'themeHelper' => $themeHelper,
                         ])
 
+                        @if(cp_has_comments($post) || cp_comments_open($post))
+                            @include('inc.post-comments', [
+                                'post' => $post,
+                                'settings' => $settings
+                            ])
+                        @endif
+
                     </article><!-- SINGLE POST END -->
                 </div>
 
                 {{-- SIDEBAR --}}
-                <div class="col-sm-12 col-md-3">
+                <div class="col-sm-12 col-md-3 bg-white">
                     @include('inc.blog-sidebar')
                 </div>
             </div>

@@ -59,30 +59,10 @@
         </div>
     </div>
 
-    @if($categories)
-        <div class="widget widget-categories mb-5">
-            <div class="widget-title">
-                <h3 class="text-danger widgettitle">{{__('cpdt::m.Categories')}}</h3>
-            </div>
-            <div class="widget-content">
-                <ul class="list-unstyled categories-list">
-                    @foreach($categories as $categoryID => $info)
-                        <li>
-                            <a class="category-name text-dark text-capitalize" href="{{cp_get_category_link($info['category'])}}">
-                                {!! $info['category']->name !!}
-                            </a>
-                            <span class="text-dark">{{$info['num_posts']}}</span>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
-    @endif
-
     @if($recentPostsList)
         <div class="widget widget-recent-posts widget-recent-posts-list mb-5">
             <div class="widget-title">
-                <h3 class="text-danger widgettitle">{{__('cpdt::m.Recent Posts')}}</h3>
+                <h3 class="text-primary widgettitle">{{__('cpdt::m.Recent Posts')}}</h3>
             </div>
             <div class="widget-content">
                 <ul class="list-unstyled posts-list">
@@ -99,17 +79,37 @@
         </div>
     @endif
 
+    @if($categories)
+        <div class="widget widget-categories mb-5">
+            <div class="widget-title">
+                <h3 class="text-primary widgettitle">{{__('cpdt::m.Categories')}}</h3>
+            </div>
+            <div class="widget-content">
+                <ul class="list-unstyled categories-list">
+                    @foreach($categories as $categoryID => $info)
+                        <li>
+                            <a class="category-name text-dark text-capitalize" href="{{cp_get_category_link($info['category'])}}">
+                                {!! $info['category']->name !!}
+                            </a>
+                            <span class="text-dark">{{$info['num_posts']}}</span>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    @endif
+
     @if($recentPostsImages)
         <div class="widget widget-recent-posts widget-recent-posts-images mb-5">
             <div class="widget-title">
-                <h3 class="text-danger widgettitle">{{__('cpdt::m.Recent Posts')}}</h3>
+                <h3 class="text-primary widgettitle">{{__('cpdt::m.Recent Posts')}}</h3>
             </div>
             <div class="widget-content">
                 <ul class="list-unstyled posts-list">
                     @foreach($recentPostsList as $post)
                         <li class="mb-3">
                             {!! $themeHelper->getPostImageOrPlaceholder($post, '', 'image-responsive') !!}
-                            <a class="post-title text-dark text-capitalize font-weight-bold font-smaller" href="{{cp_get_permalink($post)}}">
+                            <a class="post-title text-dark text-capitalize font-smaller" href="{{cp_get_permalink($post)}}">
                                 {!! $post->title !!}
                             </a>
                         </li>
@@ -122,7 +122,7 @@
     @if($tags && $tags->count())
         <div class="widget widget-tags mb-5">
             <div class="widget-title">
-                <h3 class="text-danger widgettitle">{{__('cpdt::m.Tags')}}</h3>
+                <h3 class="text-primary widgettitle">{{__('cpdt::m.Tags')}}</h3>
             </div>
             <div class="widget-content">
                 <ul class="list-unstyled tags-list">
@@ -140,7 +140,7 @@
 
     <div class="widget widget-meta mb-5">
         <div class="widget-title">
-            <h3 class="text-danger widgettitle">{{__('cpdt::m.Meta')}}</h3>
+            <h3 class="text-primary widgettitle">{{__('cpdt::m.Meta')}}</h3>
         </div>
         <div class="widget-content">
             <ul class="list-unstyled tags-list">

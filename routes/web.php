@@ -15,21 +15,21 @@ use Illuminate\Support\Facades\Route;
 //#! @see ./resources/routes/web.php
 
 //#! Override the default route
-Route::get( "/", "DefaultThemeController@index" )->name( "app.home" );
+Route::get( "/", [ DefaultThemeController::class, 'index' ] )->name( "app.home" );
 
 //#! Required in CategoriesWalker.. if not defined admin/post-type/category fails to load
-Route::get( "categories/{slug}", "DefaultThemeController@category" )->name( "blog.category" );
+Route::get( "categories/{slug}", [ DefaultThemeController::class, 'category' ] )->name( "blog.category" );
 
-Route::get( "tags", "DefaultThemeController@tags" )->name( "blog.tags" );
-Route::get( "tags/{slug}", "DefaultThemeController@tag" )->name( "blog.tag" );
+Route::get( "tags/{slug}", [ DefaultThemeController::class, 'tag' ] )->name( "blog.tag" );
 
 Route::get( "author/{id}", [ DefaultThemeController::class, 'author' ] )->name( "blog.author" );
 
-Route::any( "search", "DefaultThemeController@search" )->name( "blog.search" );
+Route::any( "search", [ DefaultThemeController::class, 'search' ] )->name( "blog.search" );
 
 //#! Special entries
-Route::get( "lang/{code}", "DefaultThemeController@lang" )->name( "app.switch_language" );
+Route::get( "lang/{code}", [ DefaultThemeController::class, 'lang' ] )->name( "app.switch_language" );
 
-Route::post( 'comment/{post_id}', "DefaultThemeController@__submitComment" )->name( 'app.submit_comment' );
+Route::post( 'comment/{post_id}', [ DefaultThemeController::class, '__submitComment' ] )->name( 'app.submit_comment' );
+Route::post( 'comment/delete/{id}', [ DefaultThemeController::class, '__deleteComment' ] )->name( 'app.delete_comment' );
 
 

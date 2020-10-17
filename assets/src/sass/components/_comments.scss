@@ -1,0 +1,41 @@
+.comments-container {
+    .comments-title {
+    }
+
+    .comment-list {
+        .comment {
+            .comment-body {
+                border-radius: 3px;
+                padding: 20px;
+
+                & + .comment-replies {
+                    margin-top: 30px;
+                    margin-left: 30px;
+                }
+
+                .author-vcard {
+                    margin: 0 0 15px;
+                }
+
+                .comment-content {
+                    @media(min-width: 576px) {
+                        width: calc(100% - 120px);
+                    }
+                    .comment-text {
+                        word-wrap: break-word;
+                        white-space: pre-wrap;
+                        line-height: 1.4;
+                    }
+                }
+            }
+
+            & + .comment {
+                margin-top: 30px;
+            }
+        }
+    }
+
+    .comment-form {
+
+    }
+}
