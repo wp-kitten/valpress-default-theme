@@ -245,6 +245,35 @@ class MainDemoData
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
             ],
+            [
+                'title' => "Credits",
+                'content' => "<p>We're using images from ".'<a href="https://unsplash.com/" target="_blank">Unsplash</a> and we thank the following for their images we use in the main demo:</p><ul><li><a href="https://unsplash.com/@domenicoloia" target="_blank">@domenicoloia</a></li>
+<li><a href="https://unsplash.com/@trueagency" target="_blank">@trueagency</a></li>
+<li><a href="https://unsplash.com/@rhondak" target="_blank">@rhondak</a></li>
+<li><a href="https://unsplash.com/@edwardhowellphotography" target="_blank">@edwardhowellphotography</a></li>
+<li><a href="https://unsplash.com/@xps" target="_blank">@xps</a></li>
+<li><a href="https://unsplash.com/@clarktibbs" target="_blank">@clarktibbs</a></li>
+<li><a href="https://unsplash.com/@kellysikkema" target="_blank">@kellysikkema</a></li>
+<li><a href="https://unsplash.com/@nickkarvounis" target="_blank">@nickkarvounis</a></li>
+<li><a href="https://unsplash.com/@andres11hernandez" target="_blank">@andres11hernandez</a></li>
+<li><a href="https://unsplash.com/@thoughtcatalog" target="_blank">@thoughtcatalog</a></li>
+<li><a href="https://unsplash.com/@headwayio" target="_blank">@headwayio</a></li>
+<li><a href="https://unsplash.com/@heftiba" target="_blank">@heftiba</a></li>
+<li><a href="https://unsplash.com/@sloppyperfectionist" target="_blank">@sloppyperfectionist</a></li>
+<li><a href="https://unsplash.com/@hannahjoshua" target="_blank">@hannahjoshua</a></li>
+<li><a href="https://unsplash.com/@athulca" target="_blank">@athulca</a></li>
+<li><a href="https://unsplash.com/@tobiasrehbein" target="_blank">@tobiasrehbein</a></li>
+<li><a href="https://unsplash.com/@luca42" target="_blank">@luca42</a></li>
+<li><a href="https://unsplash.com/@jeremythomasphoto" target="_blank">@jeremythomasphoto</a></li>
+<li><a href="https://unsplash.com/@shotbycerqueira" target="_blank">@shotbycerqueira</a></li>
+<li><a href="https://unsplash.com/@helvetiica" target="_blank">@helvetiica</a></li>
+<li><a href="https://unsplash.com/@heinrich_boll" target="_blank">@heinrich_boll</a></li>
+<li><a href="https://unsplash.com/@medhatdawoud" target="_blank">@medhatdawoud</a></li>
+<li><a href="https://unsplash.com/@arnelhasanovic" target="_blank">@arnelhasanovic</a></li>
+<li><a href="https://unsplash.com/@kellysikkema" target="_blank">@kellysikkema</a></li>
+<li><a href="https://unsplash.com/@speedoshots" target="_blank">@speedoshots</a></li>
+<li><a href="https://unsplash.com/@codypboard" target="_blank">@codypboard</a></li></ul><p>For them, we thank you!</p>',
+            ],
         ];
     }
 
