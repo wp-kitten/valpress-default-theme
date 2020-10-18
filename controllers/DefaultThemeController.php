@@ -10,7 +10,10 @@ use App\Models\PostStatus;
 use App\Models\PostType;
 use App\Models\Tag;
 use App\Models\User;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\URL;
 
 class DefaultThemeController extends SiteController
@@ -18,7 +21,7 @@ class DefaultThemeController extends SiteController
     /**
      * Render the website's homepage.
      */
-    public function index()
+    public function index(): View
     {
         $posts = Post::where( 'language_id', $this->language->getID( CPML::getFrontendLanguageCode() ) )
             ->where( 'post_status_id', PostStatus::where( 'name', 'publish' )->first()->id )
@@ -31,7 +34,20 @@ class DefaultThemeController extends SiteController
         ] );
     }
 
-    public function category( $slug )
+    /**
+     * Frontend. Switch the current language. Can be used by language switchers
+     * @param string $code Language code
+     * @return RedirectResponse
+     */
+    public function lang( string $code ): RedirectResponse
+    {
+        //#! Ensure this is a valid language code
+        CPML::setFrontendLanguageCode( $code );
+
+        return redirect()->back();
+    }
+
+    public function category( $slug ): View
     {
         //#! Get the current language ID
         $defaultLanguageID = CPML::getDefaultLanguageID();
@@ -104,7 +120,7 @@ class DefaultThemeController extends SiteController
         ] );
     }
 
-    public function tag( $slug )
+    public function tag( $slug ): View
     {
         //#! Get the current language ID
         $defaultLanguageID = CPML::getDefaultLanguageID();
@@ -193,7 +209,7 @@ class DefaultThemeController extends SiteController
         ] );
     }
 
-    public function search()
+    public function search(): View
     {
         $postType = PostType::where( 'name', '!=', 'page' )->get();
 
@@ -243,7 +259,7 @@ class DefaultThemeController extends SiteController
         ] );
     }
 
-    public function author( $id )
+    public function author( $id ): View
     {
         $user = User::find( $id );
         if ( !$user ) {
@@ -266,15 +282,19 @@ class DefaultThemeController extends SiteController
         ] );
     }
 
-    public function __submitComment( $post_id )
+    public function __submitComment( $post_id ): RedirectResponse
     {
         do_action( 'contentpress/submit_comment', $this, $post_id );
         return redirect()->back();
     }
 
-    public function __deleteComment( $id )
+    /**
+     * @param $id
+     * @return RedirectResponse
+     */
+    public function __deleteComment( $id ): RedirectResponse
     {
-        if ( ! cp_current_user_can( 'moderate_comments' ) ) {
+        if ( !cp_current_user_can( 'moderate_comments' ) ) {
             return redirect()->to( URL::previous() . "#_comments" )->with( 'message', [
                 'class' => 'danger', // success or danger on error
                 'text' => __( 'cpdt::m.You are not allowed to perform this action.' ),
@@ -282,7 +302,7 @@ class DefaultThemeController extends SiteController
         }
 
         $result = PostComments::destroy( $id );
-        if ( ! $result ) {
+        if ( !$result ) {
             return redirect()->to( URL::previous() . "#_comments" )->with( 'message', [
                 'class' => 'danger',
                 'text' => __( 'cpdt::m.The specified comment could not be deleted.' ),
@@ -296,4 +316,67 @@ class DefaultThemeController extends SiteController
         ] );
     }
 
+    /**
+     * Display the theme options page [Themes/Theme Options]
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function themeOptionsPageView(): View
+    {
+        return view( '_admin.theme-options' )->with( [
+            'previous_install' => $this->options->getOption( DEFAULT_THEME_MAIN_DEMO_INSTALLED_OPT_NAME, false ),
+        ] );
+    }
+
+    //#! TBD when needed
+    public function themeOptionsSave(): RedirectResponse
+    {
+        return redirect()->back()->with( 'message', [
+            'class' => 'warning',
+            'text' => __( "cpdt::m.Not yet implemented." ),
+        ] );
+    }
+
+    public function installMainDemo(): RedirectResponse
+    {
+        $theme = cp_get_current_theme();
+        $themeDirPath = trailingslashit( $theme->getDirPath() );
+
+        //#! Will store any errors
+        $errors = [];
+
+        //#! Load main demo data
+        require_once( path_combine( $themeDirPath, 'src/MainDemoData.php' ) );
+
+        //#! Load seeders
+        $seeders = [
+            'CpdtContentSeeder' => path_combine( $themeDirPath, 'seeders/CpdtContentSeeder.php' ),
+            'CpdtMenuSeeder' => path_combine( $themeDirPath, 'seeders/CpdtMenuSeeder.php' ),
+            'CpdtSettingsSeeder' => path_combine( $themeDirPath, 'seeders/CpdtSettingsSeeder.php' ),
+        ];
+
+        try {
+            foreach ( $seeders as $className => $filePath ) {
+                require_once( $filePath );
+                Artisan::call( 'db:seed', [
+                    '--class' => $className,
+                ] );
+            }
+        }
+        catch ( \Exception $e ) {
+            $errors[] = $e->getMessage();
+        }
+
+        if ( !empty( $errors ) ) {
+            return redirect()->back()->with( 'message', [
+                'class' => 'warning',
+                'text' => __( "cpdt::m.Something didn't go as planed: :errors", [ 'errors' => implode( '<br/>', $errors ) ] ),
+            ] );
+        }
+
+        $this->options->addOption( DEFAULT_THEME_MAIN_DEMO_INSTALLED_OPT_NAME, true );
+        return redirect()->back()->with( 'message', [
+            'class' => 'success',
+            'text' => __( "cpdt::m.Main demo installed successfully." ),
+        ] );
+    }
 }

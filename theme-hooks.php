@@ -4,6 +4,7 @@ use App\Helpers\ScriptsManager;
 use App\Helpers\Theme;
 use App\Models\Menu;
 use App\Models\Options;
+use App\Themes\ContentPressDefaultTheme\ThemeHelper;
 
 /**
  * Include theme's views into the global scope
@@ -131,142 +132,40 @@ add_action( 'contentpress/menu::main-menu', function ( Menu $menu ) {
 } );
 //</editor-fold desc=":: MAIN MENU ::">
 
-add_action( 'contentpress/submit_comment', 'cpdt_theme_submit_comment', 10, 2 );
-
 /*
- * Frontend :: Comments
+ * Comments
  *
- * These can be overridden by themes/plugins
+ * Remove actions registered by the App
  */
 remove_action( 'contentpress/comment/render', '__contentpress_render_comment', 10 );
 remove_action( 'contentpress/comment/replies', '__contentpress_render_comment_replies', 10 );
 remove_action( 'contentpress/comment/actions', '__contentpress_render_comment_actions', 10 );
 
-add_action( 'contentpress/comment/render', 'cpdt__contentpress_render_comment', 10, 2 );
-function cpdt__contentpress_render_comment( \App\Models\PostComments $comment, $withReplies = true )
-{
-    $commentUserID = $comment->user_id;
-    $commentAuthorName = ( $commentUserID ? $comment->user->display_name : $comment->author_name );
-    $commentAuthorUrl = ( $commentUserID ? cp_get_user_meta( '_website_url', $commentUserID ) : $comment->author_url );
-    $authorImageUrl = '';
-    ?>
-    <div class="comment" id="comment-<?php esc_attr_e( $comment->id ); ?>">
-        <div class="comment-body bg-white d-flex flex-column flex-md-row align-content-md-start">
-            <div class="author-vcard">
-                <?php
-                if ( $commentUserID ) {
-                    $authorImageUrl = cp_get_user_profile_image_url( $commentUserID );
-                }
-                if ( empty( $authorImageUrl ) ) {
-                    $authorImageUrl = asset( 'images/placeholder-200.jpg' );
-                }
-                ?>
-                <img src="<?php esc_attr_e( $authorImageUrl ); ?>" class="img-circle" width="120" height="120" alt=""/>
-            </div>
-            <div class="comment-content pl-3">
-                <div class="comment-meta">
-                    <h4 class="">
-                        <a href="<?php esc_attr_e( $commentAuthorUrl ); ?>" class="title-link"><?php esc_html_e( $commentAuthorName ); ?></a>
-                    </h4>
-                    <time datetime="<?php esc_attr_e( $comment->created_at ); ?>" class="text-grey font-smaller"><?php esc_html_e( cp_the_date( $comment, true ) ); ?></time>
-                </div>
-                <div class="comment-text mt-4 mb-4"><?php echo $comment->content; ?></div>
-                <?php do_action( 'contentpress/comment/actions', $comment, $comment->post->id ); ?>
-            </div> <!-- //.comment-content -->
+/*
+ * Register our actions
+ */
+$themeHelper = new ThemeHelper();
+add_action( 'contentpress/submit_comment', [ $themeHelper, 'submitComment' ], 10, 2 );
+add_action( 'contentpress/comment/render', [ $themeHelper, 'renderComment' ], 10, 2 );
+add_action( 'contentpress/comment/replies', [ $themeHelper, 'renderCommentReplies' ], 10, 1 );
+add_action( 'contentpress/comment/actions', [ $themeHelper, 'renderCommentActions' ], 10, 2 );
+unset( $themeHelper );
 
-        </div> <!-- //.comment-body -->
 
-        <?php
-        if ( $withReplies ) {
-            echo '<div class="comment-replies">';
-            do_action( 'contentpress/comment/replies', $comment );
-            echo '</div>';
-        }
+
+/*
+* [ADMIN]
+* Add the Theme options menu item under Themes in the admin menu
+*/
+add_action( 'contentpress/admin/sidebar/menu/themes', function () {
+    if ( cp_current_user_can( 'manage_options' ) ) {
         ?>
-    </div>
-    <?php
-}
-
-add_action( 'contentpress/comment/replies', 'cpdt__contentpress_render_comment_replies', 10, 1 );
-function cpdt__contentpress_render_comment_replies( \App\Models\PostComments $comment )
-{
-    $replies = \App\Models\PostComments::where( 'post_id', $comment->post->id )->where( 'comment_id', $comment->id )->get();
-    if ( $replies ) {
-        foreach ( $replies as $reply ) {
-            $commentUserID = $reply->user_id;
-            $commentAuthorName = ( $commentUserID ? $reply->user->display_name : $reply->author_name );
-            $commentAuthorUrl = ( $commentUserID ? cp_get_user_meta( '_website_url', $commentUserID ) : $reply->author_url );
-            $authorImageUrl = '';
-            ?>
-            <div class="comment-body comment-reply bg-white d-flex flex-column flex-md-row align-content-md-start">
-                <div class="author-vcard">
-                    <?php
-                    if ( $commentUserID ) {
-                        $authorImageUrl = cp_get_user_profile_image_url( $commentUserID );
-                    }
-                    if ( empty( $authorImageUrl ) ) {
-                        $authorImageUrl = asset( 'images/placeholder-200.jpg' );
-                    }
-                    ?>
-                    <img src="<?php esc_attr_e( $authorImageUrl ); ?>" class="img-circle" width="120" height="120" alt=""/>
-                </div>
-                <div class="comment-content pl-3">
-                    <div class="comment-meta">
-                        <h4 class="">
-                            <a href="<?php esc_attr_e( $commentAuthorUrl ); ?>" class="title-link"><?php esc_html_e( $commentAuthorName ); ?></a>
-                        </h4>
-                        <time datetime="<?php esc_attr_e( $reply->created_at ); ?>" class="text-grey font-smaller"><?php esc_html_e( cp_the_date( $reply, true ) ); ?></time>
-                    </div>
-                    <div class="comment-text mt-4 mb-4"><?php echo $reply->content; ?></div>
-                    <?php do_action( 'contentpress/comment/actions', $reply, $reply->post->id ); ?>
-                </div> <!-- //.comment-content -->
-            </div> <!-- //.comment-body -->
-            <div class="comment-replies">
-                <?php do_action( 'contentpress/comment/replies', $reply ); ?>
-            </div>
-            <?php
-        }
+        <li>
+            <a class="treeview-item <?php App\Helpers\MenuHelper::activateSubmenuItem( 'admin.themes.contentpress-default-theme-options' ); ?>"
+               href="<?php esc_attr_e( route( 'admin.themes.contentpress-default-theme-options' ) ); ?>">
+                <?php esc_html_e( __( 'cpdt::m.Theme Options' ) ); ?>
+            </a>
+        </li>
+        <?php
     }
-}
-
-add_action( 'contentpress/comment/actions', 'cpdt__contentpress_render_comment_actions', 10, 2 );
-function cpdt__contentpress_render_comment_actions( \App\Models\PostComments $comment, $postID )
-{
-    ?>
-    <div class="comment-actions text-right">
-        <?php if ( cp_current_user_can( 'moderate_comments' ) ) {
-            $editLink = cp_get_comment_edit_link( $comment->post, $comment->id );
-            ?>
-            <a href="#!"
-               class="js-comment-delete ml-3 btn btn-danger btn-sm"
-               data-comment-id="<?php esc_attr_e( $comment->id ); ?>"
-               data-confirm="<?php esc_attr_e( __( "cpdt::m.Are you sure you want to delete this comment?" ) ); ?>"
-               data-form-id="<?php esc_attr_e( "form-delete-comment-{$comment->id}" ); ?>">
-                <?php esc_html_e( __( 'cpdt::m.Delete' ) ); ?>
-            </a>
-            <form id="form-delete-comment-<?php esc_attr_e( $comment->id ); ?>"
-                  action="<?php echo route( 'app.delete_comment', $comment->id ); ?>"
-                  class="hidden"
-                  method="post">
-                <?php echo csrf_field(); ?>
-            </form>
-
-            <a href="<?php esc_attr_e( $editLink ); ?>"
-               class="js-comment-edit ml-3 btn btn-warning btn-sm"
-               data-post-id="<?php esc_attr_e( $postID ); ?>"
-               data-comment-id="<?php esc_attr_e( $comment->id ); ?>">
-                <?php esc_html_e( __( 'cpdt::m.Edit' ) ); ?>
-            </a>
-        <?php } ?>
-
-        <?php if ( cp_comments_open( \App\Models\Post::find( $postID ) ) ) { ?>
-            <a href="#!"
-               class="js-comment-reply ml-3 btn btn-dark btn-sm"
-               data-post-id="<?php esc_attr_e( $postID ); ?>"
-               data-comment-id="<?php esc_attr_e( $comment->id ); ?>">
-                <?php esc_html_e( __( 'cpdt::m.Reply' ) ); ?>
-            </a>
-        <?php } ?>
-    </div>
-    <?php
-}
+}, 800 );

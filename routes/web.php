@@ -32,4 +32,17 @@ Route::get( "lang/{code}", [ DefaultThemeController::class, 'lang' ] )->name( "a
 Route::post( 'comment/{post_id}', [ DefaultThemeController::class, '__submitComment' ] )->name( 'app.submit_comment' );
 Route::post( 'comment/delete/{id}', [ DefaultThemeController::class, '__deleteComment' ] )->name( 'app.delete_comment' );
 
-
+/*
+ * Theme options routes
+ */
+$cpdtBaseRoute = 'admin.themes.contentpress-default-theme-options';
+Route::get( 'admin/themes/contentpress-default-theme/options', [ DefaultThemeController::class, 'themeOptionsPageView' ] )
+    ->middleware( [ 'web', 'auth', 'active_user', 'under_maintenance' ] )
+    ->name( $cpdtBaseRoute );
+Route::post( 'admin/themes/contentpress-default-theme/options/save', [ DefaultThemeController::class, 'themeOptionsSave' ] )
+    ->middleware( [ 'web', 'auth', 'active_user', 'under_maintenance' ] )
+    ->name( "{$cpdtBaseRoute}.save" );
+Route::post( 'admin/themes/contentpress-default-theme/options/install-main-demo', [ DefaultThemeController::class, 'installMainDemo' ] )
+    ->middleware( [ 'web', 'auth', 'active_user', 'under_maintenance' ] )
+    ->name( "{$cpdtBaseRoute}.install-main-demo" );
+unset( $cpdtBaseRoute );
