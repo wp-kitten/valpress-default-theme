@@ -21,16 +21,19 @@ class CpdtMenuSeeder extends Seeder
 
         $data = [
             'Main Menu' => [
-                'items' => [
-                    //#! Page slugs
-                    'blog',
-                    'about',
-                    'contact-us',
-                ],
+                //#! Page slugs
+                'blog',
+                'about',
+                'contact-us',
+            ],
+            'Footer Menu' => [
+                'about',
+                'contact-us',
+                'credits',
             ],
         ];
 
-        foreach ( $data as $menuName => $info ) {
+        foreach ( $data as $menuName => $pageSlugs ) {
             //#! Create the menu
             $menu = Menu::create( [
                 'name' => $menuName,
@@ -39,7 +42,7 @@ class CpdtMenuSeeder extends Seeder
             ] );
             //#! Create menu items
             if ( $menu && $menu->id ) {
-                foreach ( $info[ 'items' ] as $i => $pageSlug ) {
+                foreach ( $pageSlugs as $i => $pageSlug ) {
                     $page = Post::where( 'slug', $pageSlug )->first();
                     if ( $page && $page->id ) {
                         MenuItem::create( [

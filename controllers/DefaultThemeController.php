@@ -377,6 +377,7 @@ class DefaultThemeController extends SiteController
         return redirect()->back()->with( 'message', [
             'class' => 'success',
             'text' => __( "cpdt::m.Main demo installed successfully." ),
+            'hide_notice_install' => true,
         ] );
     }
 }

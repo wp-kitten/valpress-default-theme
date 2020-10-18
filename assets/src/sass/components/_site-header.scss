@@ -1,4 +1,9 @@
 .cpdt-site-header {
     background-color: $color-white;
     padding: 1rem 0;
+
+    .logo {
+        font-size: 2rem;
+        padding-top: 0.6rem;
+    }
 }

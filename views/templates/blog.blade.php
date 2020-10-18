@@ -29,7 +29,7 @@
 @section('content')
     <main class="site-page page-blog">
 
-        <header class="page-subheader bg-white-smoke text-right pt-5 pb-2 mb-5">
+        <header class="page-subheader bg-white-smoke pt-5 pb-2 mb-5">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">

@@ -58,8 +58,7 @@
     </form>
 
 @else
-    <div class="alert alert-info mt-30">
-        <b><i class="fas fa-exclamation-triangle mr-10"></i></b>
+    <div class="alert alert-info mt-3">
         <span>{{__( 'cpdt::m.Comments are closed.' )}}</span>
     </div>
 @endif

@@ -214,9 +214,9 @@ class ThemeHelper
                 </div>
                 <div class="comment-content pl-3">
                     <div class="comment-meta">
-                        <h4 class="">
+                        <h6 class="author-name">
                             <a href="<?php esc_attr_e( $commentAuthorUrl ); ?>" class="title-link"><?php esc_html_e( $commentAuthorName ); ?></a>
-                        </h4>
+                        </h6>
                         <time datetime="<?php esc_attr_e( $comment->created_at ); ?>" class="text-grey font-smaller"><?php esc_html_e( cp_the_date( $comment, true ) ); ?></time>
                     </div>
                     <div class="comment-text mt-4 mb-4"><?php echo $comment->content; ?></div>
@@ -268,9 +268,9 @@ class ThemeHelper
                     </div>
                     <div class="comment-content pl-3">
                         <div class="comment-meta">
-                            <h4 class="">
+                            <h6 class="author-name">
                                 <a href="<?php esc_attr_e( $commentAuthorUrl ); ?>" class="title-link"><?php esc_html_e( $commentAuthorName ); ?></a>
-                            </h4>
+                            </h6>
                             <time datetime="<?php esc_attr_e( $reply->created_at ); ?>" class="text-grey font-smaller"><?php esc_html_e( cp_the_date( $reply, true ) ); ?></time>
                         </div>
                         <div class="comment-text mt-4 mb-4"><?php echo $reply->content; ?></div>

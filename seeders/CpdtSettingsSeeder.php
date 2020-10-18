@@ -38,5 +38,6 @@ class CpdtSettingsSeeder extends Seeder
         $settings->updateSetting( 'show_on_front', 'page' );
         $settings->updateSetting( 'page_on_front', Post::where( 'slug', 'home' )->first()->id );
         $settings->updateSetting( 'blog_page', Post::where( 'slug', 'blog' )->first()->id );
+        $settings->updateSetting( 'posts_per_page', 6 );
     }
 }

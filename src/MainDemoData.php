@@ -247,7 +247,7 @@ class MainDemoData
             ],
             [
                 'title' => "Credits",
-                'content' => "<p>We're using images from ".'<a href="https://unsplash.com/" target="_blank">Unsplash</a> and we thank the following for their images we use in the main demo:</p><ul><li><a href="https://unsplash.com/@domenicoloia" target="_blank">@domenicoloia</a></li>
+                'content' => "<p>We're using images from ".'<a href="https://unsplash.com/" target="_blank">Unsplash</a> and we would like to express our thanks to the following for their images we use in the main demo:</p><ul><li><a href="https://unsplash.com/@domenicoloia" target="_blank">@domenicoloia</a></li>
 <li><a href="https://unsplash.com/@trueagency" target="_blank">@trueagency</a></li>
 <li><a href="https://unsplash.com/@rhondak" target="_blank">@rhondak</a></li>
 <li><a href="https://unsplash.com/@edwardhowellphotography" target="_blank">@edwardhowellphotography</a></li>
@@ -272,7 +272,7 @@ class MainDemoData
 <li><a href="https://unsplash.com/@arnelhasanovic" target="_blank">@arnelhasanovic</a></li>
 <li><a href="https://unsplash.com/@kellysikkema" target="_blank">@kellysikkema</a></li>
 <li><a href="https://unsplash.com/@speedoshots" target="_blank">@speedoshots</a></li>
-<li><a href="https://unsplash.com/@codypboard" target="_blank">@codypboard</a></li></ul><p>For them, we thank you!</p>',
+<li><a href="https://unsplash.com/@codypboard" target="_blank">@codypboard</a></li></ul>',
             ],
         ];
     }

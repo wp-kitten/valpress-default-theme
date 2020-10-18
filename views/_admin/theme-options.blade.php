@@ -48,10 +48,12 @@
                             </ul>
                         </div>
 
-                        @if($previous_install)
-                            <div class="alert alert-warning">
-                                <p class="mb-0">{{__("cpdt::m.Looks like you've already installed the main demo once. Installing it again will duplicate entries if they exist.")}}</p>
-                            </div>
+                        @if(! session('message') || ! session('message.hide_notice_install'))
+                            @if($previous_install)
+                                <div class="alert alert-warning">
+                                    <p class="mb-0">{{__("cpdt::m.Looks like you've already installed the main demo once. Installing it again will duplicate entries if they exist.")}}</p>
+                                </div>
+                            @endif
                         @endif
 
                         <form method="post" action="{{route('admin.themes.contentpress-default-theme-options.install-main-demo')}}" class="cpdt-theme-options-page-wrap">

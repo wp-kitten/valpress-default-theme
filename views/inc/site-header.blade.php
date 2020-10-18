@@ -2,8 +2,8 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-4">
-                <h1 class="logo">
-                    <a href="{{route('app.home')}}">
+                <h1 class="logo mb-0">
+                    <a href="{{route('app.home')}}" class="text-dark">
                         {{env('APP_NAME', 'ContentPress')}}
                     </a>
                 </h1>
