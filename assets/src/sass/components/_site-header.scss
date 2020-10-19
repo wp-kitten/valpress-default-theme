@@ -2,8 +2,23 @@
     background-color: $color-white;
     padding: 1rem 0;
 
-    .logo {
-        font-size: 2rem;
-        padding-top: 0.6rem;
+    .logo-wrap {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        align-content: space-between;
+        justify-content: space-between;
+        padding: 0 0;
+
+        @media (max-width: 767px) {
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            padding-top: 0.5rem;
+        }
     }
 }

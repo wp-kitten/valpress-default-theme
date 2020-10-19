@@ -55,7 +55,12 @@ class CpdtMenuSeeder extends Seeder
                 }
 
                 //#! Set the menu's display option
-                $options->addOption( "menu-{$menu->id}-display-as", 'basic' );
+                if ( 'Main Menu' == $menuName ) {
+                    $options->addOption( "menu-{$menu->id}-display-as", 'dropdown' );
+                }
+                else {
+                    $options->addOption( "menu-{$menu->id}-display-as", 'basic' );
+                }
             }
         }
     }
