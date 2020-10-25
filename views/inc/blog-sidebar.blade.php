@@ -1,4 +1,6 @@
 @php
+    $settings = new \App\Models\Settings();
+
     /**@var App\Models\Settings $settings*/
     /**@var App\Helpers\Cache $cacheClass*/
 
