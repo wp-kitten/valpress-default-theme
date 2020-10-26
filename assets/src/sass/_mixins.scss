@@ -4,3 +4,42 @@
 @mixin heading-font {
     font-family: 'Montserrat', sans-serif;
 }
+
+//------------------
+@mixin link-red {
+    color: $cpdt-vermilion;
+    text-decoration: none;
+
+    &:active,
+    &:focus,
+    &:hover {
+        color: $cpdt-mandarin;
+        text-decoration: none;
+    }
+}
+@mixin link-blue {
+    color: $color-blue-2;
+    text-decoration: none;
+
+    &:active,
+    &:focus,
+    &:hover {
+        color: $color-blue-5;
+        text-decoration: none;
+    }
+}
+@mixin link-green {
+    color: $color-green;
+    text-decoration: none;
+
+    &:active,
+    &:focus,
+    &:hover {
+        color: $color-green-2;
+        text-decoration: none;
+    }
+}
+
+@mixin with-hover-underline {
+    text-decoration: underline !important;
+}

@@ -49,8 +49,6 @@
         $recentPostsImages = $recentPostsQuery->whereNotIn('id', $ignoreIds)->inRandomOrder()->limit(5)->get();
     }
 
-
-
 @endphp
 
 <div class="blog-sidebar">
@@ -64,13 +62,13 @@
     @if($recentPostsList)
         <div class="widget widget-recent-posts widget-recent-posts-list mb-5">
             <div class="widget-title">
-                <h3 class="text-primary widgettitle">{{__('cpdt::m.Recent Posts')}}</h3>
+                <h3 class="widgettitle">{{__('cpdt::m.Recent Posts')}}</h3>
             </div>
             <div class="widget-content">
                 <ul class="list-unstyled posts-list">
                     @foreach($recentPostsList as $post)
                         <li class="mb-3">
-                            <a class="post-title text-dark text-capitalize font-weight-bold font-smaller" href="{{cp_get_permalink($post)}}">
+                            <a class="post-title link-blue text-capitalize font-weight-bold font-smaller" href="{{cp_get_permalink($post)}}">
                                 {!! $post->title !!}
                             </a>
                             <div class="text-grey post-excerpt mt-1 font-smaller">{!! cp_ellipsis(wp_strip_all_tags($post->excerpt), 50) !!}</div>
@@ -84,13 +82,13 @@
     @if($categories)
         <div class="widget widget-categories mb-5">
             <div class="widget-title">
-                <h3 class="text-primary widgettitle">{{__('cpdt::m.Categories')}}</h3>
+                <h3 class="widgettitle">{{__('cpdt::m.Categories')}}</h3>
             </div>
             <div class="widget-content">
                 <ul class="list-unstyled categories-list">
                     @foreach($categories as $categoryID => $info)
                         <li>
-                            <a class="category-name text-dark text-capitalize" href="{{cp_get_category_link($info['category'])}}">
+                            <a class="category-name link-green text-capitalize" href="{{cp_get_category_link($info['category'])}}">
                                 {!! $info['category']->name !!}
                             </a>
                             <span class="text-dark">{{$info['num_posts']}}</span>
@@ -104,7 +102,7 @@
     @if($recentPostsImages)
         <div class="widget widget-recent-posts widget-recent-posts-images mb-5">
             <div class="widget-title">
-                <h3 class="text-primary widgettitle">{{__('cpdt::m.Recent Posts')}}</h3>
+                <h3 class="widgettitle">{{__('cpdt::m.Recent Posts')}}</h3>
             </div>
             <div class="widget-content">
                 <ul class="list-unstyled posts-list">
@@ -124,13 +122,13 @@
     @if($tags && $tags->count())
         <div class="widget widget-tags mb-5">
             <div class="widget-title">
-                <h3 class="text-primary widgettitle">{{__('cpdt::m.Tags')}}</h3>
+                <h3 class="widgettitle">{{__('cpdt::m.Tags')}}</h3>
             </div>
             <div class="widget-content">
                 <ul class="list-unstyled tags-list">
                     <li class="mb-3">
                         @foreach($tags as $tag)
-                            <a href="{{cp_get_tag_link($tag)}}" class="text-dark ml-2">
+                            <a href="{{cp_get_tag_link($tag)}}" class="link-blue ml-2">
                                 {!! wp_kses_post($tag->name) !!}
                             </a>
                         @endforeach
@@ -142,16 +140,16 @@
 
     <div class="widget widget-meta mb-5">
         <div class="widget-title">
-            <h3 class="text-primary widgettitle">{{__('cpdt::m.Meta')}}</h3>
+            <h3 class="widgettitle">{{__('cpdt::m.Meta')}}</h3>
         </div>
         <div class="widget-content">
             <ul class="list-unstyled tags-list">
                 <li class="mb-1">
                     @guest
-                        <a class="text-dark" href="{{route('login')}}">{{__("cpdt::m.Login")}}</a>
+                        <a class="link-blue" href="{{route('login')}}">{{__("cpdt::m.Login")}}</a>
                     @else
                         <a href="#"
-                           class="text-dark"
+                           class="link-blue"
                            onclick="event.preventDefault();document.getElementById('form-meta-logout').submit();">{{__("cpdt::m.Logout")}}</a>
                         <form id="form-meta-logout" action="{{route('logout')}}" method="post">
                             @csrf
@@ -162,13 +160,13 @@
                 <li class="mb-1">
                     @guest
                         @if($settings->getSetting('user_registration_open', false))
-                            <a class="text-dark" href="{{route('register')}}">{{__("cpdt::m.Register")}}</a>
+                            <a class="link-blue" href="{{route('register')}}">{{__("cpdt::m.Register")}}</a>
                         @endif
                     @endguest
                 </li>
 
                 <li class="mb-1">
-                    <a class="text-dark" href="{{CONTENTPRESS_URL}}" target="_blank">{{__("cpdt::m.ContentPress.news")}}</a>
+                    <a class="link-blue" href="{{CONTENTPRESS_URL}}" target="_blank">{{__("cpdt::m.ContentPress.news")}}</a>
                 </li>
             </ul>
         </div>

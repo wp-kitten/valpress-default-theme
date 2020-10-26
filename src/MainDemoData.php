@@ -5,216 +5,108 @@ namespace App\Themes\ContentPressDefaultTheme;
 class MainDemoData
 {
 
+    public static $images = [
+        'unsplash-7.jpg',
+        'unsplash-8.jpg',
+        'unsplash-9.jpg',
+        'unsplash-10.jpg',
+        'unsplash-11.jpg',
+        'unsplash-12.jpg',
+        'unsplash-13.jpg',
+        'unsplash-14.jpg',
+        'unsplash-15.jpg',
+        'unsplash-16.jpg',
+        'unsplash-17.jpg',
+        'unsplash-18.jpg',
+        'unsplash-19.jpg',
+        'unsplash-20.jpg',
+        'unsplash-21.jpg',
+        'unsplash-22.jpg',
+        'unsplash-23.jpg',
+    ];
+
+    public static $categories = [
+        'General',
+        'Core',
+        'Travelling',
+        'Landscapes',
+        'Nature',
+    ];
+
     public static function getPosts()
     {
         return [
             //#! Category: General
-            [
-                'title' => "Elon Musk 'guesses' SpaceX could send a ship to Mars as soon as 2024",
-                'content' => self::loremIpsumText(),
-                'featured_image' => 'unsplash-25.jpg',
-                'images' => false,
-                'category' => 'General',
-                'tags' => [ 'News', 'Elon Musk', 'SpaceX' ],
-                'comments' => false,
-            ],
-            [
-                'title' => "The best DIY home security systems of 2020",
-                'content' => self::loremIpsumText(),
-                'featured_image' => 'unsplash-24.jpg',
-                'images' => false,
-                'category' => 'General',
-                'tags' => [ 'News', 'DIY', 'Security', 'Home' ],
-                'comments' => false,
-            ],
-            [
-                'title' => "United States sees its coronavirus cases move past the 8 million mark",
-                'content' => self::loremIpsumText(),
-                'featured_image' => 'unsplash-23.jpg',
-                'images' => false,
-                'category' => 'General',
-                'tags' => [ 'News', 'Corona Virus' ],
-                'comments' => false,
-            ],
-            [
-                'title' => "Morning News",
-                'content' => "<p>No, no, not the girl, I'm pretty sure she's already taken, I mean the morning news that you get when you wake up and discover that it's a beautiful day and it's only getting better.</p>" . self::loremIpsumText(),
-                'featured_image' => 'unsplash-7.jpg',
-                'images' => false,
-                'category' => 'General',
-                'tags' => [ 'Morning', 'News' ],
-                'comments' => false,
+            'General' => [
+                [
+                    'title' => "Morning News",
+                    'content' => "<p>No, no, not the girl, I'm pretty sure she's already taken, I mean the morning news that you get when you wake up and discover that it's a beautiful day and it's only getting better.</p>" . self::loremIpsumText(),
+                    'featured_image' => 'unsplash-7.jpg',
+                    'images' => false,
+                    'tags' => [ 'Morning', 'News' ],
+                    'comments' => false,
+                ],
             ],
 
             //#! Category: Core
-            [
-                'title' => "Commands",
-                'content' => '<p>Since Laravel is not WordPress, sometimes you might need to run various commands and if your website is on a shared server without access to a <strong>SSH</strong> console then things get ugly. For that you now have a beautiful <strong>Commands</strong> section under your <strong>Administration Dashboard</strong> that helps you execute the most common commands. Yay!&nbsp;</p><p><img style="border-style: none; margin: 20px; float: left;" src="IMG_PLACEHOLDER_1" alt="" width="400" height="211" /> As the Lorem Ipsum says, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><p style="text-align: left;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            'Core' => [
+                [
+                    'title' => "Commands",
+                    'content' => '<p>Since Laravel is not WordPress, sometimes you might need to run various commands and if your website is on a shared server without access to a <strong>SSH</strong> console then things get ugly. For that you now have a beautiful <strong>Commands</strong> section under your <strong>Administration Dashboard</strong> that helps you execute the most common commands. Yay!&nbsp;</p><p><img style="border-style: none; margin: 20px; float: left;" src="IMG_PLACEHOLDER_1" alt="" width="400" height="211" /> As the Lorem Ipsum says, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><p style="text-align: left;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
-                'featured_image' => 'unsplash-14.jpg',
-                'images' => [
-                    'IMG_PLACEHOLDER_1' => '__commands.png',
+                    'featured_image' => 'unsplash-13.jpg',
+                    'images' => [
+                        'IMG_PLACEHOLDER_1' => '__commands.png',
+                    ],
+                    'tags' => [ 'Commands', 'Dashboard', 'Admin', 'Core' ],
+                    'comments' => false,
                 ],
-                'category' => 'Core',
-                'tags' => [ 'Commands', 'Dashboard', 'Admin', 'Core' ],
-                'comments' => false,
-            ],
-            [
-                'title' => "Themes & Plugins",
-                'content' => "<p>Say yes, 'cause they're here! We also have a Marketplace that will provide you with themes and plugins to fit your needs! No longer reinvent the wheel every time you have a new project!</p>" . self::loremIpsumText(),
-                'featured_image' => 'unsplash-12.jpg',
-                'images' => false,
-                'category' => 'Core',
-                'tags' => [ 'Core', 'Themes', 'Plugins', ],
-                'comments' => false,
-            ],
-            [
-                'title' => "Custom Actions And Filters",
-                'content' => "<p>We've got that too! You can super charge your themes and plugins with actions and filters just like you would do it in any WordPress websites.</p>" . self::loremIpsumText(),
-                'featured_image' => 'unsplash-11.jpg',
-                'images' => false,
-                'category' => 'Core',
-                'tags' => [ 'Core', 'Actions', 'Filters' ],
-                'comments' => false,
-            ],
-            [
-                'title' => "Custom Post Types? Yes!",
-                'content' => "<p>We've got you covered if you want Custom Post Types. No coding necessary, everything is visual and intuitive.</p>" . '<p><img style="border-style: none; margin: 20px; float: left;" src="IMG_PLACEHOLDER_1" alt="" width="400" height="211" /> As the Lorem Ipsum says, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><p style="text-align: left;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                [
+                    'title' => "Themes & Plugins",
+                    'content' => "<p>Say yes, 'cause they're here! We also have a Marketplace that will provide you with themes and plugins to fit your needs! No longer reinvent the wheel every time you have a new project!</p>" . self::loremIpsumText(),
+                    'featured_image' => 'unsplash-12.jpg',
+                    'images' => false,
+                    'tags' => [ 'Core', 'Themes', 'Plugins', ],
+                    'comments' => false,
+                ],
+                [
+                    'title' => "Custom Actions And Filters",
+                    'content' => "<p>We've got that too! You can super charge your themes and plugins with actions and filters just like you would do it in any WordPress websites.</p>" . self::loremIpsumText(),
+                    'featured_image' => 'unsplash-11.jpg',
+                    'images' => false,
+                    'tags' => [ 'Core', 'Actions', 'Filters' ],
+                    'comments' => false,
+                ],
+                [
+                    'title' => "Custom Post Types? Yes!",
+                    'content' => "<p>We've got you covered if you want Custom Post Types. No coding necessary, everything is visual and intuitive.</p>" . '<p><img style="border-style: none; margin: 20px; float: left;" src="IMG_PLACEHOLDER_1" alt="" width="400" height="211" /> As the Lorem Ipsum says, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><p style="text-align: left;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
-                'featured_image' => 'unsplash-10.jpg',
-                'images' => [
-                    'IMG_PLACEHOLDER_1' => '__post-types.png',
+                    'featured_image' => 'unsplash-10.jpg',
+                    'images' => [
+                        'IMG_PLACEHOLDER_1' => '__post-types.png',
+                    ],
+                    'tags' => [ 'Core', 'Posts', 'Custom Post Types', ],
+                    'comments' => false,
                 ],
-                'category' => 'Core',
-                'tags' => [ 'Core', 'Posts', 'Custom Post Types', ],
-                'comments' => false,
-            ],
-            [
-                'title' => "Creating Posts? Easy!",
-                'content' => "<p>Pretty simple, click a button, write some text and you're ready to go!</p>" . '<p><img style="border-style: none; margin: 20px; float: left;" src="IMG_PLACEHOLDER_1" alt="" width="400" height="211" /> As the Lorem Ipsum says, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><p style="text-align: left;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                [
+                    'title' => "Creating Posts? Easy!",
+                    'content' => "<p>Pretty simple, click a button, write some text and you're ready to go!</p>" . '<p><img style="border-style: none; margin: 20px; float: left;" src="IMG_PLACEHOLDER_1" alt="" width="400" height="211" /> As the Lorem Ipsum says, Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><p style="text-align: left;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>',
-                'featured_image' => 'unsplash-9.jpg',
-                'images' => [
-                    'IMG_PLACEHOLDER_1' => '__posts.png',
+                    'featured_image' => 'unsplash-9.jpg',
+                    'images' => [
+                        'IMG_PLACEHOLDER_1' => '__posts.png',
+                    ],
+                    'tags' => [ 'Core', 'Posts', 'Editing' ],
+                    'comments' => false,
                 ],
-                'category' => 'Core',
-                'tags' => [ 'Core', 'Posts', 'Editing' ],
-                'comments' => false,
             ],
 
-            //#! Category: Science
-            [
-                'title' => "Turning space images into music makes astronomy more accessible",
-                'content' => self::loremIpsumText(),
-                'featured_image' => 'unsplash-18.jpg',
-                'images' => false,
-                'category' => 'Science',
-                'tags' => [ 'Science', 'Space', 'Music', 'Astronomy' ],
-                'comments' => false,
-            ],
-            [
-                'title' => "The first black hole image helped test general relativity in a new way",
-                'content' => self::loremIpsumText(),
-                'featured_image' => 'unsplash-17.jpg',
-                'images' => false,
-                'category' => 'Science',
-                'tags' => [ 'Science', 'Black holes', 'Space', ],
-                'comments' => false,
-            ],
-            [
-                'title' => "The Milky Way’s most massive star cluster may have eaten a smaller cluster",
-                'content' => self::loremIpsumText(),
-                'featured_image' => 'unsplash-16.jpg',
-                'images' => false,
-                'category' => 'Science',
-                'tags' => [ 'Science', 'Milky Way', 'Stars', ],
-                'comments' => false,
-            ],
-            [
-                'title' => "What will happen when COVID-19 and the flu collide this fall?",
-                'content' => self::loremIpsumText(),
-                'featured_image' => 'unsplash-15.jpg',
-                'images' => false,
-                'category' => 'Science',
-                'tags' => [ 'Science', 'Covid-19', 'Flu', 'Corona virus', ],
-                'comments' => false,
-            ],
-
-            //#! Category: Web
-            [
-                'title' => "An iPhone a day keeps the doctor away",
-                'content' => self::loremIpsumText(),
-                'featured_image' => 'unsplash-22.jpg',
-                'images' => false,
-                'category' => 'Web',
-                'tags' => [ 'Web', 'Apple', 'iPhone', '', ],
-                'comments' => [
-                    [
-                        'content' => '<p>Hi, this is a comment.</p><p>To get started with moderating, editing, and deleting comments, please visit the Comments screen under each post type in the dashboard.</p>',
-                        'replies' => [
-                            'Hello! This is a reply',
-                            'Hi! This is another reply, just to have a few comments.',
-                        ],
-                    ],
-                ],
-            ],
-            [
-                'title' => "Apple is working to make AR part of everyday life",
-                'content' => self::loremIpsumText(),
-                'featured_image' => 'unsplash-21.jpg',
-                'images' => false,
-                'category' => 'Web',
-                'tags' => [ 'Web', 'Apple', 'Life', ],
-                'comments' => [
-                    [
-                        'content' => '<p>Hi, this is a comment.</p><p>To get started with moderating, editing, and deleting comments, please visit the Comments screen under each post type in the dashboard.</p>',
-                        'replies' => [
-                            'Hello! This is a reply',
-                            'Hi! This is another reply, just to have a few comments.',
-                        ],
-                    ],
-                ],
-            ],
-            [
-                'title' => "Microsoft ends support for Office 2010, bangs the Office 365 gong",
-                'content' => self::loremIpsumText(),
-                'featured_image' => 'unsplash-20.jpg',
-                'images' => false,
-                'category' => 'Web',
-                'tags' => [ 'Web', 'Microsoft', 'Office 365', 'Office 2010', ],
-                'comments' => [
-                    [
-                        'content' => '<p>Hi, this is a comment.</p><p>To get started with moderating, editing, and deleting comments, please visit the Comments screen under each post type in the dashboard.</p>',
-                        'replies' => [
-                            'Hello! This is a reply',
-                            'Hi! This is another reply, just to have a few comments.',
-                        ],
-                    ],
-                ],
-            ],
-            [
-                'title' => "The evolution of Apple's iPhone",
-                'content' => self::loremIpsumText(),
-                'featured_image' => 'unsplash-19.jpg',
-                'images' => false,
-                'category' => 'Web',
-                'tags' => [ 'Web', 'Phones', 'iPhone' ],
-                'comments' => [
-                    [
-                        'content' => '<p>Hi, this is a comment.</p><p>To get started with moderating, editing, and deleting comments, please visit the Comments screen under each post type in the dashboard.</p>',
-                        'replies' => [
-                            'Hello! This is a reply',
-                            'Hi! This is another reply, just to have a few comments.',
-                        ],
-                    ],
-                ],
-            ],
         ];
     }
 
@@ -247,7 +139,7 @@ class MainDemoData
             ],
             [
                 'title' => "Credits",
-                'content' => "<p>We're using images from ".'<a href="https://unsplash.com/" target="_blank">Unsplash</a> and we would like to express our thanks to the following for their images we use in the main demo:</p><ul><li><a href="https://unsplash.com/@domenicoloia" target="_blank">@domenicoloia</a></li>
+                'content' => "<p>We're using images from " . '<a href="https://unsplash.com/" target="_blank">Unsplash</a> and we would like to express our thanks to the following for their images we use in the main demo:</p><ul><li><a href="https://unsplash.com/@domenicoloia" target="_blank">@domenicoloia</a></li>
 <li><a href="https://unsplash.com/@trueagency" target="_blank">@trueagency</a></li>
 <li><a href="https://unsplash.com/@rhondak" target="_blank">@rhondak</a></li>
 <li><a href="https://unsplash.com/@edwardhowellphotography" target="_blank">@edwardhowellphotography</a></li>
@@ -272,7 +164,18 @@ class MainDemoData
 <li><a href="https://unsplash.com/@arnelhasanovic" target="_blank">@arnelhasanovic</a></li>
 <li><a href="https://unsplash.com/@kellysikkema" target="_blank">@kellysikkema</a></li>
 <li><a href="https://unsplash.com/@speedoshots" target="_blank">@speedoshots</a></li>
-<li><a href="https://unsplash.com/@codypboard" target="_blank">@codypboard</a></li></ul>',
+<li><a href="https://unsplash.com/@codypboard" target="_blank">@codypboard</a></li>
+<li><a href="https://unsplash.com/@jamesthethomas5" target="_blank">@jamesthethomas5</a></li>
+<li><a href="https://unsplash.com/@janisfasel" target="_blank">@janisfasel</a></li>
+<li><a href="https://unsplash.com/@farallon" target="_blank">@farallon</a></li>
+<li><a href="https://unsplash.com/@bethhopes" target="_blank">@bethhopes</a></li>
+<li><a href="https://unsplash.com/@marekpiwnicki" target="_blank">@marekpiwnicki</a></li>
+<li><a href="https://unsplash.com/@eadesstudio" target="_blank">@eadesstudio</a></li>
+<li><a href="https://unsplash.com/@eadesstudio" target="_blank">@eadesstudio</a></li>
+<li><a href="https://unsplash.com/@appzgo" target="_blank">@appzgo</a></li>
+<li><a href="https://unsplash.com/@luciandachman" target="_blank">@luciandachman</a></li>
+<li><a href="https://unsplash.com/@asoggetti" target="_blank">@asoggetti</a></li>
+</ul>',
             ],
         ];
     }

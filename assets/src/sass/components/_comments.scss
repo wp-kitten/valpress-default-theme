@@ -9,7 +9,7 @@
                 padding: 20px;
 
                 & + .comment-replies {
-                    margin-top: 30px;
+                    margin-top: 0;
                     margin-left: 30px;
                 }
 
@@ -25,6 +25,10 @@
                         word-wrap: break-word;
                         white-space: pre-wrap;
                         line-height: 1.4;
+                    }
+
+                    .title-link {
+                        @include link-blue;
                     }
                 }
             }

@@ -1,0 +1,25 @@
+.page-blog {
+    .featured-post {
+        width: 400px;
+        padding: 1.5rem;
+        -webkit-box-shadow: 0px 8px 21px 1px rgba(27,40,69,0.61);
+        box-shadow: 0px 8px 21px 1px rgba(27,40,69,0.61);
+        background-color: $color-white;
+
+        .entry-title {
+            a {
+                @include link-red;
+            }
+        }
+
+        .excerpt {
+            margin: 0 0;
+            padding: 0 0;
+
+            p {
+                margin: 0 0;
+                padding: 0 0;
+            }
+        }
+    }
+}

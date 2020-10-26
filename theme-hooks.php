@@ -79,7 +79,7 @@ add_action( 'contentpress/post/footer', function ( $post ) {
                 <strong><?php esc_html_e( __( 'cpdt::m.Tags:' ) ); ?></strong>
                 <?php
                 foreach ( $tags as $tag ) {
-                    echo '<a href="' . esc_attr( cp_get_tag_link( $tag ) ) . '" class="tag-link ml-2">' . $tag->name . '</a>';
+                    echo '<a href="' . esc_attr( cp_get_tag_link( $tag ) ) . '" class="link-blue ml-2">' . $tag->name . '</a>';
                 }
                 ?>
             </div>
@@ -116,7 +116,7 @@ add_action( 'contentpress/menu::main-menu/before', function ( Menu $menu ) {
     }
 } );
 add_action( 'contentpress/menu::main-menu/after', function ( Menu $menu ) {
-    $menuToggleButton = '<a href="#" class="icon btn-toggle-nav js-toggle-menu" title="' . esc_attr( __( 'np::m.Toggle menu' ) ) . '">&#9776;</a>';
+    $menuToggleButton = '<a href="#" class="menu-item icon btn-toggle-nav js-toggle-menu" title="' . esc_attr( __( 'np::m.Toggle menu' ) ) . '">&#9776;</a>';
 
     $displayAs = ( new Options() )->getOption( "menu-{$menu->id}-display-as", 'basic' );
     if ( 'basic' == $displayAs ) {

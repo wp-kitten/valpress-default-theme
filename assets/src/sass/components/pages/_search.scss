@@ -1,6 +1,56 @@
 .page-search{
     .search-form-wrap {
-        .search-button { display:none !important;}
+        position: relative;
+
+        .search-field {
+            height: 42px;
+            width: 100%;
+            padding-left: 20px;
+            padding-right: 52px;
+            outline: none;
+            border: 1px solid $color-green;
+            font-size: 100%;
+            line-height: 1.15;
+            margin: 0;
+        }
+
+        .search-button {
+            position: absolute;
+            right: 0;
+            border: 0;
+            color: $color-green;
+            background-color: transparent;
+            outline: none;
+            height: 100%;
+            padding: 0 20px;
+            font-size: 12px;
+            transition: color .2s ease-in-out;
+
+            &:after {
+                content: "";
+                width: 1px;
+                height: 24px;
+                background-color: $color-green;
+                display: block;
+                left: 0;
+                position: absolute;
+                top: 50%;
+                margin-top: -12px;
+            }
+
+            &:active,
+            &:focus,
+            &:hover {
+                color: $color-green-2;
+            }
+        }
     }
 
+    .orderby-wrap {
+        select {
+            border: solid 1px $color-green;
+            color: $color-green-2;
+            outline: none;
+        }
+    }
 }

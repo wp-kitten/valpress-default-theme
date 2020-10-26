@@ -19,6 +19,13 @@
            ->where( 'post_type_id', $postType->id )
            ->whereDate( 'created_at', '>', now()->subMonth()->toDateString() )
            ->paginate( $settings->getSetting('posts_per_page', 10) );
+
+    $postFeatured = \App\Models\Post
+           ::where( 'post_status_id', $postStatus->id )
+           ->where( 'post_type_id', $postType->id )
+           ->whereDate( 'created_at', '>', now()->subMonth()->toDateString() )
+           ->inRandomOrder()
+           ->first();
 @endphp
 
 
@@ -29,17 +36,40 @@
 @section('content')
     <main class="site-page page-blog">
 
-        <header class="page-subheader bg-white-smoke pt-5 pb-2 mb-5">
+        <header class="page-subheader" style="background-image: url({{cp_post_get_featured_image_url($page->id)}});">
             <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <h2 class="page-title mb-4 mt-4">{!!  $settings->getSetting('blog_title') !!}</h2>
-                    </div>
+                <div class="inner">
+
+                    @if($postFeatured)
+                        <div class="featured-post">
+                            <span class="entry-date text-grey font-smaller">{{cp_the_date($postFeatured, true)}}</span>
+                            <span class="text-grey font-smaller">
+                                {!! __("cpdt::m.Published in: :category_link",[
+                                    'category_link' => '<a class="link-red" href="'.cp_get_category_link($postFeatured->firstCategory()).'">'.$postFeatured->firstCategory()->name.'</a>',
+                                ]) !!}
+                            </span>
+                            <h2 class="entry-title mt-3 mb-3">
+                                <a href="{{cp_get_permalink($postFeatured)}}" title="{{$postFeatured->title}}">
+                                    {!! cp_ellipsis(wp_kses_post($postFeatured->title), 35) !!}
+                                </a>
+                            </h2>
+                            <div class="excerpt font-smaller text-grey">
+                                {!! $postFeatured->excerpt !!}
+                            </div>
+                            <p class="entry-author font-smaller mt-3 mb-0">
+                                {!! __('cpdt::m.By: :user_link', [
+                                    'user_link' => '<a class="link-red" href="'.route('blog.author', $postFeatured->user->id).'">'.$postFeatured->user->display_name.'</a>'
+                                ]) !!}
+                            </p>
+                        </div>
+                    @endif
+
+                    <h2 class="page-title mb-4 mt-4">{!!  $settings->getSetting('blog_title') !!}</h2>
                 </div>
             </div>
         </header>
 
-        <div class="container">
+        <div class="container pt-5">
             <div class="row">
 
                 {{-- MAIN CONTENT --}}
@@ -56,38 +86,10 @@
                                 <div class="row">
                                     @foreach($posts as $post)
                                         <div class="col-xs-12 col-sm-6 col-md-6">
-                                            <article class="loop-post mb-4">
-                                                <header class="article-header">
-                                                    {!! $themeHelper->getPostImageOrPlaceholder($post, '', 'image-responsive') !!}
-
-                                                    <h2 class="entry-title mt-4">
-                                                        <a href="{{cp_get_permalink($post)}}" class="text-dark">
-                                                            {!! wp_kses_post($post->title) !!}
-                                                        </a>
-                                                    </h2>
-                                                </header>
-
-                                                <section class="article-content">
-                                                    <p>
-                                                        <span class="entry-date text-grey font-smaller">{{cp_the_date($post, true)}}</span>
-                                                        <span class="entry-author font-smaller">
-                                                            {!! __('cpdt::m.By: :user_link', [
-                                                                'user_link' => '<a class="text-danger" href="'.route('blog.author', $post->user->id).'">'.$post->user->display_name.'</a>'
-                                                            ]) !!}
-                                                        </span>
-                                                    </p>
-                                                    {!! $post->excerpt !!}
-                                                </section>
-
-                                                <section class="article-meta mt-4 pt-2">
-                                                    <span class="text-grey font-smaller">
-                                                        {!! __("cpdt::m.Published in: :category_link",[
-                                                            'category_link' => '<a class="text-danger" href="'.cp_get_category_link($post->firstCategory()).'">'.$post->firstCategory()->name.'</a>',
-                                                        ]) !!}
-                                                    </span>
-                                                </section>
-
-                                            </article>
+                                            @include('inc.loop-article', [
+                                                'themeHelper' => $themeHelper,
+                                                'post' => $post,
+                                            ])
                                         </div>
                                     @endforeach
                                 </div>
@@ -104,10 +106,8 @@
                 </div>
 
                 {{-- SIDEBAR --}}
-                <div class="col-sm-12 col-md-3 bg-white">
-                    @include('inc.blog-sidebar', [
-                        'settings' => $settings,
-                    ])
+                <div class="col-sm-12 col-md-3">
+                    @include('inc.blog-sidebar')
                 </div>
             </div>
         </div>

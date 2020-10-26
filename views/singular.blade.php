@@ -21,13 +21,15 @@
 
                         <!-- POST META -->
                         <section class="entry-meta mt-2 mb-2">
-                            <span class="mr-2"><i class="fa fa-clock-o"></i> {{cp_the_date($post, true)}}</span>
-                            <span class="mr-2"><i class="fa fa-user"></i> {{$post->user->display_name}}</span>
+                            <span class="mr-2 text-dark"><i class="fa fa-clock-o"></i> {{cp_the_date($post, true)}}</span>
+                            <span class="mr-2"><i class="fa fa-user"></i>
+                                <a href="{{route('blog.author', $post->user->id)}}" class="link-red">{{$post->user->display_name}}</a>
+                            </span>
                             @if($post->categories()->count())
                                 <span>
                                     <i class="fa fa-folder-open"></i>
                                     @foreach($post->categories()->get() as $category)
-                                        <a href="{{cp_get_category_link($category)}}" class="category-link mr-2">{!! $category->name !!}</a>
+                                        <a href="{{cp_get_category_link($category)}}" class="category-link link-green mr-2">{!! $category->name !!}</a>
                                     @endforeach
                                 </span>
                             @endif
@@ -64,7 +66,7 @@
                         {{-- Render the post Edit link --}}
                         @if(cp_current_user_can('edit_others_posts'))
                             <footer class="entry-footer mt-4 mb-4">
-                                <a href="{{cp_get_post_edit_link($post)}}" class="btn bg-danger">{{__('cpdt::m.Edit')}}</a>
+                                <a href="{{cp_get_post_edit_link($post)}}" class="btn btnLinkRed">{{__('cpdt::m.Edit')}}</a>
                             </footer>
                         @endif
 

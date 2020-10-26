@@ -5,7 +5,7 @@
     "views-path": "contentpress-default-theme/views",
 
     "display_name": "ContentPress Default",
-    "version": "0.4",
+    "version": "0.5",
     "authors": [
         {
             "name": "wp-kitten",

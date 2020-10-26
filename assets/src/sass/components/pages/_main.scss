@@ -1,0 +1,24 @@
+@import "inc/blog";
+
+
+.site-page {
+    .page-subheader {
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        .inner {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            align-content: space-between;
+            justify-content: space-between;
+            padding: 3rem 0;
+
+            @media(max-width: 767px) {
+                flex-direction: column;
+                align-content: center;
+                justify-content: center;
+            }
+        }
+    }
+}

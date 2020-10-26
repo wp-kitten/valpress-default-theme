@@ -15,7 +15,6 @@ define( 'DEFAULT_THEME_MAIN_DEMO_INSTALLING_OPT_NAME', 'cpdt_main_demo_installin
 require_once( DEFAULT_THEME_DIR_PATH . '/src/ThemeHelper.php' );
 require_once( DEFAULT_THEME_DIR_PATH . '/controllers/DefaultThemeController.php' );
 require_once( DEFAULT_THEME_DIR_PATH . '/theme-hooks.php' );
-require_once( DEFAULT_THEME_DIR_PATH . '/routes/console.php' );
 
 cp_add_image_size( '55', [ 'w' => 55 ] );
 cp_add_image_size( 'w210', [ 'w' => 210 ] );

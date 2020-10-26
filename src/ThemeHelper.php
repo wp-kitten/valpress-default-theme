@@ -10,9 +10,17 @@ use App\Models\CommentStatuses;
 use App\Models\Options;
 use App\Models\Post;
 use App\Models\PostComments;
+use App\Models\User;
 
 class ThemeHelper
 {
+    private $themeClass = null;
+
+    public function __construct(  )
+    {
+        $this->themeClass = cp_get_current_theme();
+    }
+
     public function getPostImageOrPlaceholder( Post $post, $sizeName = '', $imageClass = 'image-responsive', $imageAttributes = [] )
     {
         $placeholder = '<img src="' . $this->asset( 'assets/img/placeholder.png' ) . '" alt="" class="' . $imageClass . '"/>';
@@ -32,6 +40,15 @@ class ThemeHelper
             return $imageUrl;
         }
         return $this->themeClass->url( 'assets/img/placeholder.png' );
+    }
+
+    public function getAuthorImageOrPlaceholder( int $userID, $languageID = null )
+    {
+        $imageUrl = cp_get_user_profile_image_url( $userID, $languageID );
+        if(empty($imageUrl)){
+            $imageUrl = $this->themeClass->url( 'assets/img/placeholder.png' );
+        }
+        return $imageUrl;
     }
 
     /**
@@ -204,7 +221,7 @@ class ThemeHelper
                 <div class="author-vcard">
                     <?php
                     if ( $commentUserID ) {
-                        $authorImageUrl = cp_get_user_profile_image_url( $commentUserID );
+                        $authorImageUrl = $this->getAuthorImageOrPlaceholder( $commentUserID );
                     }
                     if ( empty( $authorImageUrl ) ) {
                         $authorImageUrl = asset( 'images/placeholder-200.jpg' );
@@ -258,7 +275,7 @@ class ThemeHelper
                     <div class="author-vcard">
                         <?php
                         if ( $commentUserID ) {
-                            $authorImageUrl = cp_get_user_profile_image_url( $commentUserID );
+                            $authorImageUrl = $this->getAuthorImageOrPlaceholder( $commentUserID );
                         }
                         if ( empty( $authorImageUrl ) ) {
                             $authorImageUrl = asset( 'images/placeholder-200.jpg' );

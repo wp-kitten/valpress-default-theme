@@ -1,11 +1,23 @@
 @import 'vars', 'mixins', 'globals';
+//
+//@import "components/topnav";
+//@import "components/site-header";
+//@import "components/loop-article";
+//@import "components/pages";
+//@import "components/blog-sidebar";
+//@import "components/related-posts";
+//@import "components/pagination";
+//@import "components/comments";
+//@import "components/site-footer";
 
-@import "components/topnav";
-@import "components/site-header";
-@import "components/loop-article";
-@import "components/pages";
+
+@import "components/app-header/main";
+@import "components/pages/main";
+@import "components/pages/home";
+@import "components/pages/search";
+@import "components/pages/post-single";
 @import "components/blog-sidebar";
-@import "components/related-posts";
+@import "components/loop-article";
 @import "components/pagination";
 @import "components/comments";
 @import "components/site-footer";

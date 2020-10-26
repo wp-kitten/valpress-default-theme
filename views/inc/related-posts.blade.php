@@ -10,22 +10,14 @@
     <section class="related-posts">
         <div class="row">
             <div class="col-sm-12">
-                <h3 class="section-title mt-3 mb-4"><i class='fa fa-pencil-square-o'></i> {!! $title !!}</h3>
+                <h3 class="section-title mt-5 mb-4 text-green"><i class='fa fa-pencil-square-o'></i> {!! $title !!}</h3>
             </div>
             @foreach($posts as $post)
                 <div class="col-sm-12 col-md-4">
-                    <article class="loop-post mb-4">
-                        <header class="article-header">
-                            {!! $themeHelper->getPostImageOrPlaceholder($post, '', 'image-responsive') !!}
-                        </header>
-                        <section class="article-content">
-                            <h5 class="entry-title font-weight-normal mt-2">
-                                <a href="{{cp_get_permalink($post)}}">
-                                    {!! wp_kses_post($post->title) !!}
-                                </a>
-                            </h5>
-                        </section>
-                    </article>
+                    @include('inc.loop-article-search', [
+                        'themeHelper' => $themeHelper,
+                        'post' => $post,
+                    ])
                 </div>
             @endforeach
         </div>

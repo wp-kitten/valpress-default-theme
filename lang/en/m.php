@@ -89,4 +89,5 @@ return [
     "Something didn't go as planed: :errors" => "Something didn't go as planed: :errors",
     "Main demo installed successfully." => "Main demo installed successfully.",
     "ContentPress on Github" => "ContentPress on Github",
+    "View all" => "View all",
 ];

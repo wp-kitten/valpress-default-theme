@@ -1,0 +1,36 @@
+@import "inc/top-nav";
+
+
+.cpdt-site-header {
+
+    .logo {
+        color: $color-blue-3;
+        font-size: 1.4rem;
+
+        a {
+            color: $color-blue-3;
+
+            &:active,
+            &:focus,
+            &:hover {
+                color: $cpdt-blue-indigo-dye;
+            }
+        }
+    }
+
+    .inner {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        align-content: space-between;
+        justify-content: space-between;
+        padding: 1rem 0;
+
+        @media(max-width: 767px){
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+        }
+    }
+
+}

@@ -1,4 +1,4 @@
-<footer class="cpdt-site-footer bg-dark">
+<footer class="cpdt-site-footer">
     <div class="container">
         <div class="footer-content-wrap">
             <h4 class="logo mt-0">
