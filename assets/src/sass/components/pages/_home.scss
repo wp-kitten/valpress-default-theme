@@ -2,6 +2,7 @@
     .page-header {
         background-position: 0 0;
         background-size: cover;
+        background-repeat: no-repeat;
         display: flex;
         align-items: flex-start;
         align-content: flex-start;
@@ -21,6 +22,17 @@
                 padding: 1rem 4rem 4rem 4rem;
             }
 
+        }
+
+        @media(max-width: 767px) {
+            .header-wrap {padding: 0;}
+            .header-title,
+            .header-subtitle {
+                padding-left: 2rem !important;
+            }
+            .header-subtitle {
+                padding-bottom: 2rem !important;
+            }
         }
 
     }

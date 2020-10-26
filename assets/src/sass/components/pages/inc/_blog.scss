@@ -6,6 +6,10 @@
         box-shadow: 0px 8px 21px 1px rgba(27,40,69,0.61);
         background-color: $color-white;
 
+        @media(max-width: 767px){
+            width: 100%;
+        }
+
         .entry-title {
             a {
                 @include link-red;

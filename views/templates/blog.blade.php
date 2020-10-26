@@ -39,7 +39,6 @@
         <header class="page-subheader" style="background-image: url({{cp_post_get_featured_image_url($page->id)}});">
             <div class="container">
                 <div class="inner">
-
                     @if($postFeatured)
                         <div class="featured-post">
                             <span class="entry-date text-grey font-smaller">{{cp_the_date($postFeatured, true)}}</span>
@@ -64,7 +63,7 @@
                         </div>
                     @endif
 
-                    <h2 class="page-title mb-4 mt-4">{!!  $settings->getSetting('blog_title') !!}</h2>
+                    <h2 class="page-title mb-4 mt-md-4">{!!  $settings->getSetting('blog_title') !!}</h2>
                 </div>
             </div>
         </header>
@@ -95,7 +94,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <div class="pagination-wrap mt-4 mb-4">
+                                        <div class="pagination-wrap flex-wrap mt-4 mb-4">
                                             {!! $posts->render() !!}
                                         </div>
                                     </div>
