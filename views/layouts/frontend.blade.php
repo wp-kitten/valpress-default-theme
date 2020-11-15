@@ -21,6 +21,7 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com"/>
 
     {!! contentpressHead() !!}
+    @yield('head-scripts')
 </head>
 <body class="{{cp_body_classes()}}">
     {{do_action('contentpress/after_body_open')}}
@@ -32,5 +33,6 @@
     @include('inc.site-footer')
 
     {!! contentpressFooter() !!}
+    @yield('footer-scripts')
 </body>
 </html>
