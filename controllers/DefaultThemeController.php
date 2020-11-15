@@ -10,7 +10,6 @@ use App\Models\PostStatus;
 use App\Models\PostType;
 use App\Models\Tag;
 use App\Models\User;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Artisan;
@@ -21,7 +20,7 @@ class DefaultThemeController extends SiteController
     /**
      * Render the website's homepage.
      */
-    public function index(): View
+    public function index()
     {
         $posts = Post::where( 'language_id', $this->language->getID( CPML::getFrontendLanguageCode() ) )
             ->where( 'post_status_id', PostStatus::where( 'name', 'publish' )->first()->id )
@@ -47,7 +46,7 @@ class DefaultThemeController extends SiteController
         return redirect()->back();
     }
 
-    public function category( $slug ): View
+    public function category( $slug )
     {
         //#! Get the current language ID
         $defaultLanguageID = CPML::getDefaultLanguageID();
@@ -120,7 +119,7 @@ class DefaultThemeController extends SiteController
         ] );
     }
 
-    public function tag( $slug ): View
+    public function tag( $slug )
     {
         //#! Get the current language ID
         $defaultLanguageID = CPML::getDefaultLanguageID();
@@ -167,7 +166,7 @@ class DefaultThemeController extends SiteController
             }
         }
 
-        $postType = PostType::where( 'name', 'post' )->first();
+        $postType = PostType::find( $tag->post_type_id );
         if ( !$postType ) {
             return $this->_not_found();
         }
@@ -209,7 +208,7 @@ class DefaultThemeController extends SiteController
         ] );
     }
 
-    public function search(): View
+    public function search()
     {
         $postType = PostType::where( 'name', '!=', 'page' )->get();
 
@@ -259,7 +258,7 @@ class DefaultThemeController extends SiteController
         ] );
     }
 
-    public function author( $id ): View
+    public function author( $id )
     {
         $user = User::find( $id );
         if ( !$user ) {
@@ -320,7 +319,7 @@ class DefaultThemeController extends SiteController
      * Display the theme options page [Themes/Theme Options]
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function themeOptionsPageView(): View
+    public function themeOptionsPageView()
     {
         return view( '_admin.theme-options' )->with( [
             'previous_install' => $this->options->getOption( DEFAULT_THEME_MAIN_DEMO_INSTALLED_OPT_NAME, false ),
