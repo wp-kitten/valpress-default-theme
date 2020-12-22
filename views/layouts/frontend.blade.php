@@ -1,3 +1,4 @@
+@php do_action('contentpress/frontend/init') @endphp
 <!doctype html>
 @php
     $currentLanguageCode = App\Helpers\CPML::getFrontendLanguageCode();
