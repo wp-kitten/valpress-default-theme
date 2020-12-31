@@ -1,2 +1,2 @@
-# contentpress-default-theme
-The default theme for [ContentPress](https://github.com/wp-kitten/contentpress).
+# valpress-default-theme
+The default theme for [ValPress](https://github.com/wp-kitten/valpress).

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Helpers\CPML;
+use App\Helpers\VPML;
 use App\Models\Menu;
 use App\Models\MenuItem;
 use App\Models\MenuItemType;
@@ -11,12 +11,12 @@ use App\Models\Post;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
-class CpdtMenuSeeder extends Seeder
+class vpdtMenuSeeder extends Seeder
 {
     public function run()
     {
         $menuItemType = MenuItemType::where( 'name', 'page' )->first();
-        $languageID = CPML::getDefaultLanguageID();
+        $languageID = VPML::getDefaultLanguageID();
         $options = new Options();
 
         $data = [

@@ -4,12 +4,12 @@ use App\Helpers\ScriptsManager;
 use App\Helpers\Theme;
 use App\Models\Menu;
 use App\Models\Options;
-use App\Themes\ContentPressDefaultTheme\ThemeHelper;
+use App\Themes\ValPress\DefaultTheme\ThemeHelper;
 
 /**
  * Include theme's views into the global scope
  */
-add_filter( 'contentpress/register_view_paths', function ( $paths = [] ) {
+add_filter( 'valpress/register_view_paths', function ( $paths = [] ) {
     $paths[] = path_combine( DEFAULT_THEME_DIR_PATH, 'views' );
     return $paths;
 }, 100 );
@@ -17,7 +17,7 @@ add_filter( 'contentpress/register_view_paths', function ( $paths = [] ) {
 /**
  * Register the path to the translation file that will be used depending on the current locale
  */
-cp_register_language_file( 'cpdt', path_combine(
+cp_register_language_file( 'vpdt', path_combine(
     DEFAULT_THEME_DIR_PATH,
     'lang'
 ) );
@@ -25,7 +25,7 @@ cp_register_language_file( 'cpdt', path_combine(
 /*
  * Load|output resources in the head tag
  */
-add_action( 'contentpress/site/head', function () {
+add_action( 'valpress/site/head', function () {
 
     $theme = new Theme( DEFAULT_THEME_DIR_NAME );
 
@@ -41,9 +41,9 @@ add_action( 'contentpress/site/head', function () {
     ScriptsManager::enqueueHeadScript( 'fa-kit.js', '//kit.fontawesome.com/cec4674fec.js' );
     ScriptsManager::enqueueFooterScript( 'theme-scripts.js', $theme->url( 'assets/js/theme-scripts.js' ) );
 
-    if ( cp_is_singular() && ( cp_comments_open( cp_get_post() ) ) ) {
+    if ( vp_is_singular() && ( vp_comments_open( vp_get_post() ) ) ) {
         ScriptsManager::localizeScript( 'comments-locale', 'CommentsLocale', [
-            'confirm_cancel' => esc_js( __( 'cpdt::m.Are you sure you want to cancel?' ) ),
+            'confirm_cancel' => esc_js( __( 'vpdt::m.Are you sure you want to cancel?' ) ),
         ] );
         ScriptsManager::enqueueFooterScript( 'theme-comments.js', $theme->url( 'assets/js/comments.js' ) );
     }
@@ -52,34 +52,34 @@ add_action( 'contentpress/site/head', function () {
 /*
  * Load|output resources in the site footer
  */
-add_action( 'contentpress/site/footer', function () {
+add_action( 'valpress/site/footer', function () {
     //...
 } );
 
 /*
  * Do something when plugins have loaded
  */
-add_action( 'contentpress/plugins/loaded', function () {
+add_action( 'valpress/plugins/loaded', function () {
     //...
 } );
 
 /**
  * Output some content right after the <body> tag
  */
-add_action( 'contentpress/after_body_open', function () {
+add_action( 'valpress/after_body_open', function () {
     //...
 } );
 
-add_action( 'contentpress/post/footer', function ( $post ) {
+add_action( 'valpress/post/footer', function ( $post ) {
     $tags = $post->tags()->get();
     if ( $tags ) {
         ?>
         <div class="post-meta">
             <div class="post-tags">
-                <strong><?php esc_html_e( __( 'cpdt::m.Tags:' ) ); ?></strong>
+                <strong><?php esc_html_e( __( 'vpdt::m.Tags:' ) ); ?></strong>
                 <?php
                 foreach ( $tags as $tag ) {
-                    echo '<a href="' . esc_attr( cp_get_tag_link( $tag ) ) . '" class="link-blue ml-2">' . $tag->name . '</a>';
+                    echo '<a href="' . esc_attr( vp_get_tag_link( $tag ) ) . '" class="link-blue ml-2">' . $tag->name . '</a>';
                 }
                 ?>
             </div>
@@ -91,8 +91,8 @@ add_action( 'contentpress/post/footer', function ( $post ) {
 /**
  * Filter classes applied to the <body> tag
  */
-add_filter( 'contentpress/body-class', function ( $classes = [] ) {
-    $classes[] = 'contentpress-default-theme';
+add_filter( 'valpress/body-class', function ( $classes = [] ) {
+    $classes[] = 'valpress-default-theme';
     return $classes;
 } );
 
@@ -100,7 +100,7 @@ add_filter( 'contentpress/body-class', function ( $classes = [] ) {
 /**
  * Add custom menu items to the main menu
  */
-add_action( 'contentpress/menu::main-menu/before', function ( Menu $menu ) {
+add_action( 'valpress/menu::main-menu/before', function ( Menu $menu ) {
 
     $homeLinkActiveClass = ( Route::is( 'app.home' ) ? 'active' : '' );
 
@@ -108,14 +108,14 @@ add_action( 'contentpress/menu::main-menu/before', function ( Menu $menu ) {
     if ( 'basic' == $displayAs ) {
         echo '<ul class="list-unstyled main-menu basic">';
         echo '<li>';
-        echo '<a href="' . route( 'app.home' ) . '" class="menu-item ' . $homeLinkActiveClass . '">' . esc_attr( __( 'cpdt::m.Home' ) ) . '</a>';
+        echo '<a href="' . route( 'app.home' ) . '" class="menu-item ' . $homeLinkActiveClass . '">' . esc_attr( __( 'vpdt::m.Home' ) ) . '</a>';
         echo '</li>';
     }
     else {
-        echo '<a href="' . route( 'app.home' ) . '" class="menu-item ' . $homeLinkActiveClass . '">' . esc_attr( __( 'cpdt::m.Home' ) ) . '</a>';
+        echo '<a href="' . route( 'app.home' ) . '" class="menu-item ' . $homeLinkActiveClass . '">' . esc_attr( __( 'vpdt::m.Home' ) ) . '</a>';
     }
 } );
-add_action( 'contentpress/menu::main-menu/after', function ( Menu $menu ) {
+add_action( 'valpress/menu::main-menu/after', function ( Menu $menu ) {
     $menuToggleButton = '<a href="#" class="menu-item icon btn-toggle-nav js-toggle-menu" title="' . esc_attr( __( 'np::m.Toggle menu' ) ) . '">&#9776;</a>';
 
     $displayAs = ( new Options() )->getOption( "menu-{$menu->id}-display-as", 'basic' );
@@ -127,7 +127,7 @@ add_action( 'contentpress/menu::main-menu/after', function ( Menu $menu ) {
         echo $menuToggleButton;
     }
 } );
-add_action( 'contentpress/menu::main-menu', function ( Menu $menu ) {
+add_action( 'valpress/menu::main-menu', function ( Menu $menu ) {
 
 } );
 //</editor-fold desc=":: MAIN MENU ::">
@@ -137,18 +137,18 @@ add_action( 'contentpress/menu::main-menu', function ( Menu $menu ) {
  *
  * Remove actions registered by the App
  */
-remove_action( 'contentpress/comment/render', '__contentpress_render_comment', 10 );
-remove_action( 'contentpress/comment/replies', '__contentpress_render_comment_replies', 10 );
-remove_action( 'contentpress/comment/actions', '__contentpress_render_comment_actions', 10 );
+remove_action( 'valpress/comment/render', '__valpress_render_comment', 10 );
+remove_action( 'valpress/comment/replies', '__valpress_render_comment_replies', 10 );
+remove_action( 'valpress/comment/actions', '__valpress_render_comment_actions', 10 );
 
 /*
  * Register our actions
  */
 $themeHelper = new ThemeHelper();
-add_action( 'contentpress/submit_comment', [ $themeHelper, 'submitComment' ], 10, 2 );
-add_action( 'contentpress/comment/render', [ $themeHelper, 'renderComment' ], 10, 2 );
-add_action( 'contentpress/comment/replies', [ $themeHelper, 'renderCommentReplies' ], 10, 1 );
-add_action( 'contentpress/comment/actions', [ $themeHelper, 'renderCommentActions' ], 10, 2 );
+add_action( 'valpress/submit_comment', [ $themeHelper, 'submitComment' ], 10, 2 );
+add_action( 'valpress/comment/render', [ $themeHelper, 'renderComment' ], 10, 2 );
+add_action( 'valpress/comment/replies', [ $themeHelper, 'renderCommentReplies' ], 10, 1 );
+add_action( 'valpress/comment/actions', [ $themeHelper, 'renderCommentActions' ], 10, 2 );
 unset( $themeHelper );
 
 
@@ -157,13 +157,13 @@ unset( $themeHelper );
 * [ADMIN]
 * Add the Theme options menu item under Themes in the admin menu
 */
-add_action( 'contentpress/admin/sidebar/menu/themes', function () {
-    if ( cp_current_user_can( 'manage_options' ) ) {
+add_action( 'valpress/admin/sidebar/menu/themes', function () {
+    if ( vp_current_user_can( 'manage_options' ) ) {
         ?>
         <li>
-            <a class="treeview-item <?php App\Helpers\MenuHelper::activateSubmenuItem( 'admin.themes.contentpress-default-theme-options' ); ?>"
-               href="<?php esc_attr_e( route( 'admin.themes.contentpress-default-theme-options' ) ); ?>">
-                <?php esc_html_e( __( 'cpdt::m.Theme Options' ) ); ?>
+            <a class="treeview-item <?php App\Helpers\MenuHelper::activateSubmenuItem( 'admin.themes.valpress-default-theme-options' ); ?>"
+               href="<?php esc_attr_e( route( 'admin.themes.valpress-default-theme-options' ) ); ?>">
+                <?php esc_html_e( __( 'vpdt::m.Theme Options' ) ); ?>
             </a>
         </li>
         <?php

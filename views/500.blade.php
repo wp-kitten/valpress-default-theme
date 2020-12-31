@@ -4,7 +4,7 @@
 @extends('layouts.frontend')
 
 @section('title')
-    <title>{{__('cpdt::m.500')}}</title>
+    <title>{{__('vpdt::m.500')}}</title>
 @endsection
 
 @section('content')
@@ -12,8 +12,8 @@
 
         <section class="page-content-wrap">
             <div class="container">
-                <h2 class="font-weight-bold text-center title">{{__('cpdt::m.500')}}</h2>
-                <h4 class="text-center subtitle">{{__("cpdt::m.Oooops! An internal error occurred.")}}</h4>
+                <h2 class="font-weight-bold text-center title">{{__('vpdt::m.500')}}</h2>
+                <h4 class="text-center subtitle">{{__("vpdt::m.Oooops! An internal error occurred.")}}</h4>
             </div> <!-- container -->
         </section> <!-- section-full -->
     </main>

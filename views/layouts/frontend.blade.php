@@ -1,6 +1,6 @@
 <!doctype html>
 @php
-    $currentLanguageCode = App\Helpers\CPML::getFrontendLanguageCode();
+    $currentLanguageCode = App\Helpers\VPML::getFrontendLanguageCode();
     app()->setLocale($currentLanguageCode);
 @endphp
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -14,17 +14,17 @@
     @hasSection('title')
         @yield('title')
     @else
-        <title>{{ config('app.name', 'ContentPress') }}</title>
+        <title>{{ config('app.name', 'ValPress') }}</title>
     @endif
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com"/>
 
-    {!! contentpressHead() !!}
+    {!! valpressHead() !!}
     @yield('head-scripts')
 </head>
-<body class="{{cp_body_classes()}}">
-    {{do_action('contentpress/after_body_open')}}
+<body class="{{vp_body_classes()}}">
+    {{do_action('valpress/after_body_open')}}
 
     @include('inc.site-header')
 
@@ -32,7 +32,7 @@
 
     @include('inc.site-footer')
 
-    {!! contentpressFooter() !!}
+    {!! valpressFooter() !!}
     @yield('footer-scripts')
 </body>
 </html>

@@ -1,4 +1,4 @@
-.cpdt-site-footer {
+.vpdt-site-footer {
     background-color: $color-white-smoke;
 
     .footer-content-wrap {
@@ -16,12 +16,12 @@
         }
 
         a {
-            color: $cpdt-vermilion;
+            color: $vpdt-vermilion;
 
             &:active,
             &:focus,
             &:hover {
-                color: $cpdt-body-text-color;
+                color: $vpdt-body-text-color;
             }
         }
 

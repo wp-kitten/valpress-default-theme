@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Themes\ContentPressDefaultTheme;
+namespace App\Themes\ValPress\DefaultTheme;
 
 class MainDemoData
 {

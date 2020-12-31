@@ -4,7 +4,7 @@
 @extends('layouts.frontend')
 
 @section('title')
-    <title>{{__('cpdt::m.Reset your password')}}</title>
+    <title>{{__('vpdt::m.Reset your password')}}</title>
 @endsection
 
 @section('content')

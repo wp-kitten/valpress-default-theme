@@ -4,7 +4,7 @@
 --}}
 
 <div class="comments-container mt-5 mb-5">
-    <h3 class="mb-4 comments-title" id="_comments">{{__('cpdt::m.Comments')}}</h3>
+    <h3 class="mb-4 comments-title" id="_comments">{{__('vpdt::m.Comments')}}</h3>
 
     @include('inc.notices')
 
@@ -25,7 +25,7 @@
                 }
             }
             else {
-                wp_kses_e('<div class="alert alert-info">'.__('cpdt::m.No comments found.').'</div>', ['div' => [
+                wp_kses_e('<div class="alert alert-info">'.__('vpdt::m.No comments found.').'</div>', ['div' => [
                  'class' => []
                  ] ] );
             }
@@ -34,7 +34,7 @@
     </div> <!-- //.comment-list -->
 
     {{-- Comment Reply Form --}}
-    {!! cp_comments_reply_form($post, 'inc.comment_form') !!}
+    {!! vp_comments_reply_form($post, 'inc.comment_form') !!}
     <!-- //.comment-form -->
 </div>
 <!-- end .comments-container -->

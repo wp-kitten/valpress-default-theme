@@ -7,8 +7,8 @@
     $postStatus = App\Models\PostStatus::where( 'name', 'publish' )->first();
     $postType = App\Models\PostType::where( 'name', 'post' )->first();
 
-    $languageID = cp_get_frontend_user_language_id();
-    $cacheClass = app('cp.cache');
+    $languageID = vp_get_frontend_user_language_id();
+    $cacheClass = app('vp.cache');
 
     $tagsCacheKey = "blog_tags_cache_{$languageID}";
     $tags = $cacheClass->get($tagsCacheKey, false);
@@ -55,20 +55,20 @@
 
     <div class="widget widget-search mt-0 mb-5">
         <div class="widget-content mt-0">
-            {!! cp_search_form(__("cpdt::m.Search..."), '<i class="fas fa-search"></i>') !!}
+            {!! vp_search_form(__("vpdt::m.Search..."), '<i class="fas fa-search"></i>') !!}
         </div>
     </div>
 
     @if($recentPostsList)
         <div class="widget widget-recent-posts widget-recent-posts-list mb-5">
             <div class="widget-title">
-                <h3 class="widgettitle">{{__('cpdt::m.Recent Posts')}}</h3>
+                <h3 class="widgettitle">{{__('vpdt::m.Recent Posts')}}</h3>
             </div>
             <div class="widget-content">
                 <ul class="list-unstyled posts-list">
                     @foreach($recentPostsList as $post)
                         <li class="mb-3">
-                            <a class="post-title link-blue text-capitalize font-weight-bold font-smaller" href="{{cp_get_permalink($post)}}">
+                            <a class="post-title link-blue text-capitalize font-weight-bold font-smaller" href="{{vp_get_permalink($post)}}">
                                 {!! $post->title !!}
                             </a>
                             <div class="text-grey post-excerpt mt-1 font-smaller">{!! cp_ellipsis(wp_strip_all_tags($post->excerpt), 50) !!}</div>
@@ -82,13 +82,13 @@
     @if($categories)
         <div class="widget widget-categories mb-5">
             <div class="widget-title">
-                <h3 class="widgettitle">{{__('cpdt::m.Categories')}}</h3>
+                <h3 class="widgettitle">{{__('vpdt::m.Categories')}}</h3>
             </div>
             <div class="widget-content">
                 <ul class="list-unstyled categories-list">
                     @foreach($categories as $categoryID => $info)
                         <li>
-                            <a class="category-name link-green text-capitalize" href="{{cp_get_category_link($info['category'])}}">
+                            <a class="category-name link-green text-capitalize" href="{{vp_get_category_link($info['category'])}}">
                                 {!! $info['category']->name !!}
                             </a>
                             <span class="text-dark">{{$info['num_posts']}}</span>
@@ -102,14 +102,14 @@
     @if($recentPostsImages)
         <div class="widget widget-recent-posts widget-recent-posts-images mb-5">
             <div class="widget-title">
-                <h3 class="widgettitle">{{__('cpdt::m.Recent Posts')}}</h3>
+                <h3 class="widgettitle">{{__('vpdt::m.Recent Posts')}}</h3>
             </div>
             <div class="widget-content">
                 <ul class="list-unstyled posts-list">
                     @foreach($recentPostsList as $post)
                         <li class="mb-3">
                             {!! $themeHelper->getPostImageOrPlaceholder($post, '', 'image-responsive') !!}
-                            <a class="post-title text-dark text-capitalize font-smaller" href="{{cp_get_permalink($post)}}">
+                            <a class="post-title text-dark text-capitalize font-smaller" href="{{vp_get_permalink($post)}}">
                                 {!! $post->title !!}
                             </a>
                         </li>
@@ -122,13 +122,13 @@
     @if($tags && $tags->count())
         <div class="widget widget-tags mb-5">
             <div class="widget-title">
-                <h3 class="widgettitle">{{__('cpdt::m.Tags')}}</h3>
+                <h3 class="widgettitle">{{__('vpdt::m.Tags')}}</h3>
             </div>
             <div class="widget-content">
                 <ul class="list-unstyled tags-list">
                     <li class="mb-3">
                         @foreach($tags as $tag)
-                            <a href="{{cp_get_tag_link($tag)}}" class="link-blue ml-2">
+                            <a href="{{vp_get_tag_link($tag)}}" class="link-blue ml-2">
                                 {!! wp_kses_post($tag->name) !!}
                             </a>
                         @endforeach
@@ -140,17 +140,17 @@
 
     <div class="widget widget-meta mb-5">
         <div class="widget-title">
-            <h3 class="widgettitle">{{__('cpdt::m.Meta')}}</h3>
+            <h3 class="widgettitle">{{__('vpdt::m.Meta')}}</h3>
         </div>
         <div class="widget-content">
             <ul class="list-unstyled tags-list">
                 <li class="mb-1">
                     @guest
-                        <a class="link-blue" href="{{route('login')}}">{{__("cpdt::m.Login")}}</a>
+                        <a class="link-blue" href="{{route('login')}}">{{__("vpdt::m.Login")}}</a>
                     @else
                         <a href="#"
                            class="link-blue"
-                           onclick="event.preventDefault();document.getElementById('form-meta-logout').submit();">{{__("cpdt::m.Logout")}}</a>
+                           onclick="event.preventDefault();document.getElementById('form-meta-logout').submit();">{{__("vpdt::m.Logout")}}</a>
                         <form id="form-meta-logout" action="{{route('logout')}}" method="post">
                             @csrf
                         </form>
@@ -160,13 +160,13 @@
                 <li class="mb-1">
                     @guest
                         @if($settings->getSetting('user_registration_open', false))
-                            <a class="link-blue" href="{{route('register')}}">{{__("cpdt::m.Register")}}</a>
+                            <a class="link-blue" href="{{route('register')}}">{{__("vpdt::m.Register")}}</a>
                         @endif
                     @endguest
                 </li>
 
                 <li class="mb-1">
-                    <a class="link-blue" href="{{CONTENTPRESS_URL}}" target="_blank">{{__("cpdt::m.ContentPress.news")}}</a>
+                    <a class="link-blue" href="{{VALPRESS_URL}}" target="_blank">{{__("vpdt::m.ValPress.news")}}</a>
                 </li>
             </ul>
         </div>

@@ -7,7 +7,7 @@ use App\Models\Post;
 use App\Models\Settings;
 use Illuminate\Database\Seeder;
 
-class CpdtSettingsSeeder extends Seeder
+class vpdtSettingsSeeder extends Seeder
 {
     public function run()
     {

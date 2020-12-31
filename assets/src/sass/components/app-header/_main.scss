@@ -1,7 +1,7 @@
 @import "inc/top-nav";
 
 
-.cpdt-site-header {
+.vpdt-site-header {
 
     .logo {
         color: $color-blue-3;
@@ -13,7 +13,7 @@
             &:active,
             &:focus,
             &:hover {
-                color: $cpdt-blue-indigo-dye;
+                color: $vpdt-blue-indigo-dye;
             }
         }
     }

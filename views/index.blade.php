@@ -39,7 +39,7 @@ The template to display the front page or the blog page depending on what is set
 @section('content')
 
     @if($thePage)
-        @if( $template = cp_get_post_meta( $thePage, 'template') )
+        @if( $template = vp_get_post_meta( $thePage, 'template') )
             @include($template, [ 'page' => $thePage ] )
         @else
             @include('page', [ 'page' => $thePage ] )

@@ -4,9 +4,9 @@
 --}}
 @extends('layouts.frontend')
 
-@inject('themeHelper', App\Themes\ContentPressDefaultTheme\ThemeHelper)
+@inject('themeHelper', App\Themes\ValPress\DefaultTheme\ThemeHelper)
 @php
-    /**@var \App\Themes\ContentPressDefaultTheme\ThemeHelper $themeHelper*/
+    /**@var \App\Themes\ValPress\DefaultTheme\ThemeHelper $themeHelper*/
 @endphp
 
 @section('content')
@@ -24,7 +24,7 @@
 
         <section class="page-content-wrap">
             <div class="container">
-                <div class="{{cp_post_classes()}}">
+                <div class="{{vp_post_classes()}}">
                     <article class="article-single">
                         <div class="entry-content">
                             {!! $page->content !!}
@@ -33,9 +33,9 @@
                 </div>
 
                 {{-- Render the post Edit link --}}
-                @if(cp_current_user_can('edit_others_posts'))
+                @if(vp_current_user_can('edit_others_posts'))
                     <footer class="entry-footer mt-4 mb-4">
-                        <a href="{{cp_get_post_edit_link($page)}}" class="btn bg-danger text-light">{{__('cpdt::m.Edit')}}</a>
+                        <a href="{{vp_get_post_edit_link($page)}}" class="btn bg-danger text-light">{{__('vpdt::m.Edit')}}</a>
                     </footer>
                 @endif
             </div> <!-- container -->

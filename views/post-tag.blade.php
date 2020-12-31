@@ -4,7 +4,7 @@
 --}}
 @extends('layouts.frontend')
 
-@inject('themeHelper', App\Themes\ContentPressDefaultTheme\ThemeHelper)
+@inject('themeHelper', App\Themes\ValPress\DefaultTheme\ThemeHelper)
 
 @section('title')
     <title>{!! $tag->name !!}</title>
@@ -18,7 +18,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h2 class="page-title mb-4 mt-4">{{__('cpdt::m.Tag: :name', ['name' => $tag->name])}}</h2>
+                        <h2 class="page-title mb-4 mt-4">{{__('vpdt::m.Tag: :name', ['name' => $tag->name])}}</h2>
                     </div>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             @if(!$posts || ! $posts->count())
-                                @include('inc.no-content', ['class' => 'info', 'text' => __('cpdt::m.No posts under this tag.')])
+                                @include('inc.no-content', ['class' => 'info', 'text' => __('vpdt::m.No posts under this tag.')])
                             @else
                                 <div class="row">
                                     @foreach($posts as $post)

@@ -3,13 +3,13 @@
 --}}
 @extends('layouts.frontend')
 
-@inject('themeHelper', App\Themes\ContentPressDefaultTheme\ThemeHelper)
+@inject('themeHelper', App\Themes\ValPress\DefaultTheme\ThemeHelper)
 @inject('settings', App\Models\Settings)
 @inject('postStatusClass', App\Models\PostStatus)
 @inject('postTypeClass', App\Models\PostType)
 
 @php
-    /**@var \App\Themes\ContentPressDefaultTheme\ThemeHelper $themeHelper*/
+    /**@var \App\Themes\ValPress\DefaultTheme\ThemeHelper $themeHelper*/
     /**@var App\Models\Settings $settings*/
 
     $postStatus = $postStatusClass->where( 'name', 'publish' )->first();
@@ -36,19 +36,19 @@
 @section('content')
     <main class="site-page page-blog">
 
-        <header class="page-subheader" style="background-image: url({{cp_post_get_featured_image_url($page->id)}});">
+        <header class="page-subheader" style="background-image: url({{vp_post_get_featured_image_url($page->id)}});">
             <div class="container">
                 <div class="inner">
                     @if($postFeatured)
                         <div class="featured-post">
-                            <span class="entry-date text-grey font-smaller">{{cp_the_date($postFeatured, true)}}</span>
+                            <span class="entry-date text-grey font-smaller">{{vp_the_date($postFeatured, true)}}</span>
                             <span class="text-grey font-smaller">
-                                {!! __("cpdt::m.Published in: :category_link",[
-                                    'category_link' => '<a class="link-red" href="'.cp_get_category_link($postFeatured->firstCategory()).'">'.$postFeatured->firstCategory()->name.'</a>',
+                                {!! __("vpdt::m.Published in: :category_link",[
+                                    'category_link' => '<a class="link-red" href="'.vp_get_category_link($postFeatured->firstCategory()).'">'.$postFeatured->firstCategory()->name.'</a>',
                                 ]) !!}
                             </span>
                             <h2 class="entry-title mt-3 mb-3">
-                                <a href="{{cp_get_permalink($postFeatured)}}" title="{{$postFeatured->title}}">
+                                <a href="{{vp_get_permalink($postFeatured)}}" title="{{$postFeatured->title}}">
                                     {!! cp_ellipsis(wp_kses_post($postFeatured->title), 35) !!}
                                 </a>
                             </h2>
@@ -56,7 +56,7 @@
                                 {!! $postFeatured->excerpt !!}
                             </div>
                             <p class="entry-author font-smaller mt-3 mb-0">
-                                {!! __('cpdt::m.By: :user_link', [
+                                {!! __('vpdt::m.By: :user_link', [
                                     'user_link' => '<a class="link-red" href="'.route('blog.author', $postFeatured->user->id).'">'.$postFeatured->user->display_name.'</a>'
                                 ]) !!}
                             </p>
@@ -80,7 +80,7 @@
                         {{-- POSTS --}}
                         <div class="col-sm-12">
                             @if(!$posts || ! $posts->count())
-                                @include('inc.no-content', ['class' => 'info', 'text' => __('cpdt::m.No posts found.')])
+                                @include('inc.no-content', ['class' => 'info', 'text' => __('vpdt::m.No posts found.')])
                             @else
                                 <div class="row">
                                     @foreach($posts as $post)

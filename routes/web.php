@@ -35,14 +35,14 @@ Route::post( 'comment/delete/{id}', [ DefaultThemeController::class, '__deleteCo
 /*
  * Theme options routes
  */
-$cpdtBaseRoute = 'admin.themes.contentpress-default-theme-options';
-Route::get( 'admin/themes/contentpress-default-theme/options', [ DefaultThemeController::class, 'themeOptionsPageView' ] )
+$vpdtBaseRoute = 'admin.themes.valpress-default-theme-options';
+Route::get( 'admin/themes/valpress-default-theme/options', [ DefaultThemeController::class, 'themeOptionsPageView' ] )
     ->middleware( [ 'web', 'auth', 'active_user', 'under_maintenance' ] )
-    ->name( $cpdtBaseRoute );
-Route::post( 'admin/themes/contentpress-default-theme/options/save', [ DefaultThemeController::class, 'themeOptionsSave' ] )
+    ->name( $vpdtBaseRoute );
+Route::post( 'admin/themes/valpress-default-theme/options/save', [ DefaultThemeController::class, 'themeOptionsSave' ] )
     ->middleware( [ 'web', 'auth', 'active_user', 'under_maintenance' ] )
-    ->name( "{$cpdtBaseRoute}.save" );
-Route::post( 'admin/themes/contentpress-default-theme/options/install-main-demo', [ DefaultThemeController::class, 'installMainDemo' ] )
+    ->name( "{$vpdtBaseRoute}.save" );
+Route::post( 'admin/themes/valpress-default-theme/options/install-main-demo', [ DefaultThemeController::class, 'installMainDemo' ] )
     ->middleware( [ 'web', 'auth', 'active_user', 'under_maintenance' ] )
-    ->name( "{$cpdtBaseRoute}.install-main-demo" );
-unset( $cpdtBaseRoute );
+    ->name( "{$vpdtBaseRoute}.install-main-demo" );
+unset( $vpdtBaseRoute );

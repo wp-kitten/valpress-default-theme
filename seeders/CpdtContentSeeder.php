@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Helpers\CPML;
+use App\Helpers\VPML;
 use App\Helpers\ImageHelper;
 use App\Helpers\MediaHelper;
 use App\Helpers\MetaFields;
@@ -15,13 +15,13 @@ use App\Models\PostMeta;
 use App\Models\PostStatus;
 use App\Models\PostType;
 use App\Models\Tag;
-use App\Themes\ContentPressDefaultTheme\MainDemoData;
+use App\Themes\ValPress\DefaultTheme\MainDemoData;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
-class CpdtContentSeeder extends Seeder
+class vpdtContentSeeder extends Seeder
 {
     /**
      * Stores the mapped categories: Name => ID
@@ -45,8 +45,8 @@ class CpdtContentSeeder extends Seeder
         $postTypePost = PostType::where( 'name', 'post' )->first();
         $postTypePage = PostType::where( 'name', 'page' )->first();
         $postStatus = PostStatus::where( 'name', 'publish' )->first();
-        $languageID = CPML::getDefaultLanguageID();
-        $userID = cp_get_current_user_id();
+        $languageID = VPML::getDefaultLanguageID();
+        $userID = vp_get_current_user_id();
 
         $mediaHelper = new MediaHelper();
         $uploadsDir = $mediaHelper->getUploadsDir();
@@ -251,7 +251,7 @@ class CpdtContentSeeder extends Seeder
 
                 $pageID = $this->__getPostID( $title, $content, $postStatus, $postTypePage, $languageID, $userID );
                 if ( empty( $pageID ) ) {
-                    throw new \Exception( __( "cpdt::m. The page :page could not be created.", [ 'page' => $title ] ) );
+                    throw new \Exception( __( "vpdt::m. The page :page could not be created.", [ 'page' => $title ] ) );
                 }
 
                 //#! Set templates for Home & Blog
@@ -395,7 +395,7 @@ class CpdtContentSeeder extends Seeder
         //#! [::2] Create the post
         $postID = $this->__getPostID( $title, $content, $postStatus, $postTypePost, $languageID, $userID );
         if ( empty( $postID ) ) {
-            throw new \Exception( __( "cpdt::m. The post :post could not be created.", [ 'post' => $title ] ) );
+            throw new \Exception( __( "vpdt::m. The post :post could not be created.", [ 'post' => $title ] ) );
         }
         $thePost = Post::find( $postID );
 

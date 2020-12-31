@@ -4,9 +4,9 @@
 --}}
 @extends('layouts.frontend')
 
-@inject('themeHelper', App\Themes\ContentPressDefaultTheme\ThemeHelper)
+@inject('themeHelper', App\Themes\ValPress\DefaultTheme\ThemeHelper)
 @php
-    /**@var \App\Themes\ContentPressDefaultTheme\ThemeHelper $themeHelper*/
+    /**@var \App\Themes\ValPress\DefaultTheme\ThemeHelper $themeHelper*/
 @endphp
 
 @section('title')
@@ -20,7 +20,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h2 class="page-title mb-4 mt-4">{{__('cpdt::m.Category: :name', ['name' => $category->name])}}</h2>
+                        <h2 class="page-title mb-4 mt-4">{{__('vpdt::m.Category: :name', ['name' => $category->name])}}</h2>
                     </div>
                 </div>
             </div>
@@ -40,10 +40,10 @@
                                 $catsTree = [];
                                 if( ! empty($parentCategories)){
                                     foreach($parentCategories as $cat){
-                                        $catsTree[] = '<a href="'.esc_attr(cp_get_category_link($cat)).'">'.$cat->name.'</a>';
+                                        $catsTree[] = '<a href="'.esc_attr(vp_get_category_link($cat)).'">'.$cat->name.'</a>';
                                     }
                                 }
-                                $catsTree[] = '<a href="'.esc_attr(cp_get_category_link($category)).'">'. $category->name.'</a>';
+                                $catsTree[] = '<a href="'.esc_attr(vp_get_category_link($category)).'">'. $category->name.'</a>';
                             @endphp
                             @if(count($catsTree) > 1)
                                 <span class="d-block text-description">{!! implode('/', $catsTree) !!}</span>
@@ -55,7 +55,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             @if(!$posts || ! $posts->count())
-                                @include('inc.no-content', ['class' => 'info', 'text' => __('cpdt::m.No posts in this category.')])
+                                @include('inc.no-content', ['class' => 'info', 'text' => __('vpdt::m.No posts in this category.')])
                             @else
                                 <div class="row">
                                     @foreach($posts as $post)

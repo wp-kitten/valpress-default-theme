@@ -4,7 +4,7 @@
     if(! $postCategory){
         return;
     }
-    $posts = cp_get_related_posts($post->categories()->first(), 3, $post->id);
+    $posts = vp_get_related_posts($post->categories()->first(), 3, $post->id);
 @endphp
 @if($posts && $posts->count())
     <section class="related-posts">

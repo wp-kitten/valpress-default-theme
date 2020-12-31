@@ -1,10 +1,10 @@
 {
-    "name": "contentpress-default-theme",
+    "name": "valpress-default-theme",
     "extends": "",
-    "asset-path": "contentpress-default-theme/assets",
-    "views-path": "contentpress-default-theme/views",
+    "asset-path": "valpress-default-theme/assets",
+    "views-path": "valpress-default-theme/views",
 
-    "display_name": "ContentPress Default",
+    "display_name": "ValPress Default",
     "version": "0.6",
     "authors": [
         {
@@ -13,8 +13,8 @@
         }
     ],
     "contributors": [],
-    "page_url": "https://github.com/wp-kitten/contentpress-default-theme",
-    "update_url": "http://api.contentpress.news/api/theme/info/contentpress-default-theme",
-    "description": "The default theme for ContentPress",
+    "page_url": "https://github.com/wp-kitten/valpress-default-theme",
+    "update_url": "https://api.valpress.net/api/theme/info/valpress-default-theme",
+    "description": "The default theme for ValPress",
     "thumbnail": "thumb.png"
 }

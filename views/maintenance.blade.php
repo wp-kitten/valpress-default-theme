@@ -5,14 +5,14 @@
 @inject('settings', App\Models\Settings)
 
 @section('title')
-    <title>{{__('cpdt::m.Under maintenance')}}</title>
+    <title>{{__('vpdt::m.Under maintenance')}}</title>
 @endsection
 
 @section('content')
 
     @php
-        $title = $settings->getSetting('under_maintenance_page_title', __('cpdt::m.Under maintenance'));
-        $message = $settings->getSetting('under_maintenance_message', __("cpdt::m.The website is under maintenance. Please check back in a few minutes."));
+        $title = $settings->getSetting('under_maintenance_page_title', __('vpdt::m.Under maintenance'));
+        $message = $settings->getSetting('under_maintenance_message', __("vpdt::m.The website is under maintenance. Please check back in a few minutes."));
     @endphp
 
     <main class="site-page page-page page-under-maintenance">

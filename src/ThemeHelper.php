@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Themes\ContentPressDefaultTheme;
+namespace App\Themes\ValPress\DefaultTheme;
 
 use App\Helpers\ImageHelper;
 use App\Helpers\Theme;
@@ -24,7 +24,7 @@ class ThemeHelper
     public function getPostImageOrPlaceholder( Post $post, $sizeName = '', $imageClass = 'image-responsive', $imageAttributes = [] )
     {
         $placeholder = '<img src="' . $this->asset( 'assets/img/placeholder.png' ) . '" alt="" class="' . $imageClass . '"/>';
-        if ( cp_post_has_featured_image( $post ) ) {
+        if ( vp_post_has_featured_image( $post ) ) {
             $img = ImageHelper::getResponsiveImage( $post, $sizeName, $imageClass, $imageAttributes );
             if ( empty( $img ) ) {
                 return $placeholder;
@@ -36,7 +36,7 @@ class ThemeHelper
 
     public function getCategoryImageOrPlaceholder( Category $category )
     {
-        if ( $imageUrl = cp_get_category_image_url( $category->id ) ) {
+        if ( $imageUrl = vp_get_category_image_url( $category->id ) ) {
             return $imageUrl;
         }
         return $this->themeClass->url( 'assets/img/placeholder.png' );
@@ -44,7 +44,7 @@ class ThemeHelper
 
     public function getAuthorImageOrPlaceholder( int $userID, $languageID = null )
     {
-        $imageUrl = cp_get_user_profile_image_url( $userID, $languageID );
+        $imageUrl = vp_get_user_profile_image_url( $userID, $languageID );
         if(empty($imageUrl)){
             $imageUrl = $this->themeClass->url( 'assets/img/placeholder.png' );
         }
@@ -80,7 +80,7 @@ class ThemeHelper
      * @param Controller $controller
      * @param int $postID
      *
-     * @hooked add_action( 'contentpress/submit_comment', [$themeHelper, 'submitComment'], 10, 2 );
+     * @hooked add_action( 'valpress/submit_comment', [$themeHelper, 'submitComment'], 10, 2 );
      * @return \Illuminate\Http\RedirectResponse
      */
     public function submitComment( Controller $controller, int $postID )
@@ -89,15 +89,15 @@ class ThemeHelper
         if ( !$post ) {
             return redirect()->back()->with( 'message', [
                 'class' => 'danger',
-                'text' => __( 'cpdt::m.Sorry, an error occurred.' ),
+                'text' => __( 'vpdt::m.Sorry, an error occurred.' ),
             ] );
         }
 
         //#! Make sure the comments are open for this post
-        if ( !cp_get_post_meta( $post, '_comments_enabled' ) ) {
+        if ( !vp_get_post_meta( $post, '_comments_enabled' ) ) {
             return redirect()->back()->with( 'message', [
                 'class' => 'danger',
-                'text' => __( 'cpdt::m.Sorry, the comments are closed for this post.' ),
+                'text' => __( 'vpdt::m.Sorry, the comments are closed for this post.' ),
             ] );
         }
 
@@ -106,10 +106,10 @@ class ThemeHelper
         $user = $controller->current_user();
 
         //#! Make sure the current user is allowed to comment
-        if ( !cp_is_user_logged_in() && !$settings->getSetting( 'anyone_can_comment' ) ) {
+        if ( !vp_is_user_logged_in() && !$settings->getSetting( 'anyone_can_comment' ) ) {
             return redirect()->back()->with( 'message', [
                 'class' => 'danger',
-                'text' => __( 'cpdt::m.Sorry, you are not allowed to comment for this post.' ),
+                'text' => __( 'vpdt::m.Sorry, you are not allowed to comment for this post.' ),
             ] );
         }
 
@@ -120,7 +120,7 @@ class ThemeHelper
 
         $commentApproved = false;
 
-        if ( $user && cp_current_user_can( 'moderate_comments' ) ) {
+        if ( $user && vp_current_user_can( 'moderate_comments' ) ) {
             $commentStatusID = CommentStatuses::where( 'name', 'approve' )->first()->id;
             $commentApproved = true;
         }
@@ -144,7 +144,7 @@ class ThemeHelper
             if ( empty( $authorName ) ) {
                 return redirect()->back()->with( 'message', [
                     'class' => 'danger',
-                    'text' => __( 'cpdt::m.Your name is required.' ),
+                    'text' => __( 'vpdt::m.Your name is required.' ),
                     'data' => $request->post(),
                 ] );
             }
@@ -152,14 +152,14 @@ class ThemeHelper
             if ( empty( $authorEmail ) ) {
                 return redirect()->back()->with( 'message', [
                     'class' => 'danger',
-                    'text' => __( 'cpdt::m.Your email is required.' ),
+                    'text' => __( 'vpdt::m.Your email is required.' ),
                     'data' => $request->post(),
                 ] );
             }
             if ( !filter_var( $authorEmail, FILTER_VALIDATE_EMAIL ) ) {
                 return redirect()->back()->with( 'message', [
                     'class' => 'danger',
-                    'text' => __( 'cpdt::m.The specified email address is not valid.' ),
+                    'text' => __( 'vpdt::m.The specified email address is not valid.' ),
                     'data' => $request->post(),
                 ] );
             }
@@ -168,7 +168,7 @@ class ThemeHelper
                 if ( !filter_var( $authorUrl, FILTER_VALIDATE_URL ) || ( false === strpos( $authorUrl, '.' ) ) ) {
                     return redirect()->back()->with( 'message', [
                         'class' => 'danger',
-                        'text' => __( 'cpdt::m.The specified website URL is not valid.' ),
+                        'text' => __( 'vpdt::m.The specified website URL is not valid.' ),
                         'data' => $request->post(),
                     ] );
                 }
@@ -185,9 +185,9 @@ class ThemeHelper
 
         if ( $comment ) {
             //#! If approved
-            $m = __( 'cpdt::m.Comment added.' );
+            $m = __( 'vpdt::m.Comment added.' );
             if ( !$commentApproved ) {
-                $m = __( 'cpdt::m.Your comment has been added and currently awaits moderation.' );
+                $m = __( 'vpdt::m.Your comment has been added and currently awaits moderation.' );
             }
 
             return redirect()->back()->with( 'message', [
@@ -198,7 +198,7 @@ class ThemeHelper
 
         return redirect()->back()->with( 'message', [
             'class' => 'danger',
-            'text' => __( 'cpdt::m.The comment could not be added.' ),
+            'text' => __( 'vpdt::m.The comment could not be added.' ),
         ] );
     }
 
@@ -207,13 +207,13 @@ class ThemeHelper
      * @param PostComments $comment
      * @param bool $withReplies
      *
-     * @hooked add_action( 'contentpress/comment/render', [$themeHelper, 'renderComment'], 10, 2 );
+     * @hooked add_action( 'valpress/comment/render', [$themeHelper, 'renderComment'], 10, 2 );
      */
     public function renderComment( PostComments $comment, $withReplies = true )
     {
         $commentUserID = $comment->user_id;
         $commentAuthorName = ( $commentUserID ? $comment->user->display_name : $comment->author_name );
-        $commentAuthorUrl = ( $commentUserID ? cp_get_user_meta( '_website_url', $commentUserID ) : $comment->author_url );
+        $commentAuthorUrl = ( $commentUserID ? vp_get_user_meta( '_website_url', $commentUserID ) : $comment->author_url );
         $authorImageUrl = '';
         ?>
         <div class="comment" id="comment-<?php esc_attr_e( $comment->id ); ?>">
@@ -234,10 +234,10 @@ class ThemeHelper
                         <h6 class="author-name">
                             <a href="<?php esc_attr_e( $commentAuthorUrl ); ?>" class="title-link"><?php esc_html_e( $commentAuthorName ); ?></a>
                         </h6>
-                        <time datetime="<?php esc_attr_e( $comment->created_at ); ?>" class="text-grey font-smaller"><?php esc_html_e( cp_the_date( $comment, true ) ); ?></time>
+                        <time datetime="<?php esc_attr_e( $comment->created_at ); ?>" class="text-grey font-smaller"><?php esc_html_e( vp_the_date( $comment, true ) ); ?></time>
                     </div>
                     <div class="comment-text mt-4 mb-4"><?php echo $comment->content; ?></div>
-                    <?php do_action( 'contentpress/comment/actions', $comment, $comment->post->id ); ?>
+                    <?php do_action( 'valpress/comment/actions', $comment, $comment->post->id ); ?>
                 </div> <!-- //.comment-content -->
 
             </div> <!-- //.comment-body -->
@@ -245,7 +245,7 @@ class ThemeHelper
             <?php
             if ( $withReplies ) {
                 echo '<div class="comment-replies">';
-                do_action( 'contentpress/comment/replies', $comment );
+                do_action( 'valpress/comment/replies', $comment );
                 echo '</div>';
             }
             ?>
@@ -257,7 +257,7 @@ class ThemeHelper
      * Render a comment's replies
      * @param PostComments $comment
      *
-     * @hooked add_action( 'contentpress/comment/replies', [$themeHelper, 'renderCommentReplies'], 10, 1 );
+     * @hooked add_action( 'valpress/comment/replies', [$themeHelper, 'renderCommentReplies'], 10, 1 );
      */
     public function renderCommentReplies( PostComments $comment )
     {
@@ -268,7 +268,7 @@ class ThemeHelper
             foreach ( $replies as $reply ) {
                 $commentUserID = $reply->user_id;
                 $commentAuthorName = ( $commentUserID ? $reply->user->display_name : $reply->author_name );
-                $commentAuthorUrl = ( $commentUserID ? cp_get_user_meta( '_website_url', $commentUserID ) : $reply->author_url );
+                $commentAuthorUrl = ( $commentUserID ? vp_get_user_meta( '_website_url', $commentUserID ) : $reply->author_url );
                 $authorImageUrl = '';
                 ?>
                 <div class="comment-body comment-reply bg-white d-flex flex-column flex-md-row align-content-md-start">
@@ -288,14 +288,14 @@ class ThemeHelper
                             <h6 class="author-name">
                                 <a href="<?php esc_attr_e( $commentAuthorUrl ); ?>" class="title-link"><?php esc_html_e( $commentAuthorName ); ?></a>
                             </h6>
-                            <time datetime="<?php esc_attr_e( $reply->created_at ); ?>" class="text-grey font-smaller"><?php esc_html_e( cp_the_date( $reply, true ) ); ?></time>
+                            <time datetime="<?php esc_attr_e( $reply->created_at ); ?>" class="text-grey font-smaller"><?php esc_html_e( vp_the_date( $reply, true ) ); ?></time>
                         </div>
                         <div class="comment-text mt-4 mb-4"><?php echo $reply->content; ?></div>
-                        <?php do_action( 'contentpress/comment/actions', $reply, $reply->post->id ); ?>
+                        <?php do_action( 'valpress/comment/actions', $reply, $reply->post->id ); ?>
                     </div> <!-- //.comment-content -->
                 </div> <!-- //.comment-body -->
                 <div class="comment-replies">
-                    <?php do_action( 'contentpress/comment/replies', $reply ); ?>
+                    <?php do_action( 'valpress/comment/replies', $reply ); ?>
                 </div>
                 <?php
             }
@@ -307,21 +307,21 @@ class ThemeHelper
      * @param PostComments $comment
      * @param int $postID
      *
-     * @hooked add_action( 'contentpress/comment/actions', [$themeHelper, 'renderCommentActions'], 10, 2 );
+     * @hooked add_action( 'valpress/comment/actions', [$themeHelper, 'renderCommentActions'], 10, 2 );
      */
     public function renderCommentActions( PostComments $comment, int $postID )
     {
         ?>
         <div class="comment-actions text-right">
-            <?php if ( cp_current_user_can( 'moderate_comments' ) ) {
-                $editLink = cp_get_comment_edit_link( $comment->post, $comment->id );
+            <?php if ( vp_current_user_can( 'moderate_comments' ) ) {
+                $editLink = vp_get_comment_edit_link( $comment->post, $comment->id );
                 ?>
                 <a href="#!"
                    class="js-comment-delete ml-3 btn btn-danger btn-sm"
                    data-comment-id="<?php esc_attr_e( $comment->id ); ?>"
-                   data-confirm="<?php esc_attr_e( __( "cpdt::m.Are you sure you want to delete this comment?" ) ); ?>"
+                   data-confirm="<?php esc_attr_e( __( "vpdt::m.Are you sure you want to delete this comment?" ) ); ?>"
                    data-form-id="<?php esc_attr_e( "form-delete-comment-{$comment->id}" ); ?>">
-                    <?php esc_html_e( __( 'cpdt::m.Delete' ) ); ?>
+                    <?php esc_html_e( __( 'vpdt::m.Delete' ) ); ?>
                 </a>
                 <form id="form-delete-comment-<?php esc_attr_e( $comment->id ); ?>"
                       action="<?php echo route( 'app.delete_comment', $comment->id ); ?>"
@@ -334,16 +334,16 @@ class ThemeHelper
                    class="js-comment-edit ml-3 btn btn-warning btn-sm"
                    data-post-id="<?php esc_attr_e( $postID ); ?>"
                    data-comment-id="<?php esc_attr_e( $comment->id ); ?>">
-                    <?php esc_html_e( __( 'cpdt::m.Edit' ) ); ?>
+                    <?php esc_html_e( __( 'vpdt::m.Edit' ) ); ?>
                 </a>
             <?php } ?>
 
-            <?php if ( cp_comments_open( Post::find( $postID ) ) ) { ?>
+            <?php if ( vp_comments_open( Post::find( $postID ) ) ) { ?>
                 <a href="#!"
                    class="js-comment-reply ml-3 btn btn-dark btn-sm"
                    data-post-id="<?php esc_attr_e( $postID ); ?>"
                    data-comment-id="<?php esc_attr_e( $comment->id ); ?>">
-                    <?php esc_html_e( __( 'cpdt::m.Reply' ) ); ?>
+                    <?php esc_html_e( __( 'vpdt::m.Reply' ) ); ?>
                 </a>
             <?php } ?>
         </div>

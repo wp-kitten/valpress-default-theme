@@ -1,6 +1,6 @@
 @php
-/**@var \App\Themes\ContentPressDefaultTheme\ThemeHelper $themeHelper*/
-/**@var \App\Models\Post $post*/
+    /**@var \App\Themes\ValPress\DefaultTheme\ThemeHelper $themeHelper*/
+    /**@var \App\Models\Post $post*/
 @endphp
 <article class="loop-post mb-4">
     <header class="article-header img-zoom-in">
@@ -9,11 +9,11 @@
 
     <section class="article-content p-4 pt-0 pb-0">
         <h2 class="entry-title m-0">
-            <a href="{{cp_get_permalink($post)}}" class="link-blue">
+            <a href="{{vp_get_permalink($post)}}" class="link-blue">
                 {!! wp_kses_post($post->title) !!}
             </a>
         </h2>
-        <span class="entry-date text-grey font-smaller d-block mt-2">{{cp_the_date($post, true)}}</span>
+        <span class="entry-date text-grey font-smaller d-block mt-2">{{vp_the_date($post, true)}}</span>
 
         <div class="entry-excerpt mt-3">{!! $post->excerpt !!}</div>
 
@@ -22,13 +22,13 @@
 
             <p class="entry-date text-grey font-smaller mb-0 ml-3">
                 <span class="entry-date text-grey font-smaller d-block">
-                    {!! __('cpdt::m.By: :user_link', [
+                    {!! __('vpdt::m.By: :user_link', [
                     'user_link' => '<a class="link-red" href="'.route('blog.author', $post->user->id).'">'.$post->user->display_name.'</a>'
                 ]) !!}
                 </span>
                 <span class="entry-date text-grey font-smaller d-block">
-                    {!! __("cpdt::m.Published in: :category_link",[
-                    'category_link' => '<a class="link-green" href="'.cp_get_category_link($post->firstCategory()).'">'.$post->firstCategory()->name.'</a>',
+                    {!! __("vpdt::m.Published in: :category_link",[
+                    'category_link' => '<a class="link-green" href="'.vp_get_category_link($post->firstCategory()).'">'.$post->firstCategory()->name.'</a>',
                 ]) !!}
                 </span>
             </p>

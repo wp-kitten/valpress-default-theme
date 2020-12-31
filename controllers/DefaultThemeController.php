@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\CPML;
+use App\Helpers\VPML;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\PostComments;
@@ -22,7 +22,7 @@ class DefaultThemeController extends SiteController
      */
     public function index()
     {
-        $posts = Post::where( 'language_id', $this->language->getID( CPML::getFrontendLanguageCode() ) )
+        $posts = Post::where( 'language_id', $this->language->getID( VPML::getFrontendLanguageCode() ) )
             ->where( 'post_status_id', PostStatus::where( 'name', 'publish' )->first()->id )
             ->where( 'post_type_id', PostType::where( 'name', 'post' )->first()->id )
             ->where( 'translated_post_id', null )
@@ -41,7 +41,7 @@ class DefaultThemeController extends SiteController
     public function lang( string $code ): RedirectResponse
     {
         //#! Ensure this is a valid language code
-        CPML::setFrontendLanguageCode( $code );
+        VPML::setFrontendLanguageCode( $code );
 
         return redirect()->back();
     }
@@ -49,9 +49,9 @@ class DefaultThemeController extends SiteController
     public function category( $slug )
     {
         //#! Get the current language ID
-        $defaultLanguageID = CPML::getDefaultLanguageID();
+        $defaultLanguageID = VPML::getDefaultLanguageID();
         //#! Get the selected language in frontend
-        $frontendLanguageID = cp_get_frontend_user_language_id();
+        $frontendLanguageID = vp_get_frontend_user_language_id();
 
         $category = Category::where( 'slug', $slug )->where( 'language_id', $frontendLanguageID )->first();
 
@@ -68,7 +68,7 @@ class DefaultThemeController extends SiteController
                         if ( !$category ) {
                             return $this->_not_found();
                         }
-                        return redirect( cp_get_category_link( $category ) );
+                        return redirect( vp_get_category_link( $category ) );
                     }
 
                     //#! Other language -> default language ( RO -> EN ) //
@@ -77,7 +77,7 @@ class DefaultThemeController extends SiteController
                         if ( !$category ) {
                             return $this->_not_found();
                         }
-                        return redirect( cp_get_category_link( $category ) );
+                        return redirect( vp_get_category_link( $category ) );
                     }
 
                     //#! other language -> other language ( ES -> RO )
@@ -85,7 +85,7 @@ class DefaultThemeController extends SiteController
                     if ( !$category ) {
                         return $this->_not_found();
                     }
-                    return redirect( cp_get_category_link( $category ) );
+                    return redirect( vp_get_category_link( $category ) );
                 }
             }
             else {
@@ -122,9 +122,9 @@ class DefaultThemeController extends SiteController
     public function tag( $slug )
     {
         //#! Get the current language ID
-        $defaultLanguageID = CPML::getDefaultLanguageID();
+        $defaultLanguageID = VPML::getDefaultLanguageID();
         //#! Get the selected language in frontend
-        $frontendLanguageID = cp_get_frontend_user_language_id();
+        $frontendLanguageID = vp_get_frontend_user_language_id();
 
         $tag = Tag::where( 'slug', $slug )->where( 'language_id', $frontendLanguageID )->first();
 
@@ -141,7 +141,7 @@ class DefaultThemeController extends SiteController
                         if ( !$tag ) {
                             return $this->_not_found();
                         }
-                        return redirect( cp_get_tag_link( $tag ) );
+                        return redirect( vp_get_tag_link( $tag ) );
                     }
 
                     //#! Other language -> default language ( RO -> EN ) //
@@ -150,7 +150,7 @@ class DefaultThemeController extends SiteController
                         if ( !$tag ) {
                             return $this->_not_found();
                         }
-                        return redirect( cp_get_tag_link( $tag ) );
+                        return redirect( vp_get_tag_link( $tag ) );
                     }
 
                     //#! other language -> other language ( ES -> RO )
@@ -158,7 +158,7 @@ class DefaultThemeController extends SiteController
                     if ( !$tag ) {
                         return $this->_not_found();
                     }
-                    return redirect( cp_get_tag_link( $tag ) );
+                    return redirect( vp_get_tag_link( $tag ) );
                 }
             }
             else {
@@ -179,7 +179,7 @@ class DefaultThemeController extends SiteController
         //#! Make sure the post is published if the current user is not allowed to "edit_private_posts"
         $_postStatuses = PostStatus::all();
         $postStatuses = [];
-        if ( cp_current_user_can( 'edit_private_posts' ) ) {
+        if ( vp_current_user_can( 'edit_private_posts' ) ) {
             $postStatuses = Arr::pluck( $_postStatuses, 'id' );
         }
         else {
@@ -212,7 +212,7 @@ class DefaultThemeController extends SiteController
     {
         $postType = PostType::where( 'name', '!=', 'page' )->get();
 
-        $s = cp_get_search_query();
+        $s = vp_get_search_query();
 
         if ( !$postType || empty( $s ) ) {
             return view( 'search' )->with( [
@@ -234,7 +234,7 @@ class DefaultThemeController extends SiteController
             $order = ( in_array( $order, [ 'asc', 'desc' ] ) ? $order : 'desc' );
         }
 
-        $posts = Post::where( 'language_id', cp_get_frontend_user_language_id() )
+        $posts = Post::where( 'language_id', vp_get_frontend_user_language_id() )
             ->where( 'post_status_id', PostStatus::where( 'name', 'publish' )->first()->id )
             ->whereIn( 'post_type_id', $postTypesArray )
             ->where( function ( $query ) use ( $s ) {
@@ -268,7 +268,7 @@ class DefaultThemeController extends SiteController
         $posts = $user->posts()
             ->where( 'post_type_id', PostType::where( 'name', 'post' )->first()->id )
             ->where( function ( $query ) use ( $user ) {
-                if ( !cp_user_can( $user, 'read_private_posts' ) ) {
+                if ( !vp_user_can( $user, 'read_private_posts' ) ) {
                     $query->where( 'post_status_id', PostStatus::where( 'name', 'published' )->first()->id );
                 }
             } )
@@ -283,7 +283,7 @@ class DefaultThemeController extends SiteController
 
     public function __submitComment( $post_id ): RedirectResponse
     {
-        do_action( 'contentpress/submit_comment', $this, $post_id );
+        do_action( 'valpress/submit_comment', $this, $post_id );
         return redirect()->back();
     }
 
@@ -293,10 +293,10 @@ class DefaultThemeController extends SiteController
      */
     public function __deleteComment( $id ): RedirectResponse
     {
-        if ( !cp_current_user_can( 'moderate_comments' ) ) {
+        if ( !vp_current_user_can( 'moderate_comments' ) ) {
             return redirect()->to( URL::previous() . "#_comments" )->with( 'message', [
                 'class' => 'danger', // success or danger on error
-                'text' => __( 'cpdt::m.You are not allowed to perform this action.' ),
+                'text' => __( 'vpdt::m.You are not allowed to perform this action.' ),
             ] );
         }
 
@@ -304,14 +304,14 @@ class DefaultThemeController extends SiteController
         if ( !$result ) {
             return redirect()->to( URL::previous() . "#_comments" )->with( 'message', [
                 'class' => 'danger',
-                'text' => __( 'cpdt::m.The specified comment could not be deleted.' ),
+                'text' => __( 'vpdt::m.The specified comment could not be deleted.' ),
             ] );
         }
 
-        do_action( 'contentpress/comment/deleted', $id );
+        do_action( 'valpress/comment/deleted', $id );
         return redirect()->to( URL::previous() . "#_comments" )->with( 'message', [
             'class' => 'success',
-            'text' => __( 'cpdt::m.Comment deleted.' ),
+            'text' => __( 'vpdt::m.Comment deleted.' ),
         ] );
     }
 
@@ -331,7 +331,7 @@ class DefaultThemeController extends SiteController
     {
         return redirect()->back()->with( 'message', [
             'class' => 'warning',
-            'text' => __( "cpdt::m.Not yet implemented." ),
+            'text' => __( "vpdt::m.Not yet implemented." ),
         ] );
     }
 
@@ -348,9 +348,9 @@ class DefaultThemeController extends SiteController
 
         //#! Load seeders
         $seeders = [
-            'CpdtContentSeeder' => path_combine( $themeDirPath, 'seeders/CpdtContentSeeder.php' ),
-            'CpdtMenuSeeder' => path_combine( $themeDirPath, 'seeders/CpdtMenuSeeder.php' ),
-            'CpdtSettingsSeeder' => path_combine( $themeDirPath, 'seeders/CpdtSettingsSeeder.php' ),
+            'vpdtContentSeeder' => path_combine( $themeDirPath, 'seeders/vpdtContentSeeder.php' ),
+            'vpdtMenuSeeder' => path_combine( $themeDirPath, 'seeders/vpdtMenuSeeder.php' ),
+            'vpdtSettingsSeeder' => path_combine( $themeDirPath, 'seeders/vpdtSettingsSeeder.php' ),
         ];
 
         try {
@@ -368,14 +368,14 @@ class DefaultThemeController extends SiteController
         if ( !empty( $errors ) ) {
             return redirect()->back()->with( 'message', [
                 'class' => 'warning',
-                'text' => __( "cpdt::m.Something didn't go as planed: :errors", [ 'errors' => implode( '<br/>', $errors ) ] ),
+                'text' => __( "vpdt::m.Something didn't go as planed: :errors", [ 'errors' => implode( '<br/>', $errors ) ] ),
             ] );
         }
 
         $this->options->addOption( DEFAULT_THEME_MAIN_DEMO_INSTALLED_OPT_NAME, true );
         return redirect()->back()->with( 'message', [
             'class' => 'success',
-            'text' => __( "cpdt::m.Main demo installed successfully." ),
+            'text' => __( "vpdt::m.Main demo installed successfully." ),
             'hide_notice_install' => true,
         ] );
     }
