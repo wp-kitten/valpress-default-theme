@@ -1,4 +1,4 @@
-<!doctype html>
+@php do_action('valpress/frontend/init') @endphp<!doctype html>
 @php
     $currentLanguageCode = App\Helpers\VPML::getFrontendLanguageCode();
     app()->setLocale($currentLanguageCode);

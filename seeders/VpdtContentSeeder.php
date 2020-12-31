@@ -21,7 +21,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
-class vpdtContentSeeder extends Seeder
+class VpdtContentSeeder extends Seeder
 {
     /**
      * Stores the mapped categories: Name => ID

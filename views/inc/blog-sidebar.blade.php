@@ -144,10 +144,17 @@
         </div>
         <div class="widget-content">
             <ul class="list-unstyled tags-list">
+                @auth
+                    <li class="mb-1">
+                        <a class="link-blue" href="{{route('admin.dashboard')}}">{{__("vpdt::m.Dashboard")}}</a>
+                    </li>
+                @endauth
+
                 <li class="mb-1">
                     @guest
                         <a class="link-blue" href="{{route('login')}}">{{__("vpdt::m.Login")}}</a>
                     @else
+
                         <a href="#"
                            class="link-blue"
                            onclick="event.preventDefault();document.getElementById('form-meta-logout').submit();">{{__("vpdt::m.Logout")}}</a>
@@ -157,16 +164,16 @@
                     @endguest
                 </li>
 
-                <li class="mb-1">
-                    @guest
-                        @if($settings->getSetting('user_registration_open', false))
+                @guest
+                    @if($settings->getSetting('user_registration_open', false))
+                        <li class="mb-1">
                             <a class="link-blue" href="{{route('register')}}">{{__("vpdt::m.Register")}}</a>
-                        @endif
-                    @endguest
-                </li>
+                        </li>
+                    @endif
+                @endguest
 
                 <li class="mb-1">
-                    <a class="link-blue" href="{{VALPRESS_URL}}" target="_blank">{{__("vpdt::m.ValPress.news")}}</a>
+                    <a class="link-blue" href="{{VALPRESS_URL}}" target="_blank">ValPress.net</a>
                 </li>
             </ul>
         </div>

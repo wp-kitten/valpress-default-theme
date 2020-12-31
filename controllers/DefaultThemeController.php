@@ -348,9 +348,9 @@ class DefaultThemeController extends SiteController
 
         //#! Load seeders
         $seeders = [
-            'vpdtContentSeeder' => path_combine( $themeDirPath, 'seeders/vpdtContentSeeder.php' ),
-            'vpdtMenuSeeder' => path_combine( $themeDirPath, 'seeders/vpdtMenuSeeder.php' ),
-            'vpdtSettingsSeeder' => path_combine( $themeDirPath, 'seeders/vpdtSettingsSeeder.php' ),
+            'VpdtContentSeeder' => path_combine( $themeDirPath, 'seeders/VpdtContentSeeder.php' ),
+            'VpdtMenuSeeder' => path_combine( $themeDirPath, 'seeders/VpdtMenuSeeder.php' ),
+            'VpdtSettingsSeeder' => path_combine( $themeDirPath, 'seeders/VpdtSettingsSeeder.php' ),
         ];
 
         try {

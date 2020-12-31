@@ -90,4 +90,5 @@ return [
     "Main demo installed successfully." => "Main demo installed successfully.",
     "ValPress on Github" => "ValPress on Github",
     "View all" => "View all",
+    "Dashboard" => "Dashboard",
 ];
