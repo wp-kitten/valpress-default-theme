@@ -7,10 +7,10 @@
                 </a>
             </h4>
 
-            @if(cp_has_menu('footer-menu'))
+            @if(vp_has_menu('footer-menu'))
                 <nav class="footer-menu-nav">
                     <ul class="list-unstyled footer-menu-wrap">
-                        {!! cp_menu('footer-menu') !!}
+                        {!! vp_menu('footer-menu') !!}
                         <li>
                             <a href="https://github.com/wp-kitten/valpress" target="_blank" title="{{__('vpdt::m.ValPress on Github')}}">
                                 <i class="fab fa-github"></i>

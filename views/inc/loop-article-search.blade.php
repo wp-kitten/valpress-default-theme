@@ -15,6 +15,6 @@
         </h2>
         <span class="entry-date text-grey font-smaller d-block mt-2">{{vp_the_date($post, true)}}</span>
 
-        <div class="entry-excerpt mt-3">{!! cp_ellipsis(wp_strip_all_tags($post->excerpt), 80) !!}</div>
+        <div class="entry-excerpt mt-3">{!! vp_ellipsis(wp_strip_all_tags($post->excerpt), 80) !!}</div>
     </section>
 </article>

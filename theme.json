@@ -5,7 +5,7 @@
     "views-path": "valpress-default-theme/views",
 
     "display_name": "ValPress Default",
-    "version": "0.6",
+    "version": "1.0",
     "authors": [
         {
             "name": "wp-kitten",

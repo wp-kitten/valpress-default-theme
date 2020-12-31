@@ -52,7 +52,7 @@ class vpdtContentSeeder extends Seeder
         $uploadsDir = $mediaHelper->getUploadsDir();
         $uploadSubDirs = date( 'Y' ) . '/' . date( 'n' );
 
-        $theme = cp_get_current_theme();
+        $theme = vp_get_current_theme();
         $themeDirPath = $theme->getDirPath();
 
         //#! Attempt to create the uploads dir path

@@ -17,7 +17,7 @@
 
 @section('content')
     <main class="site-page page-home mt-0 mb-4">
-        <header class="page-header" style="background-image: url({{cp_theme_url(DEFAULT_THEME_DIR_NAME, 'assets/img/home-header.jpg')}})">
+        <header class="page-header" style="background-image: url({{vp_theme_url(DEFAULT_THEME_DIR_NAME, 'assets/img/home-header.jpg')}})">
             <div class="header-wrap">
                 <h2 class="header-title text-red">{{__('vpdt::m.Your Laravel blogging platform')}}</h2>
                 <h4 class="header-subtitle text-red">{{__('vpdt::m.is here, enjoy it!')}}</h4>
@@ -38,21 +38,21 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12 col-md-4 mb-3">
-                        <img class="image-responsive" src="{{cp_theme_url(DEFAULT_THEME_DIR_NAME, 'assets/img/unsplash-4.jpg')}}" alt=""/>
+                        <img class="image-responsive" src="{{vp_theme_url(DEFAULT_THEME_DIR_NAME, 'assets/img/unsplash-4.jpg')}}" alt=""/>
                         <div class="mt-3">
                             <h5>{{__("vpdt::m.All you need is less")}}</h5>
                             <p class="mt-3">{{__("vpdt::m.Forget the bloated code or the gigantic mess, less is more!")}}</p>
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-4 mb-3">
-                        <img class="image-responsive" src="{{cp_theme_url(DEFAULT_THEME_DIR_NAME, 'assets/img/unsplash-5.jpg')}}" alt=""/>
+                        <img class="image-responsive" src="{{vp_theme_url(DEFAULT_THEME_DIR_NAME, 'assets/img/unsplash-5.jpg')}}" alt=""/>
                         <div class="mt-3">
                             <h5>{{__("vpdt::m.Beautiful and functional? Oh, yes!")}}</h5>
                             <p class="mt-3">{{__("vpdt::m.Have your idea? Good! You have everything you need to make something great!")}}</p>
                         </div>
                     </div>
                     <div class="col-sm-12 col-md-4 mb-3">
-                        <img class="image-responsive" src="{{cp_theme_url(DEFAULT_THEME_DIR_NAME, 'assets/img/unsplash-6.jpg')}}" alt=""/>
+                        <img class="image-responsive" src="{{vp_theme_url(DEFAULT_THEME_DIR_NAME, 'assets/img/unsplash-6.jpg')}}" alt=""/>
                         <div class="mt-3">
                             <h5>{{__("vpdt::m.Coding should be fun")}}</h5>
                             <p class="mt-3">{{__("vpdt::m.Everyone should be able to have their own website without having to pay lots of money for it.")}}</p>

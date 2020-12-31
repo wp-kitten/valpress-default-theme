@@ -18,7 +18,7 @@ class ThemeHelper
 
     public function __construct(  )
     {
-        $this->themeClass = cp_get_current_theme();
+        $this->themeClass = vp_get_current_theme();
     }
 
     public function getPostImageOrPlaceholder( Post $post, $sizeName = '', $imageClass = 'image-responsive', $imageAttributes = [] )
@@ -61,7 +61,7 @@ class ThemeHelper
 
     public function asset( string $path )
     {
-        return cp_theme_url( DEFAULT_THEME_DIR_NAME, $path );
+        return vp_theme_url( DEFAULT_THEME_DIR_NAME, $path );
     }
 
     /**

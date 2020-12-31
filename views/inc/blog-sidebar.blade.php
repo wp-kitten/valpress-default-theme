@@ -71,7 +71,7 @@
                             <a class="post-title link-blue text-capitalize font-weight-bold font-smaller" href="{{vp_get_permalink($post)}}">
                                 {!! $post->title !!}
                             </a>
-                            <div class="text-grey post-excerpt mt-1 font-smaller">{!! cp_ellipsis(wp_strip_all_tags($post->excerpt), 50) !!}</div>
+                            <div class="text-grey post-excerpt mt-1 font-smaller">{!! vp_ellipsis(wp_strip_all_tags($post->excerpt), 50) !!}</div>
                         </li>
                     @endforeach
                 </ul>

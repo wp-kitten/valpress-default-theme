@@ -6,10 +6,10 @@
                     {{env('APP_NAME', 'ValPress')}}
                 </a>
             </h1>
-            @if(cp_has_menu('main-menu'))
+            @if(vp_has_menu('main-menu'))
                 <nav class="vpdt-navbar mt-3 mt-md-0">
                     <div class="vpdt-navbar-nav topnav">
-                        {!! cp_menu('main-menu') !!}
+                        {!! vp_menu('main-menu') !!}
                     </div>
                 </nav>
             @endif

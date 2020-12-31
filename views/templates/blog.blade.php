@@ -49,7 +49,7 @@
                             </span>
                             <h2 class="entry-title mt-3 mb-3">
                                 <a href="{{vp_get_permalink($postFeatured)}}" title="{{$postFeatured->title}}">
-                                    {!! cp_ellipsis(wp_kses_post($postFeatured->title), 35) !!}
+                                    {!! vp_ellipsis(wp_kses_post($postFeatured->title), 35) !!}
                                 </a>
                             </h2>
                             <div class="excerpt font-smaller text-grey">

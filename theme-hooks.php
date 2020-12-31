@@ -17,7 +17,7 @@ add_filter( 'valpress/register_view_paths', function ( $paths = [] ) {
 /**
  * Register the path to the translation file that will be used depending on the current locale
  */
-cp_register_language_file( 'vpdt', path_combine(
+vp_register_language_file( 'vpdt', path_combine(
     DEFAULT_THEME_DIR_PATH,
     'lang'
 ) );

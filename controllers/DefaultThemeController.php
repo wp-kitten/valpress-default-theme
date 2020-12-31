@@ -337,7 +337,7 @@ class DefaultThemeController extends SiteController
 
     public function installMainDemo(): RedirectResponse
     {
-        $theme = cp_get_current_theme();
+        $theme = vp_get_current_theme();
         $themeDirPath = trailingslashit( $theme->getDirPath() );
 
         //#! Will store any errors
