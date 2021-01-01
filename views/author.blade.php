@@ -9,7 +9,7 @@
 @endphp
 
 @section('content')
-    <main class="site-page page-page page-singular">
+    <main class="site-page page-page page-author">
 
         <header class="page-subheader bg-white-smoke text-right pt-5 pb-2 mb-5">
             <div class="container">
@@ -31,28 +31,16 @@
                         @if($posts)
                             @foreach($posts as $post)
                                 <div class="col-xs-12 col-sm-6 col-md-4">
-                                    <article class="loop-post mb-4">
-                                        <header class="article-header">
-                                            {!! $themeHelper->getPostImageOrPlaceholder($post, '', 'image-responsive') !!}
-                                        </header>
-                                        <section class="article-meta mt-2">
-                                            <a href="{{vp_get_category_link($post->firstCategory())}}" class="text-dark">
-                                                {!! $post->firstCategory()->name !!}
-                                            </a>
-                                            <span class="text-grey">{{vp_the_date($post)}}</span>
-                                        </section>
-                                        <section class="article-content mt-1">
-                                            <h5 class="entry-title">
-                                                <a href="{{vp_get_permalink($post)}}">
-                                                    {!! wp_kses_post($post->title) !!}
-                                                </a>
-                                            </h5>
-                                        </section>
-                                    </article>
+                                    @include('inc.loop-article-search', [
+                                        'themeHelper' => $themeHelper,
+                                        'post' => $post,
+                                    ])
                                 </div>
                             @endforeach
                         @else
-                            @include('inc.no-content', ['class' => 'info', 'text' => __('vpdt::m.No posts found.')])
+                            <div class="col-sm-12">
+                                @include('inc.no-content', ['class' => 'info', 'text' => __('vpdt::m.No posts found.')])
+                            </div>
                         @endif
                     </div>
                     <div class="row">
