@@ -343,19 +343,15 @@ class DefaultThemeController extends SiteController
         //#! Will store any errors
         $errors = [];
 
-        //#! Load main demo data
-        require_once( path_combine( $themeDirPath, 'src/MainDemoData.php' ) );
-
-        //#! Load seeders
+        //#! Seeders
         $seeders = [
-            'VpdtContentSeeder' => path_combine( $themeDirPath, 'seeders/VpdtContentSeeder.php' ),
-            'VpdtMenuSeeder' => path_combine( $themeDirPath, 'seeders/VpdtMenuSeeder.php' ),
-            'VpdtSettingsSeeder' => path_combine( $themeDirPath, 'seeders/VpdtSettingsSeeder.php' ),
+            'VpdtContentSeeder',
+            'VpdtMenuSeeder',
+            'VpdtSettingsSeeder',
         ];
 
         try {
-            foreach ( $seeders as $className => $filePath ) {
-                require_once( $filePath );
+            foreach ( $seeders as $className ) {
                 Artisan::call( 'db:seed', [
                     '--class' => $className,
                 ] );

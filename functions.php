@@ -1,19 +1,26 @@
 <?php
+
+use App\Helpers\DirAutoloader;
+
 define( 'DEFAULT_THEME_DIR_PATH', untrailingslashit( wp_normalize_path( dirname( __FILE__ ) ) ) );
 define( 'DEFAULT_THEME_DIR_NAME', basename( dirname( __FILE__ ) ) );
+
 /**
  * The name of the option storing whether the main demo has been installed or not
  * @var string
  */
 define( 'DEFAULT_THEME_MAIN_DEMO_INSTALLED_OPT_NAME', 'vpdt_main_demo_installed' );
+
 /**
  * The name of the option storing whether the main demo is being installed or not
  * @var string
  */
 define( 'DEFAULT_THEME_MAIN_DEMO_INSTALLING_OPT_NAME', 'vpdt_main_demo_installing' );
 
-require_once( DEFAULT_THEME_DIR_PATH . '/src/ThemeHelper.php' );
-require_once( DEFAULT_THEME_DIR_PATH . '/controllers/DefaultThemeController.php' );
+DirAutoloader::registerPath( DEFAULT_THEME_DIR_PATH . '/controllers' );
+DirAutoloader::registerPath( DEFAULT_THEME_DIR_PATH . '/seeders' );
+DirAutoloader::registerPath( DEFAULT_THEME_DIR_PATH . '/src' );
+
 require_once( DEFAULT_THEME_DIR_PATH . '/theme-hooks.php' );
 
 vp_add_image_size( '55', [ 'w' => 55 ] );
