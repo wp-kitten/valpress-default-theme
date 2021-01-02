@@ -7,10 +7,13 @@
                 </a>
             </h1>
             @if(vp_has_menu('main-menu'))
-                <nav class="vpdt-navbar mt-3 mt-md-0">
-                    <div class="vpdt-navbar-nav topnav">
-                        {!! vp_menu('main-menu') !!}
-                    </div>
+                @php
+                    $menu = \App\Models\Menu::where( 'slug', 'main-menu' )->first();
+                    $displayAs = ( new \App\Models\Options() )->getOption( "menu-{$menu->id}-display-as", 'basic' );
+                    $menuClass = ('megamenu' == $displayAs ? 'vp-mega-menu' : '');
+                @endphp
+                <nav class="vp-navbar {{$menuClass}} {{$displayAs}}">
+                    {!! vp_menu('main-menu') !!}
                 </nav>
             @endif
         </div>

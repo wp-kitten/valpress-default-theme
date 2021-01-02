@@ -101,26 +101,17 @@ add_filter( 'valpress/body-class', function ( $classes = [] ) {
  * Add custom menu items to the main menu
  */
 add_action( 'valpress/menu::main-menu/before', function ( Menu $menu ) {
-
-    $homeLinkActiveClass = ( Route::is( 'app.home' ) ? 'active' : '' );
-
     $displayAs = ( new Options() )->getOption( "menu-{$menu->id}-display-as", 'basic' );
-    if ( 'basic' == $displayAs ) {
-        echo '<ul class="list-unstyled main-menu basic">';
-        echo '<li>';
-        echo '<a href="' . route( 'app.home' ) . '" class="menu-item ' . $homeLinkActiveClass . '">' . esc_attr( __( 'vpdt::m.Home' ) ) . '</a>';
-        echo '</li>';
-    }
-    else {
-        echo '<a href="' . route( 'app.home' ) . '" class="menu-item ' . $homeLinkActiveClass . '">' . esc_attr( __( 'vpdt::m.Home' ) ) . '</a>';
+    if ( 'basic' == $displayAs || 'megamenu' == $displayAs ) {
+        echo '<ul class="list-unstyled main-menu vp-navbar-nav">';
     }
 } );
 add_action( 'valpress/menu::main-menu/after', function ( Menu $menu ) {
     $menuToggleButton = '<a href="#" class="menu-item icon btn-toggle-nav js-toggle-menu" title="' . esc_attr( __( 'np::m.Toggle menu' ) ) . '">&#9776;</a>';
 
     $displayAs = ( new Options() )->getOption( "menu-{$menu->id}-display-as", 'basic' );
-    if ( 'basic' == $displayAs ) {
-        echo '<li>' . $menuToggleButton . '</li>';
+    if ( 'basic' == $displayAs || 'megamenu' == $displayAs ) {
+        echo '<li class="menu-item-main">' . $menuToggleButton . '</li>';
         echo '</ul">';
     }
     else {

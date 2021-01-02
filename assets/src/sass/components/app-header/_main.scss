@@ -1,4 +1,26 @@
-@import "inc/top-nav";
+/*
+    [[ NAVBAR
+    ------------------------------
+*/
+.vp-navbar {
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    align-content: space-around;
+
+    &.basic {
+        .vp-navbar-nav {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            align-content: space-around;
+        }
+    }
+}
+
+@import "inc/nav-menu";
+@import "inc/nav-menu-mega-menu";
 
 
 .vpdt-site-header {
