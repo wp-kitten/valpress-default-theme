@@ -10,18 +10,21 @@ use App\Models\CommentStatuses;
 use App\Models\Options;
 use App\Models\Post;
 use App\Models\PostComments;
-use App\Models\User;
 
 class ThemeHelper
 {
-    private $themeClass = null;
+    /**
+     * Holds the reference to the currently loaded theme class
+     * @var Theme|null
+     */
+    private $themeClass;
 
-    public function __construct(  )
+    public function __construct()
     {
         $this->themeClass = vp_get_current_theme();
     }
 
-    public function getPostImageOrPlaceholder( Post $post, $sizeName = '', $imageClass = 'image-responsive', $imageAttributes = [] )
+    public function getPostImageOrPlaceholder( Post $post, $sizeName = '', $imageClass = 'image-responsive', $imageAttributes = [] ): string
     {
         $placeholder = '<img src="' . $this->asset( 'assets/img/placeholder.png' ) . '" alt="" class="' . $imageClass . '"/>';
         if ( vp_post_has_featured_image( $post ) ) {
@@ -34,7 +37,7 @@ class ThemeHelper
         return $placeholder;
     }
 
-    public function getCategoryImageOrPlaceholder( Category $category )
+    public function getCategoryImageOrPlaceholder( Category $category ): string
     {
         if ( $imageUrl = vp_get_category_image_url( $category->id ) ) {
             return $imageUrl;
@@ -42,10 +45,10 @@ class ThemeHelper
         return $this->themeClass->url( 'assets/img/placeholder.png' );
     }
 
-    public function getAuthorImageOrPlaceholder( int $userID, $languageID = null )
+    public function getAuthorImageOrPlaceholder( int $userID, $languageID = null ): string
     {
         $imageUrl = vp_get_user_profile_image_url( $userID, $languageID );
-        if(empty($imageUrl)){
+        if ( empty( $imageUrl ) ) {
             $imageUrl = $this->themeClass->url( 'assets/img/placeholder.png' );
         }
         return $imageUrl;
@@ -54,12 +57,12 @@ class ThemeHelper
     /**
      * @return Theme
      */
-    public function getThemeClass()
+    public function getThemeClass(): ?Theme
     {
         return $this->themeClass;
     }
 
-    public function asset( string $path )
+    public function asset( string $path ): string
     {
         return vp_theme_url( DEFAULT_THEME_DIR_NAME, $path );
     }
@@ -68,7 +71,7 @@ class ThemeHelper
      * Check to see whether the main demo is currently installing or not
      * @return bool|mixed
      */
-    public function mainDemoInstalling()
+    public function mainDemoInstalling(): bool
     {
         return ( new Options() )->getOption( DEFAULT_THEME_MAIN_DEMO_INSTALLING_OPT_NAME, false );
     }
@@ -83,7 +86,7 @@ class ThemeHelper
      * @hooked add_action( 'valpress/submit_comment', [$themeHelper, 'submitComment'], 10, 2 );
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function submitComment( Controller $controller, int $postID )
+    public function submitComment( Controller $controller, int $postID ): \Illuminate\Http\RedirectResponse
     {
         $post = Post::find( $postID );
         if ( !$post ) {
