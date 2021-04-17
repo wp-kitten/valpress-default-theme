@@ -1,8 +1,8 @@
 {{--
     The template to display the front page
 --}}
-@inject('themeHelper', App\Themes\ValPress\DefaultTheme\ThemeHelper)
-@inject('settings', App\Models\Settings)
+@inject('themeHelper', 'App\Themes\ValPress\DefaultTheme\ThemeHelper')
+@inject('settings', 'App\Models\Settings')
 @extends('layouts.frontend')
 
 @php

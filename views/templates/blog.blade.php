@@ -3,10 +3,10 @@
 --}}
 @extends('layouts.frontend')
 
-@inject('themeHelper', App\Themes\ValPress\DefaultTheme\ThemeHelper)
-@inject('settings', App\Models\Settings)
-@inject('postStatusClass', App\Models\PostStatus)
-@inject('postTypeClass', App\Models\PostType)
+@inject('themeHelper', 'App\Themes\ValPress\DefaultTheme\ThemeHelper')
+@inject('settings', 'App\Models\Settings')
+@inject('postStatusClass', 'App\Models\PostStatus')
+@inject('postTypeClass', 'App\Models\PostType')
 
 @php
     /**@var \App\Themes\ValPress\DefaultTheme\ThemeHelper $themeHelper*/

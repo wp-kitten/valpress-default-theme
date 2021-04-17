@@ -2,7 +2,7 @@
         The template to display the search results
 --}}
 @extends('layouts.frontend')
-@inject('themeHelper', App\Themes\ValPress\DefaultTheme\ThemeHelper)
+@inject('themeHelper', 'App\Themes\ValPress\DefaultTheme\ThemeHelper')
 
 
 @section('title')

@@ -4,7 +4,7 @@
 --}}
 @extends('layouts.frontend')
 
-@inject('themeHelper', App\Themes\ValPress\DefaultTheme\ThemeHelper)
+@inject('themeHelper', 'App\Themes\ValPress\DefaultTheme\ThemeHelper')
 @php
     /**@var \App\Themes\ValPress\DefaultTheme\ThemeHelper $themeHelper*/
 @endphp
