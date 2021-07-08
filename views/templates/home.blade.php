@@ -1,8 +1,8 @@
 {{--
     The template to display the front page
 --}}
-@inject('themeHelper', App\Themes\ValPress\DefaultTheme\ThemeHelper)
-@inject('settings', App\Models\Settings)
+@inject('themeHelper', 'App\Themes\ValPress\DefaultTheme\ThemeHelper')
+@inject('settings', 'App\Models\Settings')
 @extends('layouts.frontend')
 
 @php
@@ -71,9 +71,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row blog-entries">
                     @forelse($posts as $post)
-                        <div class="col-sm-12 col-md-4 mb-5">
+                        <div class="col-sm-12 col-md-4 mb-4">
                             @include('inc.loop-article-search', [
                                 'themeHelper' => $themeHelper,
                                 'post' => $post,

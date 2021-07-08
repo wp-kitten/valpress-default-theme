@@ -2,7 +2,7 @@
     The template to display the front page or the blog page depending on what is set in Settings > Reading
 --}}
 @extends('layouts.frontend')
-@inject('settings', App\Models\Settings)
+@inject('settings', 'App\Models\Settings')
 
 @section('title')
     <title>{{__('vpdt::m.Under maintenance')}}</title>

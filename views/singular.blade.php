@@ -4,8 +4,8 @@
 --}}
 @extends('layouts.frontend')
 
-@inject('themeHelper', App\Themes\ValPress\DefaultTheme\ThemeHelper)
-@inject('settings', App\Models\Settings)
+@inject('themeHelper', 'App\Themes\ValPress\DefaultTheme\ThemeHelper')
+@inject('settings', 'App\Models\Settings')
 @php
     /**@var \App\Themes\ValPress\DefaultTheme\ThemeHelper $themeHelper*/
 @endphp
@@ -23,13 +23,13 @@
                         <section class="entry-meta mt-2 mb-2">
                             <span class="mr-2 text-dark"><i class="fa fa-clock-o"></i> {{vp_the_date($post, true)}}</span>
                             <span class="mr-2"><i class="fa fa-user"></i>
-                                <a href="{{route('blog.author', $post->user->id)}}" class="link-red">{{$post->user->display_name}}</a>
+                                <a href="{{route('blog.author', $post->user->id)}}" class="with-hover-underline text-dark">{{$post->user->display_name}}</a>
                             </span>
                             @if($post->categories()->count())
                                 <span>
                                     <i class="fa fa-folder-open"></i>
                                     @foreach($post->categories()->get() as $category)
-                                        <a href="{{vp_get_category_link($category)}}" class="category-link link-green mr-2">{!! $category->name !!}</a>
+                                        <a href="{{vp_get_category_link($category)}}" class="category-link with-hover-underline text-dark mr-2">{!! $category->name !!}</a>
                                     @endforeach
                                 </span>
                             @endif

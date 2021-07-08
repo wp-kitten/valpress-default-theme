@@ -3,10 +3,10 @@
 --}}
 @extends('layouts.frontend')
 
-@inject('themeHelper', App\Themes\ValPress\DefaultTheme\ThemeHelper)
-@inject('settings', App\Models\Settings)
-@inject('postStatusClass', App\Models\PostStatus)
-@inject('postTypeClass', App\Models\PostType)
+@inject('themeHelper', 'App\Themes\ValPress\DefaultTheme\ThemeHelper')
+@inject('settings', 'App\Models\Settings')
+@inject('postStatusClass', 'App\Models\PostStatus')
+@inject('postTypeClass', 'App\Models\PostType')
 
 @php
     /**@var \App\Themes\ValPress\DefaultTheme\ThemeHelper $themeHelper*/
@@ -82,9 +82,10 @@
                             @if(!$posts || ! $posts->count())
                                 @include('inc.no-content', ['class' => 'info', 'text' => __('vpdt::m.No posts found.')])
                             @else
-                                <div class="row">
+                                <div class="row masonry-grid">
+                                    <div class="col-xs-12 col-sm-6 col-md-6 masonry-grid-sizer"></div>
                                     @foreach($posts as $post)
-                                        <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="col-xs-12 col-sm-6 col-md-6 masonry-grid-item">
                                             @include('inc.loop-article', [
                                                 'themeHelper' => $themeHelper,
                                                 'post' => $post,

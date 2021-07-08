@@ -26,7 +26,7 @@ class DefaultThemeController extends SiteController
             ->where( 'post_status_id', PostStatus::where( 'name', 'publish' )->first()->id )
             ->where( 'post_type_id', PostType::where( 'name', 'post' )->first()->id )
             ->where( 'translated_post_id', null )
-            ->limit( $this->settings->getSetting( 'posts_per_page', 12 ) )
+            ->limit( apply_filters( 'valpress/default_theme/homepage/max_blog_posts', 6 ) )
             ->get();
         return view( 'index' )->with( [
             'posts' => $posts,

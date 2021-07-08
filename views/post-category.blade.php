@@ -4,7 +4,7 @@
 --}}
 @extends('layouts.frontend')
 
-@inject('themeHelper', App\Themes\ValPress\DefaultTheme\ThemeHelper)
+@inject('themeHelper', 'App\Themes\ValPress\DefaultTheme\ThemeHelper')
 @php
     /**@var \App\Themes\ValPress\DefaultTheme\ThemeHelper $themeHelper*/
 @endphp
@@ -57,9 +57,10 @@
                             @if(!$posts || ! $posts->count())
                                 @include('inc.no-content', ['class' => 'info', 'text' => __('vpdt::m.No posts in this category.')])
                             @else
-                                <div class="row">
+                                <div class="row masonry-grid">
+                                    <div class="col-xs-12 col-sm-6 col-md-4 masonry-grid-sizer"></div>
                                     @foreach($posts as $post)
-                                        <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="col-xs-12 col-sm-6 col-md-4 masonry-grid-item">
                                             @include('inc.loop-article-search', [
                                                 'themeHelper' => $themeHelper,
                                                 'post' => $post,

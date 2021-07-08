@@ -7,7 +7,6 @@ class MainDemoData
 
     public static $images = [
         'unsplash-7.jpg',
-        'unsplash-8.jpg',
         'unsplash-9.jpg',
         'unsplash-10.jpg',
         'unsplash-11.jpg',

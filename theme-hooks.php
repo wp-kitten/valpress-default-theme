@@ -40,6 +40,8 @@ add_action( 'valpress/site/head', function () {
     ScriptsManager::enqueueHeadScript( 'bootstrap.js', $theme->url( 'assets/vendor/bootstrap/js/bootstrap.min.js' ) );
     ScriptsManager::enqueueHeadScript( 'fa-kit.js', '//kit.fontawesome.com/cec4674fec.js' );
     ScriptsManager::enqueueFooterScript( 'theme-scripts.js', $theme->url( 'assets/js/theme-scripts.js' ) );
+    ScriptsManager::enqueueFooterScript( 'theme-masonry-layout.js', $theme->url( 'assets/vendor/masonry.pkgd.min.js' ) );
+    ScriptsManager::enqueueFooterScript( 'theme-masonry-images-loaded.js', $theme->url( 'assets/vendor/imagesloaded.pkgd.min.js' ) );
 
     if ( vp_is_singular() && ( vp_comments_open( vp_get_post() ) ) ) {
         ScriptsManager::localizeScript( 'comments-locale', 'CommentsLocale', [

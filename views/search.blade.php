@@ -2,7 +2,7 @@
         The template to display the search results
 --}}
 @extends('layouts.frontend')
-@inject('themeHelper', App\Themes\ValPress\DefaultTheme\ThemeHelper)
+@inject('themeHelper', 'App\Themes\ValPress\DefaultTheme\ThemeHelper')
 
 
 @section('title')
@@ -35,7 +35,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-md-4 text-right">
-                                    <div class="orderby-wrap mt-2">
+                                    <div class="orderby-wrap">
                                         <form id="form-filter-search" method="get" action="<?php esc_attr_e( route( 'blog.search' ) ); ?>">
                                             <input name="s" value="{{vp_get_search_query()}}" class="hidden"/>
                                             <select name="order" id="js-sort-results" data-form-id="form-filter-search">
@@ -60,10 +60,11 @@
                 {{-- MAIN CONTENT --}}
                 <div class="col-xs-12 col-md-9">
                     {{-- POSTS GRID --}}
-                    <div class="row">
+                    <div class="row masonry-grid">
                         @if($posts)
+                            <div class="col-xs-12 col-sm-6 col-md-4 masonry-grid-sizer"></div>
                             @foreach($posts as $post)
-                                <div class="col-xs-12 col-sm-6 col-md-4">
+                                <div class="col-xs-12 col-sm-6 col-md-4 mb-2 masonry-grid-item">
                                     @include('inc.loop-article-search', [
                                         'themeHelper' => $themeHelper,
                                         'post' => $post,

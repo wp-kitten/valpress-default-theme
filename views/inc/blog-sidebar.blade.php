@@ -68,7 +68,7 @@
                 <ul class="list-unstyled posts-list">
                     @foreach($recentPostsList as $post)
                         <li class="mb-3">
-                            <a class="post-title link-blue text-capitalize font-weight-bold font-smaller" href="{{vp_get_permalink($post)}}">
+                            <a class="post-title text-capitalize font-weight-bold font-smaller with-hover-underline text-dark" href="{{vp_get_permalink($post)}}">
                                 {!! $post->title !!}
                             </a>
                             <div class="text-grey post-excerpt mt-1 font-smaller">{!! vp_ellipsis(wp_strip_all_tags($post->excerpt), 50) !!}</div>
@@ -88,7 +88,7 @@
                 <ul class="list-unstyled categories-list">
                     @foreach($categories as $categoryID => $info)
                         <li>
-                            <a class="category-name link-green text-capitalize" href="{{vp_get_category_link($info['category'])}}">
+                            <a class="category-name text-capitalize" href="{{vp_get_category_link($info['category'])}}">
                                 {!! $info['category']->name !!}
                             </a>
                             <span class="text-dark">{{$info['num_posts']}}</span>
@@ -109,7 +109,7 @@
                     @foreach($recentPostsList as $post)
                         <li class="mb-3">
                             {!! $themeHelper->getPostImageOrPlaceholder($post, '', 'image-responsive') !!}
-                            <a class="post-title text-dark text-capitalize font-smaller" href="{{vp_get_permalink($post)}}">
+                            <a class="post-title with-hover-underline text-dark text-capitalize font-smaller" href="{{vp_get_permalink($post)}}">
                                 {!! $post->title !!}
                             </a>
                         </li>
@@ -128,7 +128,7 @@
                 <ul class="list-unstyled tags-list">
                     <li class="mb-3">
                         @foreach($tags as $tag)
-                            <a href="{{vp_get_tag_link($tag)}}" class="link-blue ml-2">
+                            <a href="{{vp_get_tag_link($tag)}}" class="with-hover-underline text-dark ml-2">
                                 {!! wp_kses_post($tag->name) !!}
                             </a>
                         @endforeach

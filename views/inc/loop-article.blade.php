@@ -23,12 +23,12 @@
             <p class="entry-date text-grey font-smaller mb-0 ml-3">
                 <span class="entry-date text-grey font-smaller d-block">
                     {!! __('vpdt::m.By: :user_link', [
-                    'user_link' => '<a class="link-red" href="'.route('blog.author', $post->user->id).'">'.$post->user->display_name.'</a>'
+                    'user_link' => '<a class="text-dark" href="'.route('blog.author', $post->user->id).'">'.$post->user->display_name.'</a>'
                 ]) !!}
                 </span>
                 <span class="entry-date text-grey font-smaller d-block">
                     {!! __("vpdt::m.Published in: :category_link",[
-                    'category_link' => '<a class="link-green" href="'.vp_get_category_link($post->firstCategory()).'">'.$post->firstCategory()->name.'</a>',
+                    'category_link' => '<a class="text-dark" href="'.vp_get_category_link($post->firstCategory()).'">'.$post->firstCategory()->name.'</a>',
                 ]) !!}
                 </span>
             </p>
