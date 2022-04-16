@@ -23,7 +23,7 @@
     $postFeatured = \App\Models\Post
            ::where( 'post_status_id', $postStatus->id )
            ->where( 'post_type_id', $postType->id )
-           ->whereDate( 'created_at', '>', now()->subMonth()->toDateString() )
+           //->whereDate( 'created_at', '>', now()->subMonth()->toDateString() )
            ->inRandomOrder()
            ->first();
 @endphp

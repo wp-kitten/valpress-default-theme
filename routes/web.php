@@ -46,3 +46,22 @@ Route::post( 'admin/themes/valpress-default-theme/options/install-main-demo', [ 
     ->middleware( [ 'web', 'auth', 'active_user', 'under_maintenance' ] )
     ->name( "{$vpdtBaseRoute}.install-main-demo" );
 unset( $vpdtBaseRoute );
+
+//#! Overrides the default routes
+if ( Schema::hasTable( 'post_types' ) ) {
+    $postTypes = \App\Models\PostType::all();
+    foreach ( $postTypes as $postType ) {
+        //#! posts/post-slug
+        if ( 'post' == $postType->name ) {
+            Route::get( 'posts/{slug}', [ DefaultThemeController::class, 'renderPostView' ] )->middleware( [ 'web', 'active_user', 'under_maintenance' ] )->name( "app.post.view" );
+        }
+        //#!/post-slug
+        elseif ( 'page' == $postType->name ) {
+            Route::get( '/{slug}', [ DefaultThemeController::class, 'renderPostView' ] )->middleware( [ 'web', 'active_user', 'under_maintenance' ] )->name( "app.page.view" );
+        }
+        //#! {post_type}/post-slug
+        else {
+            Route::get( $postType->name . '/{slug}', [ DefaultThemeController::class, 'renderPostView' ] )->middleware( [ 'web', 'active_user', 'under_maintenance' ] )->name( "app.{$postType->name}.view" );
+        }
+    }
+}

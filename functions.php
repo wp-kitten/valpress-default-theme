@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers\DirAutoloader;
+use App\Http\Controllers\SiteController;
 
 define( 'DEFAULT_THEME_DIR_PATH', untrailingslashit( wp_normalize_path( dirname( __FILE__ ) ) ) );
 define( 'DEFAULT_THEME_DIR_NAME', basename( dirname( __FILE__ ) ) );
@@ -31,3 +32,19 @@ vp_add_image_size( 'w510', [ 'w' => 510 ] );
 vp_add_image_size( 'w690', [ 'w' => 690 ] );
 vp_add_image_size( 'w825', [ 'w' => 825 ] );
 
+add_action( 'valpress/frontend/before-render/single-post-view', function ( string $slug, SiteController $siteController ) {
+    if ( !vp_is_user_logged_in() ) {
+        var_dump( 'NOT LOGGED IN' );
+        return redirect( '404' );
+    }
+}, 10, 2 );
+
+add_action( 'valpress/frontend/before-render/homepage', function ( SiteController $siteController ) {
+    if ( !vp_is_user_logged_in() ) {
+        var_dump( 'NOT LOGGED IN' );
+    }
+} );
+
+add_filter( 'valpress/admin/http/verify-ssl', function () {
+    return false;
+} );

@@ -1,15 +1,26 @@
 {{--
     The template to display the front page
 --}}
+@extends('layouts.frontend')
+
 @inject('themeHelper', 'App\Themes\ValPress\DefaultTheme\ThemeHelper')
 @inject('settings', 'App\Models\Settings')
-@extends('layouts.frontend')
 
 @php
     /**@var \App\Themes\ValPress\DefaultTheme\ThemeHelper $themeHelper*/
     /**@var \App\Models\Settings $settings*/
 @endphp
 
+<?php
+if ( ! isset( $posts ) ) {
+    $posts = \App\Models\Post::where( 'language_id', ( new \App\Models\Language() )->getID( \App\Helpers\VPML::getFrontendLanguageCode() ) )
+        ->where( 'post_status_id', \App\Models\PostStatus::where( 'name', 'publish' )->first()->id )
+        ->where( 'post_type_id', \App\Models\PostType::where( 'name', 'post' )->first()->id )
+        ->where( 'translated_post_id', null )
+        ->limit( apply_filters( 'valpress/default_theme/homepage/max_blog_posts', 6 ) )
+        ->get();
+}
+?>
 
 @section('title')
     <title>{!! $page->title !!}</title>

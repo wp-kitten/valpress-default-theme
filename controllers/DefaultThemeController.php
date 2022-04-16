@@ -375,4 +375,14 @@ class DefaultThemeController extends SiteController
             'hide_notice_install' => true,
         ] );
     }
+
+    public function renderPostView( string $slug )
+    {
+        //#! Do whatever before the post is rendered
+        //#! For example, refuse anonymous access
+//        if ( !vp_is_user_logged_in() ) {
+//            return $this->_not_found();
+//        }
+        return $this->post_view( $slug );
+    }
 }

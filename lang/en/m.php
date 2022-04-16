@@ -91,4 +91,6 @@ return [
     "ValPress on Github" => "ValPress on Github",
     "View all" => "View all",
     "Dashboard" => "Dashboard",
+    "" => "",
+    "" => "",
 ];
